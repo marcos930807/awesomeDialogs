@@ -6,6 +6,9 @@ A new Flutter package project for simple a awesome dialogs
 
 To use this package, add fancy_dialog as a dependency in your pubspec.yaml file.
 
+## Image
+![alt text](docs/gif.gif)
+
 ### Example
 
 ```
