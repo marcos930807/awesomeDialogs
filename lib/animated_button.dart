@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class AnimatedButton extends StatefulWidget {
   final Function pressEvent;
   final String text;

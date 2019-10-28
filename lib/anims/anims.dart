@@ -160,7 +160,7 @@ class Scale extends StatelessWidget {
     this.delay = 1,
     this.duration = 1,
     this.child,
-    this.scalebegin =0.7,
+    this.scalebegin = 0.7,
     this.curve = Curves.elasticOut,
     this.fade = true,
     this.playback = Playback.PLAY_FORWARD,

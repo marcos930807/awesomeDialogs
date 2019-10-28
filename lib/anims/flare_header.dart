@@ -1,9 +1,6 @@
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
-
-
 
 class FlareHeader extends StatelessWidget {
   const FlareHeader({Key key, @required this.dialogType}) : super(key: key);
@@ -15,7 +12,6 @@ class FlareHeader extends StatelessWidget {
       case DialogType.INFO:
         return FlareActor(
           "packages/awesome_dialog/assets/flare/info.flr",
-          
           alignment: Alignment.center,
           fit: BoxFit.cover,
           animation: 'appear',
@@ -46,7 +42,12 @@ class FlareHeader extends StatelessWidget {
         );
         break;
       default:
+        return FlareActor(
+          "packages/awesome_dialog/assets/flare/info.flr",
+          alignment: Alignment.center,
+          fit: BoxFit.cover,
+          animation: 'appear',
+        );
     }
-    
   }
 }

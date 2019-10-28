@@ -1,4 +1,3 @@
-
 import 'package:awesome_dialog/animated_button.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
@@ -106,7 +105,7 @@ class HomePage extends StatelessWidget {
                   }).show();
             },
           ),
-           SizedBox(
+          SizedBox(
             height: 16,
           ),
           AnimatedButton(
@@ -114,21 +113,22 @@ class HomePage extends StatelessWidget {
             color: Colors.blueGrey,
             pressEvent: () {
               AwesomeDialog(
-                  context: context,
-                  animType: AnimType.SCALE,
-                  dialogType: DialogType.INFO,
-                  body: Center(child: Text(
-                    
+                context: context,
+                animType: AnimType.SCALE,
+                dialogType: DialogType.INFO,
+                body: Center(
+                  child: Text(
                     'If the body is specified, then title and description will be ignored, this allows to further customize the dialogue.',
                     style: TextStyle(fontStyle: FontStyle.italic),
-                  ),),
-                  tittle: 'This is Ignored',
-                  desc:   'This is also Ignored',
-                  btnOkOnPress: () {},
-                 ).show();
+                  ),
+                ),
+                tittle: 'This is Ignored',
+                desc: 'This is also Ignored',
+                btnOkOnPress: () {},
+              ).show();
             },
           ),
-           SizedBox(
+          SizedBox(
             height: 16,
           ),
           AnimatedButton(
@@ -136,19 +136,24 @@ class HomePage extends StatelessWidget {
             color: Colors.brown,
             pressEvent: () {
               AwesomeDialog(
-                  context: context,
-                  animType: AnimType.SCALE,
-                  customHeader: Icon(Icons.face,size: 50,),
-                 
-                  tittle: 'This is Custom',
-                  desc:
-                      'This is custom button and header',
-                  btnOk: FlatButton(child: Text('Custom Button'),onPressed: (){
+                context: context,
+                animType: AnimType.SCALE,
+                customHeader: Icon(
+                  Icons.face,
+                  size: 50,
+                ),
+
+                tittle: 'This is Custom',
+                desc: 'This is custom button and header',
+                btnOk: FlatButton(
+                  child: Text('Custom Button'),
+                  onPressed: () {
                     Navigator.of(context).pop();
-                  },),
-                      //this is ignored
-                  btnOkOnPress: () {},
-                 ).show();
+                  },
+                ),
+                //this is ignored
+                btnOkOnPress: () {},
+              ).show();
             },
           ),
         ],

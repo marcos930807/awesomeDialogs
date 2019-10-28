@@ -6,7 +6,7 @@ import 'package:awesome_dialog/anims/flare_header.dart';
 import 'package:awesome_dialog/vertical_stack_header_dialog.dart';
 import 'package:flutter/material.dart';
 
-enum DialogType { INFO, WARNING, ERROR, SUCCES}
+enum DialogType { INFO, WARNING, ERROR, SUCCES }
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
 
 class AwesomeDialog {
@@ -30,8 +30,7 @@ class AwesomeDialog {
   final Function onDissmissCallback;
   final AnimType animType;
   AwesomeDialog(
-      {
-      @required this.context,
+      {@required this.context,
       this.dialogType,
       this.customHeader,
       this.tittle,
@@ -51,7 +50,7 @@ class AwesomeDialog {
       this.dismissOnTouchOutside = true,
       this.animType = AnimType.SCALE})
       : assert(
-          (dialogType != null || customHeader!=null ),
+          (dialogType != null || customHeader != null),
           context != null,
         );
 
@@ -68,28 +67,20 @@ class AwesomeDialog {
                   child: _buildDialog());
               break;
             case AnimType.LEFTSLIDE:
-              return Slide(
-                  from: SlideFrom.LEFT,
-                  child: _buildDialog());
+              return Slide(from: SlideFrom.LEFT, child: _buildDialog());
               break;
             case AnimType.RIGHSLIDE:
-              return Slide(
-                  from: SlideFrom.RIGHT,
-                  child: _buildDialog());
+              return Slide(from: SlideFrom.RIGHT, child: _buildDialog());
               break;
             case AnimType.BOTTOMSLIDE:
-              return Slide(
-                  from: SlideFrom.BOTTOM,
-                  child: _buildDialog());
+              return Slide(from: SlideFrom.BOTTOM, child: _buildDialog());
               break;
             case AnimType.TOPSLIDE:
-              return Slide(
-                  from: SlideFrom.TOP,
-                  child: _buildDialog());
+              return Slide(from: SlideFrom.TOP, child: _buildDialog());
               break;
-            default: return _buildDialog();
+            default:
+              return _buildDialog();
           }
-          
         }).then((_) {
       if (onDissmissCallback != null) onDissmissCallback();
     });
@@ -97,9 +88,10 @@ class AwesomeDialog {
 
   _buildDialog() {
     return VerticalStackDialog(
-      header: customHeader ?? FlareHeader(
-        dialogType: this.dialogType,
-      ),
+      header: customHeader ??
+          FlareHeader(
+            dialogType: this.dialogType,
+          ),
       title: this.tittle,
       desc: this.desc,
       body: this.body,
@@ -133,7 +125,7 @@ class AwesomeDialog {
     );
   }
 
-  dissmiss(){
+  dissmiss() {
     Navigator.of(context).pop();
   }
 }
