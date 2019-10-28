@@ -1,6 +1,6 @@
 # awesome_dialog
 
-A new Flutter package project for simple a awesome dialogs
+A new Flutter package project for simple and awesome dialogs
 
 ## Usage
 
