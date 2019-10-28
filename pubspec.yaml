@@ -1,8 +1,8 @@
 name: fancy_dialog
 description: A new Flutter package project.
 version: 0.0.1
-author:
-homepage:
+author: Marcos Rodriguez <marcos930807@gmail.com>
+homepage: https://github.com/marcos930807/fancyDialogs
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
