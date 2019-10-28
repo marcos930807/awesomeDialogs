@@ -1,5 +1,6 @@
-import 'package:fancy_dialog/animated_button.dart';
-import 'package:fancy_dialog/fancy_dialog.dart';
+
+import 'package:awesome_dialog/animated_button.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -34,7 +35,7 @@ class HomePage extends StatelessWidget {
           AnimatedButton(
             text: 'Info Dialog',
             pressEvent: () {
-              FancyDialog(
+              AwesomeDialog(
                       context: context,
                       dialogType: DialogType.INFO,
                       animType: AnimType.BOTTOMSLIDE,
@@ -53,7 +54,7 @@ class HomePage extends StatelessWidget {
             text: 'Warning Dialog',
             color: Colors.orange,
             pressEvent: () {
-              FancyDialog(
+              AwesomeDialog(
                       context: context,
                       dialogType: DialogType.WARNING,
                       animType: AnimType.TOPSLIDE,
@@ -72,7 +73,7 @@ class HomePage extends StatelessWidget {
             text: 'Error Dialog',
             color: Colors.red,
             pressEvent: () {
-              FancyDialog(
+              AwesomeDialog(
                       context: context,
                       dialogType: DialogType.ERROR,
                       animType: AnimType.RIGHSLIDE,
@@ -91,7 +92,7 @@ class HomePage extends StatelessWidget {
             text: 'Succes Dialog',
             color: Colors.green,
             pressEvent: () {
-              FancyDialog(
+              AwesomeDialog(
                   context: context,
                   animType: AnimType.LEFTSLIDE,
                   dialogType: DialogType.SUCCES,
@@ -112,7 +113,7 @@ class HomePage extends StatelessWidget {
             text: 'Custom Body Dialog',
             color: Colors.blueGrey,
             pressEvent: () {
-              FancyDialog(
+              AwesomeDialog(
                   context: context,
                   animType: AnimType.SCALE,
                   dialogType: DialogType.INFO,
@@ -134,7 +135,7 @@ class HomePage extends StatelessWidget {
             text: 'Custom Buttons Dialog',
             color: Colors.brown,
             pressEvent: () {
-              FancyDialog(
+              AwesomeDialog(
                   context: context,
                   animType: AnimType.SCALE,
                   customHeader: Icon(Icons.face,size: 50,),

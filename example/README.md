@@ -1,6 +1,6 @@
-# fancy_dialog_example
+# awesome_dialog_example
 
-FancyDialogLibExample
+AwesomeDialogLibExample
 
 ## Getting Started
 

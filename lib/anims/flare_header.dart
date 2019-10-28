@@ -1,4 +1,5 @@
-import 'package:fancy_dialog/fancy_dialog.dart';
+
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class FlareHeader extends StatelessWidget {
     switch (dialogType) {
       case DialogType.INFO:
         return FlareActor(
-          "packages/fancy_dialog/assets/flare/info.flr",
+          "packages/awesome_dialog/assets/flare/info.flr",
           
           alignment: Alignment.center,
           fit: BoxFit.cover,
@@ -22,7 +23,7 @@ class FlareHeader extends StatelessWidget {
         break;
       case DialogType.WARNING:
         return FlareActor(
-          "packages/fancy_dialog/assets/flare/warning.flr",
+          "packages/awesome_dialog/assets/flare/warning.flr",
           alignment: Alignment.center,
           fit: BoxFit.cover,
           animation: 'appear',
@@ -30,7 +31,7 @@ class FlareHeader extends StatelessWidget {
         break;
       case DialogType.ERROR:
         return FlareActor(
-          "packages/fancy_dialog/assets/flare/error.flr",
+          "packages/awesome_dialog/assets/flare/error.flr",
           alignment: Alignment.center,
           fit: BoxFit.fill,
           animation: 'Error',
@@ -38,7 +39,7 @@ class FlareHeader extends StatelessWidget {
         break;
       case DialogType.SUCCES:
         return FlareActor(
-          "packages/fancy_dialog/assets/flare/succes.flr",
+          "packages/awesome_dialog/assets/flare/succes.flr",
           alignment: Alignment.center,
           fit: BoxFit.fill,
           animation: 'Untitled',

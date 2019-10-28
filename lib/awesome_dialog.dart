@@ -1,15 +1,15 @@
-library fancy_dialog;
+library awesome_dialog;
 
 import 'anims/anims.dart';
-import 'package:fancy_dialog/animated_button.dart';
-import 'package:fancy_dialog/anims/flare_header.dart';
-import 'package:fancy_dialog/vertical_stack_header_dialog.dart';
+import 'package:awesome_dialog/animated_button.dart';
+import 'package:awesome_dialog/anims/flare_header.dart';
+import 'package:awesome_dialog/vertical_stack_header_dialog.dart';
 import 'package:flutter/material.dart';
 
 enum DialogType { INFO, WARNING, ERROR, SUCCES}
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
 
-class FancyDialog {
+class AwesomeDialog {
   final DialogType dialogType;
   final Widget customHeader;
   final String tittle;
@@ -29,7 +29,7 @@ class FancyDialog {
   final bool dismissOnTouchOutside;
   final Function onDissmissCallback;
   final AnimType animType;
-  FancyDialog(
+  AwesomeDialog(
       {
       @required this.context,
       this.dialogType,

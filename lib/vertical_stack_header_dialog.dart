@@ -1,4 +1,4 @@
-import 'package:fancy_dialog/anims/anims.dart';
+import 'package:awesome_dialog/anims/anims.dart';
 import 'package:flutter/material.dart';
 
 class VerticalStackDialog extends StatelessWidget {

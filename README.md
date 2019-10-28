@@ -1,13 +1,13 @@
-# fancy_dialog
+# awesome_dialog
 
 A new Flutter package project for simple a awesome dialogs
 
 ## Usage
 
-To use this package, add fancy_dialog as a dependency in your pubspec.yaml file.
+To use this package, add awesome_dialog as a dependency in your pubspec.yaml file.
 And add this import to your file.
 
-import 'package:fancy_dialog/fancy_dialog.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 ## Image
 ![alt text](doc/gif.gif)
@@ -15,7 +15,7 @@ import 'package:fancy_dialog/fancy_dialog.dart';
 ### Example
 
 ```
-FancyDialog(context: context,
+AwesomeDialog(context: context,
             dialogType: DialogType.INFO,
             animType: AnimType.BOTTOMSLIDE,
             tittle: 'Dialog Title',
@@ -28,7 +28,7 @@ FancyDialog(context: context,
 If the body is specified, then title and description will be ignored, this allows to further customize the dialogue.
 
 ```
-FancyDialog(
+AwesomeDialog(
             context: context,
             animType: AnimType.SCALE,
             dialogType: DialogType.INFO,
@@ -48,7 +48,7 @@ To use custom buttons, just specify the buttonOk or btnCancel widget, all text p
 
 ## Dissmiss and Callback
 
-FancyDialog has onDissmissCallback() and can be dissmissed at any time using dissmiss() public method.
+AwesomeDialog has onDissmissCallback() and can be dissmissed at any time using dissmiss() public method.
 
 
 
