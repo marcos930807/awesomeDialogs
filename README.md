@@ -5,6 +5,9 @@ A new Flutter package project for simple a awesome dialogs
 ## Usage
 
 To use this package, add fancy_dialog as a dependency in your pubspec.yaml file.
+And add this import to your file.
+
+import 'package:fancy_dialog/fancy_dialog.dart';
 
 ## Image
 ![alt text](docs/gif.gif)
