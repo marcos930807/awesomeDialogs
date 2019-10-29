@@ -3,7 +3,7 @@ description: >-
   Flutter package to show beautiful dialogs with animations as simply as possible.
 version: 0.0.2
 author: Marcos Rodriguez <marcos930807@gmail.com>
-homepage: https://github.com/marcos930807/fancyDialogs
+homepage: https://github.com/marcos930807/awesomeDialogs
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
