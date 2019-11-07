@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/animated_button.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:fancy_dialog_example/routes.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -9,28 +10,67 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Fancy Dialog Example',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Fancy Dialog Example'),
-        ),
-        body: new HomePage(),
-      ),
+      initialRoute: '/',
+      onGenerateRoute: RouteGenerator.generateRoute,
+     
+      
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({
     Key key,
   }) : super(key: key);
 
   @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  showDebugPrint() {
+    debugPrint('Print from Callback Function');
+  }
+  _slideMainPage(BuildContext context) {
+    showDebugPrint();
+    Navigator.of(context).pushNamed(RouteGenerator.testPage);
+}
+
+  void showAlertDialogOnOkCallback(String title, String msg,
+      DialogType dialogType, BuildContext context, VoidCallback onOkPress) {
+    AwesomeDialog(
+      context: context,
+      animType: AnimType.TOPSLIDE,
+      dialogType: dialogType,
+      tittle: title,
+      desc: msg,
+      btnOkIcon: Icons.check_circle,
+      btnOkColor: Colors.green.shade900,
+      btnOkOnPress: onOkPress,
+    ).show();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Center(
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Fancy Dialog Example'),
+        ),
+        body:Center(
         child: Container(
       padding: EdgeInsets.all(16),
       child: Column(
         children: <Widget>[
+          AnimatedButton(
+            text: 'Issue Dialog',
+            pressEvent: () {
+              showAlertDialogOnOkCallback('Verified', 'Sign In Success!, prees Ok to navigate.',
+                  DialogType.SUCCES, context,  () => _slideMainPage(context));
+            },
+          ),
+          SizedBox(
+            height: 16,
+          ),
           AnimatedButton(
             text: 'Info Dialog',
             pressEvent: () {
@@ -42,11 +82,11 @@ class HomePage extends StatelessWidget {
                       desc:
                           'Dialog description here..................................................',
                       btnCancelOnPress: () {},
-                      btnOkOnPress: () {})
+                      btnOkOnPress: showDebugPrint)
                   .show();
             },
           ),
-          SizedBox(
+           SizedBox(
             height: 16,
           ),
           AnimatedButton(
@@ -98,7 +138,9 @@ class HomePage extends StatelessWidget {
                   tittle: 'Succes',
                   desc:
                       'Dialog description here..................................................',
-                  btnOkOnPress: () {},
+                  btnOkOnPress: () {
+                    debugPrint('OnClcik');
+                  },
                   btnOkIcon: Icons.check_circle,
                   onDissmissCallback: () {
                     debugPrint('Dialog Dissmiss from callback');
@@ -157,7 +199,7 @@ class HomePage extends StatelessWidget {
             },
           ),
         ],
-      ),
+      ),)
     ));
   }
 }

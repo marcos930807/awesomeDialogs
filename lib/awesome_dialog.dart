@@ -104,8 +104,8 @@ class AwesomeDialog {
   _buildFancyButtonOk() {
     return AnimatedButton(
       pressEvent: () {
-        btnOkOnPress();
         Navigator.of(context).pop();
+        btnOkOnPress();
       },
       text: btnOkText ?? 'Ok',
       color: btnOkColor ?? Color(0xFF00CA71),
@@ -116,8 +116,8 @@ class AwesomeDialog {
   _buildFancyButtonCancel() {
     return AnimatedButton(
       pressEvent: () {
-        btnCancelOnPress();
         Navigator.of(context).pop();
+        btnCancelOnPress();
       },
       text: btnCancelText ?? 'Cancel',
       color: btnCancelColor ?? Colors.red,
