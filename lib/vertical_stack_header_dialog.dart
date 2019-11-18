@@ -33,7 +33,7 @@ class VerticalStackDialog extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 elevation: 0.5,
-                color: Colors.white,
+                color: Theme.of(context).cardColor,
                 child: Container(
                   padding: EdgeInsets.only(left: 5, right: 5),
                   child: Column(
@@ -105,7 +105,7 @@ class VerticalStackDialog extends StatelessWidget {
                 from: SlideFrom.TOP,
                 delay: 1,
                 child: CircleAvatar(
-                  backgroundColor: Colors.white,
+                  backgroundColor: Theme.of(context).cardColor,
                   radius: 55.0,
                   child: header,
                 ),
