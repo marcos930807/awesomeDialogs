@@ -8,6 +8,8 @@ class VerticalStackDialog extends StatelessWidget {
   final Widget btnCancel;
   final Widget header;
   final Widget body;
+  final bool isDense;
+  final AlignmentGeometry aligment;
   const VerticalStackDialog({
     Key key,
     @required this.title,
@@ -15,20 +17,24 @@ class VerticalStackDialog extends StatelessWidget {
     this.btnOk,
     this.btnCancel,
     this.body,
+    this.aligment,
+    this.isDense,
     @required this.header,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Container(
+      alignment: aligment,
       child: Stack(
         children: <Widget>[
           FadeIn(
             from: SlideFrom.BOTTOM,
             delay: 1,
             child: Container(
-              padding: EdgeInsets.only(
-                  top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
+              padding: isDense ? EdgeInsets.only(
+                  top: 65.0, left: 15.0, right: 15.0, bottom: 10.0) : EdgeInsets.only(
+                  top: 65.0, left: 40.0, right: 40.0, bottom: 10.0) ,
               child: Material(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),

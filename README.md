@@ -73,6 +73,7 @@ AwesomeDialog has onDissmissCallback() and can be dissmissed at any time using d
 |dismissOnTouchOutside             | bool      | Dissmiss dialog on touch overlay    | true |
 |onDissmissCallback            | Function      | Dissmiss callback funtion    | Null |
 | animType             | AnimType      | Type of dialogue enter animation                                 | AnimType.SCALE |
+| aligment             | AlignmentGeometry      | dialogue aligment gravity                                | Alignment.center |
 
 
 

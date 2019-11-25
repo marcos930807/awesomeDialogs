@@ -29,6 +29,8 @@ class AwesomeDialog {
   final bool dismissOnTouchOutside;
   final Function onDissmissCallback;
   final AnimType animType;
+  final AlignmentGeometry aligment;
+  final bool isDense;
   AwesomeDialog(
       {@required this.context,
       this.dialogType,
@@ -47,7 +49,9 @@ class AwesomeDialog {
       this.btnCancelOnPress,
       this.btnCancelColor,
       this.onDissmissCallback,
+      this.isDense = false,
       this.dismissOnTouchOutside = true,
+      this.aligment = Alignment.center,
       this.animType = AnimType.SCALE})
       : assert(
           (dialogType != null || customHeader != null),
@@ -95,6 +99,8 @@ class AwesomeDialog {
       title: this.tittle,
       desc: this.desc,
       body: this.body,
+      isDense: isDense,
+      aligment: aligment,
       btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk() : null),
       btnCancel: btnCancel ??
           (btnCancelOnPress != null ? _buildFancyButtonCancel() : null),
