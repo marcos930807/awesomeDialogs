@@ -32,9 +32,11 @@ class VerticalStackDialog extends StatelessWidget {
             from: SlideFrom.BOTTOM,
             delay: 1,
             child: Container(
-              padding: isDense ? EdgeInsets.only(
-                  top: 65.0, left: 15.0, right: 15.0, bottom: 10.0) : EdgeInsets.only(
-                  top: 65.0, left: 40.0, right: 40.0, bottom: 10.0) ,
+              padding: isDense
+                  ? EdgeInsets.only(
+                      top: 65.0, left: 15.0, right: 15.0, bottom: 10.0)
+                  : EdgeInsets.only(
+                      top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
               child: Material(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
@@ -87,9 +89,11 @@ class VerticalStackDialog extends StatelessWidget {
                                     child: btnCancel ?? Container(),
                                   )
                                 : Container(),
-                            SizedBox(
-                              width: 10,
-                            ),
+                            (btnCancel != null && btnOk != null)
+                                ? SizedBox(
+                                    width: 10,
+                                  )
+                                : Container(),
                             btnOk != null
                                 ? Expanded(
                                     child: btnOk,
