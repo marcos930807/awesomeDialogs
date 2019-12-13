@@ -74,7 +74,7 @@ AwesomeDialog has onDissmissCallback() and can be dissmissed at any time using d
 |onDissmissCallback            | Function      | Dissmiss callback funtion    | Null |
 | animType             | AnimType      | Type of dialogue enter animation                                 | AnimType.SCALE |
 | aligment             | AlignmentGeometry      | dialogue aligment gravity                                | Alignment.center |
-
+| useRootNavigator     | bool    | Use the root navigator insteed than the local. This is usefuk when the defaut cancel go to the previous screen insteed to just close the dialog | false |
 
 
 
