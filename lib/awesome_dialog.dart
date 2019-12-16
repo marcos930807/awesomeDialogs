@@ -31,6 +31,7 @@ class AwesomeDialog {
   final AnimType animType;
   final AlignmentGeometry aligment;
   final bool isDense;
+  final bool useRootNavigator;
   AwesomeDialog(
       {@required this.context,
       this.dialogType,
@@ -52,7 +53,8 @@ class AwesomeDialog {
       this.isDense = false,
       this.dismissOnTouchOutside = true,
       this.aligment = Alignment.center,
-      this.animType = AnimType.SCALE})
+      this.animType = AnimType.SCALE,
+      this.useRootNavigator = false})
       : assert(
           (dialogType != null || customHeader != null),
           context != null,
@@ -110,7 +112,7 @@ class AwesomeDialog {
   _buildFancyButtonOk() {
     return AnimatedButton(
       pressEvent: () {
-        Navigator.of(context).pop();
+        Navigator.of(context, rootNavigator: useRootNavigator).pop();
         btnOkOnPress();
       },
       text: btnOkText ?? 'Ok',
@@ -122,7 +124,7 @@ class AwesomeDialog {
   _buildFancyButtonCancel() {
     return AnimatedButton(
       pressEvent: () {
-        Navigator.of(context).pop();
+        Navigator.of(context, rootNavigator: useRootNavigator).pop();
         btnCancelOnPress();
       },
       text: btnCancelText ?? 'Cancel',
@@ -132,6 +134,6 @@ class AwesomeDialog {
   }
 
   dissmiss() {
-    Navigator.of(context).pop();
+    Navigator.of(context, rootNavigator: useRootNavigator).pop();
   }
 }
