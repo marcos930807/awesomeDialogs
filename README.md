@@ -18,11 +18,12 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 AwesomeDialog(context: context,
             dialogType: DialogType.INFO,
             animType: AnimType.BOTTOMSLIDE,
-            tittle: 'Dialog Title',
+            title: 'Dialog Title',
             desc: 'Dialog description here..................................................',
             btnCancelOnPress: () {},
             btnOkOnPress: () {}).show();
 ```
+
 ## Custom Body
 
 If the body is specified, then title and description will be ignored, this allows to further customize the dialogue.
@@ -36,7 +37,7 @@ AwesomeDialog(
                     'If the body is specified, then title and description will be ignored, this allows to further customize the dialogue.',
                     style: TextStyle(fontStyle: FontStyle.italic),
                   ),),
-            tittle: 'This is Ignored',
+            title: 'This is Ignored',
             desc:   'This is also Ignored',
             btnOkOnPress: () {},
                  ).show();
