@@ -31,6 +31,7 @@ class AwesomeDialog {
   final AnimType animType;
   final AlignmentGeometry aligment;
   final bool isDense;
+  final bool headerAnimationLoop;
   AwesomeDialog(
       {@required this.context,
       this.dialogType,
@@ -51,6 +52,7 @@ class AwesomeDialog {
       this.onDissmissCallback,
       this.isDense = false,
       this.dismissOnTouchOutside = true,
+      this.headerAnimationLoop = true,
       this.aligment = Alignment.center,
       this.animType = AnimType.SCALE})
       : assert(
@@ -94,6 +96,7 @@ class AwesomeDialog {
     return VerticalStackDialog(
       header: customHeader ??
           FlareHeader(
+            loop: headerAnimationLoop,
             dialogType: this.dialogType,
           ),
       title: this.tittle,

@@ -1,7 +1,7 @@
 name: awesome_dialog
 description: >-
   Flutter package to show beautiful dialogs with animations as simply as possible.
-version: 0.1.0
+version: 0.1.1
 author: Marcos Rodriguez <marcos930807@gmail.com>
 homepage: https://github.com/marcos930807/awesomeDialogs
 
@@ -11,8 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  simple_animations: ^1.3.3
-  flare_flutter: ^1.6.1
+  simple_animations: ^1.3.4
+  flare_flutter: ^1.8.3
 
 dev_dependencies:
   flutter_test:

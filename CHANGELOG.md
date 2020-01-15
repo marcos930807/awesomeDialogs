@@ -1,3 +1,6 @@
+## [0.1.1] - 15/01/2020.
+
+* Added prop headerAnimationLoop.
 ## [0.1.0] - 03/12/2019.
 
 * Fix a bug when there is only a single button, removing unwanted space
