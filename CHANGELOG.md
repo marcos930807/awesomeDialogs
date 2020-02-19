@@ -1,3 +1,9 @@
+## [0.1.2] - 19/02/2020.
+
+* Upgrade dependencies
+* Remove spacing for buttons if no buttons are especified.
+* Added prop padding with default value EdgeInsets.only(left: 5, right: 5). this is not breaking change since this is the padding used on eraly version.
+
 ## [0.1.1] - 15/01/2020.
 
 * Added prop headerAnimationLoop.

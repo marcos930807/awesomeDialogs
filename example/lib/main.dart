@@ -94,6 +94,23 @@ class _HomePageState extends State<HomePage> {
                 height: 16,
               ),
               AnimatedButton(
+                text: 'Info Dialog Without buttons',
+                pressEvent: () {
+                  AwesomeDialog(
+                    context: context,
+                    headerAnimationLoop: false,
+                    dialogType: DialogType.INFO,
+                    animType: AnimType.BOTTOMSLIDE,
+                    tittle: 'INFO',
+                    desc:
+                        'Dialog description here..................................................',
+                  ).show();
+                },
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              AnimatedButton(
                 text: 'Warning Dialog',
                 color: Colors.orange,
                 pressEvent: () {
@@ -173,7 +190,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                     tittle: 'This is Ignored',
                     desc: 'This is also Ignored',
-                    btnOkOnPress: () {},
                   ).show();
                 },
               ),

@@ -10,6 +10,7 @@ class VerticalStackDialog extends StatelessWidget {
   final Widget body;
   final bool isDense;
   final AlignmentGeometry aligment;
+  final EdgeInsetsGeometry padding;
   const VerticalStackDialog({
     Key key,
     @required this.title,
@@ -20,6 +21,7 @@ class VerticalStackDialog extends StatelessWidget {
     this.aligment,
     this.isDense,
     @required this.header,
+    this.padding,
   }) : super(key: key);
 
   @override
@@ -43,7 +45,7 @@ class VerticalStackDialog extends StatelessWidget {
                 elevation: 0.5,
                 color: Theme.of(context).cardColor,
                 child: Container(
-                  padding: EdgeInsets.only(left: 5, right: 5),
+                  padding: padding,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
@@ -78,30 +80,31 @@ class VerticalStackDialog extends StatelessWidget {
                       SizedBox(
                         height: 16.0,
                       ),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            btnCancel != null
-                                ? Expanded(
-                                    child: btnCancel ?? Container(),
-                                  )
-                                : Container(),
-                            (btnCancel != null && btnOk != null)
-                                ? SizedBox(
-                                    width: 10,
-                                  )
-                                : Container(),
-                            btnOk != null
-                                ? Expanded(
-                                    child: btnOk,
-                                  )
-                                : Container(),
-                          ],
-                        ),
-                      )
+                      if (btnOk != null || btnCancel != null)
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              btnCancel != null
+                                  ? Expanded(
+                                      child: btnCancel ?? Container(),
+                                    )
+                                  : Container(),
+                              (btnCancel != null && btnOk != null)
+                                  ? SizedBox(
+                                      width: 10,
+                                    )
+                                  : Container(),
+                              btnOk != null
+                                  ? Expanded(
+                                      child: btnOk,
+                                    )
+                                  : Container(),
+                            ],
+                          ),
+                        )
                     ],
                   ),
                 ),

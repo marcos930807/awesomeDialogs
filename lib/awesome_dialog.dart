@@ -30,6 +30,7 @@ class AwesomeDialog {
   final Function onDissmissCallback;
   final AnimType animType;
   final AlignmentGeometry aligment;
+  final EdgeInsetsGeometry padding;
   final bool isDense;
   final bool headerAnimationLoop;
   final bool useRootNavigator;
@@ -56,6 +57,7 @@ class AwesomeDialog {
       this.headerAnimationLoop = true,
       this.aligment = Alignment.center,
       this.animType = AnimType.SCALE,
+      this.padding,
       this.useRootNavigator = false})
       : assert(
           (dialogType != null || customHeader != null),
@@ -106,6 +108,7 @@ class AwesomeDialog {
       body: this.body,
       isDense: isDense,
       aligment: aligment,
+      padding: padding ?? EdgeInsets.only(left: 5, right: 5),
       btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk() : null),
       btnCancel: btnCancel ??
           (btnCancelOnPress != null ? _buildFancyButtonCancel() : null),
