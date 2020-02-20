@@ -102,8 +102,7 @@ class _HomePageState extends State<HomePage> {
                     dialogType: DialogType.INFO,
                     animType: AnimType.BOTTOMSLIDE,
                     tittle: 'INFO',
-                    desc:
-                        'Dialog description here..................................................',
+                    desc: 'Dialog de.',
                   ).show();
                 },
               ),

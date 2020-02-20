@@ -1,3 +1,5 @@
+## [0.1.3] - 19/02/2020.
+* Fix tiny bug after features of version 0.1.2
 ## [0.1.2] - 19/02/2020.
 
 * Upgrade dependencies

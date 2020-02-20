@@ -46,6 +46,7 @@ class VerticalStackDialog extends StatelessWidget {
                 color: Theme.of(context).cardColor,
                 child: Container(
                   padding: padding,
+                  width: MediaQuery.of(context).size.width,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
