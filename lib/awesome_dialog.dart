@@ -71,22 +71,23 @@ class AwesomeDialog {
         builder: (BuildContext context) {
           switch (animType) {
             case AnimType.SCALE:
-              return Scale(
-                  scalebegin: 0.1,
+              return ScaleFade(
+                  scale: 0.1,
+                  fade: true,
                   curve: Curves.fastLinearToSlowEaseIn,
                   child: _buildDialog());
               break;
             case AnimType.LEFTSLIDE:
-              return Slide(from: SlideFrom.LEFT, child: _buildDialog());
+              return FadeIn(from: SlideFrom.LEFT, child: _buildDialog());
               break;
             case AnimType.RIGHSLIDE:
-              return Slide(from: SlideFrom.RIGHT, child: _buildDialog());
+              return FadeIn(from: SlideFrom.RIGHT, child: _buildDialog());
               break;
             case AnimType.BOTTOMSLIDE:
-              return Slide(from: SlideFrom.BOTTOM, child: _buildDialog());
+              return FadeIn(from: SlideFrom.BOTTOM, child: _buildDialog());
               break;
             case AnimType.TOPSLIDE:
-              return Slide(from: SlideFrom.TOP, child: _buildDialog());
+              return FadeIn(from: SlideFrom.TOP, child: _buildDialog());
               break;
             default:
               return _buildDialog();
