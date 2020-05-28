@@ -1,3 +1,7 @@
+## [1.0.0] - 28/05/2020.
+* Added AutoHide feature.
+* Added DialogType NO_HEADER feature.
+* Organized project files.
 ## [0.1.4] - 30/04/2020.
 * Upgrade dependencies. and animations.
 ## [0.1.3] - 19/02/2020.

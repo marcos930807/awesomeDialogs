@@ -1,7 +1,7 @@
 name: awesome_dialog
 description: >-
   Flutter package to show beautiful dialogs with animations as simply as possible.
-version: 0.1.4
+version: 1.0.0
 homepage: https://github.com/marcos930807/awesomeDialogs
 
 environment:

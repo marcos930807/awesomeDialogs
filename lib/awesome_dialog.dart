@@ -1,39 +1,81 @@
 library awesome_dialog;
 
-import 'anims/anims.dart';
-import 'package:awesome_dialog/animated_button.dart';
-import 'package:awesome_dialog/anims/flare_header.dart';
-import 'package:awesome_dialog/vertical_stack_header_dialog.dart';
+import 'src/anims/anims.dart';
+import 'src/animated_button.dart';
+import 'src/anims/flare_header.dart';
+import 'src/vertical_stack_header_dialog.dart';
 import 'package:flutter/material.dart';
 
-enum DialogType { INFO, WARNING, ERROR, SUCCES }
+export 'src/animated_button.dart';
+export 'src/anims/flare_header.dart';
+
+enum DialogType { INFO, WARNING, ERROR, SUCCES, NO_HEADER }
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
 
 class AwesomeDialog {
-  final DialogType dialogType;
-  final Widget customHeader;
-  final String tittle;
-  final String desc;
+  /// [@required]
   final BuildContext context;
+
+  /// Dialog Type can be INFO, WARNING, ERROR, SUCCES, NO_HEADER
+  final DialogType dialogType;
+
+  /// Widget with priority over DialogType, for a custom header widget
+  final Widget customHeader;
+
+  /// Dialog Title
+  final String tittle;
+
+  /// Set the description text of the dialog.
+  final String desc;
+
+  /// Create your own Widget for body, if this property is set title and description will be ignored.
+  final Widget body;
+
+  /// Btn OK props
   final String btnOkText;
   final IconData btnOkIcon;
   final Function btnOkOnPress;
   final Color btnOkColor;
+
+  /// Btn Cancel props
   final String btnCancelText;
   final IconData btnCancelIcon;
   final Function btnCancelOnPress;
   final Color btnCancelColor;
+
+  /// Custom Btn OK
   final Widget btnOk;
+
+  /// Custom Btn Cancel
   final Widget btnCancel;
-  final Widget body;
+
+  /// Barrier Dissmisable
   final bool dismissOnTouchOutside;
+
+  /// Callback to execute after dialog get dissmised
   final Function onDissmissCallback;
+
+  /// Anim Type can be { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
   final AnimType animType;
+
+  /// Aligment of the Dialog
   final AlignmentGeometry aligment;
+
+  /// Padding off inner content of Dialog
   final EdgeInsetsGeometry padding;
+
+  /// this Prop is usefull to Take advantage of screen dimensions
   final bool isDense;
+
+  /// Whenever the animation Header loops or not.
   final bool headerAnimationLoop;
+
+  /// To use the Rootnavigator
   final bool useRootNavigator;
+
+  /// For Autho Hide Dialog after some Duration.
+  final Duration autoHide;
+
   AwesomeDialog(
       {@required this.context,
       this.dialogType,
@@ -58,89 +100,94 @@ class AwesomeDialog {
       this.aligment = Alignment.center,
       this.animType = AnimType.SCALE,
       this.padding,
-      this.useRootNavigator = false})
+      this.useRootNavigator = false,
+      this.autoHide})
       : assert(
           (dialogType != null || customHeader != null),
           context != null,
         );
 
-  Future show() {
-    return showDialog(
-        context: this.context,
-        barrierDismissible: dismissOnTouchOutside,
-        builder: (BuildContext context) {
-          switch (animType) {
-            case AnimType.SCALE:
-              return ScaleFade(
-                  scale: 0.1,
-                  fade: true,
-                  curve: Curves.fastLinearToSlowEaseIn,
-                  child: _buildDialog());
-              break;
-            case AnimType.LEFTSLIDE:
-              return FadeIn(from: SlideFrom.LEFT, child: _buildDialog());
-              break;
-            case AnimType.RIGHSLIDE:
-              return FadeIn(from: SlideFrom.RIGHT, child: _buildDialog());
-              break;
-            case AnimType.BOTTOMSLIDE:
-              return FadeIn(from: SlideFrom.BOTTOM, child: _buildDialog());
-              break;
-            case AnimType.TOPSLIDE:
-              return FadeIn(from: SlideFrom.TOP, child: _buildDialog());
-              break;
-            default:
-              return _buildDialog();
-          }
-        }).then((_) {
-      if (onDissmissCallback != null) onDissmissCallback();
-    });
-  }
+  bool isDissmisedBySystem = false;
 
-  _buildDialog() {
-    return VerticalStackDialog(
-      header: customHeader ??
-          FlareHeader(
-            loop: headerAnimationLoop,
-            dialogType: this.dialogType,
-          ),
-      title: this.tittle,
-      desc: this.desc,
-      body: this.body,
-      isDense: isDense,
-      aligment: aligment,
-      padding: padding ?? EdgeInsets.only(left: 5, right: 5),
-      btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk() : null),
-      btnCancel: btnCancel ??
-          (btnCancelOnPress != null ? _buildFancyButtonCancel() : null),
+  Future show() => showDialog(
+          context: this.context,
+          barrierDismissible: dismissOnTouchOutside,
+          builder: (BuildContext context) {
+            if (autoHide != null) {
+              Future.delayed(autoHide).then((value) => dissmiss());
+            }
+            switch (animType) {
+              case AnimType.SCALE:
+                return ScaleFade(
+                    scale: 0.1,
+                    fade: true,
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    child: _buildDialog);
+                break;
+              case AnimType.LEFTSLIDE:
+                return FadeIn(from: SlideFrom.LEFT, child: _buildDialog);
+                break;
+              case AnimType.RIGHSLIDE:
+                return FadeIn(from: SlideFrom.RIGHT, child: _buildDialog);
+                break;
+              case AnimType.BOTTOMSLIDE:
+                return FadeIn(from: SlideFrom.BOTTOM, child: _buildDialog);
+                break;
+              case AnimType.TOPSLIDE:
+                return FadeIn(from: SlideFrom.TOP, child: _buildDialog);
+                break;
+              default:
+                return _buildDialog;
+            }
+          }).then((_) {
+        isDissmisedBySystem = true;
+        if (onDissmissCallback != null) onDissmissCallback();
+      });
+
+  Widget get _buildHeader {
+    if (customHeader != null) return customHeader;
+    if (dialogType == DialogType.NO_HEADER) return null;
+    return FlareHeader(
+      loop: headerAnimationLoop,
+      dialogType: this.dialogType,
     );
   }
 
-  _buildFancyButtonOk() {
-    return AnimatedButton(
-      pressEvent: () {
-        Navigator.of(context, rootNavigator: useRootNavigator).pop();
-        btnOkOnPress();
-      },
-      text: btnOkText ?? 'Ok',
-      color: btnOkColor ?? Color(0xFF00CA71),
-      icon: btnOkIcon,
-    );
-  }
+  Widget get _buildDialog => VerticalStackDialog(
+        header: _buildHeader,
+        title: this.tittle,
+        desc: this.desc,
+        body: this.body,
+        isDense: isDense,
+        aligment: aligment,
+        padding: padding ?? EdgeInsets.only(left: 5, right: 5),
+        btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
+        btnCancel: btnCancel ??
+            (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
+      );
 
-  _buildFancyButtonCancel() {
-    return AnimatedButton(
-      pressEvent: () {
-        Navigator.of(context, rootNavigator: useRootNavigator).pop();
-        btnCancelOnPress();
-      },
-      text: btnCancelText ?? 'Cancel',
-      color: btnCancelColor ?? Colors.red,
-      icon: btnCancelIcon,
-    );
-  }
+  Widget get _buildFancyButtonOk => AnimatedButton(
+        pressEvent: () {
+          Navigator.of(context, rootNavigator: useRootNavigator).pop();
+          btnOkOnPress();
+        },
+        text: btnOkText ?? 'Ok',
+        color: btnOkColor ?? Color(0xFF00CA71),
+        icon: btnOkIcon,
+      );
+
+  Widget get _buildFancyButtonCancel => AnimatedButton(
+        pressEvent: () {
+          Navigator.of(context, rootNavigator: useRootNavigator).pop();
+          btnCancelOnPress();
+        },
+        text: btnCancelText ?? 'Cancel',
+        color: btnCancelColor ?? Colors.red,
+        icon: btnCancelIcon,
+      );
 
   dissmiss() {
-    Navigator.of(context, rootNavigator: useRootNavigator).pop();
+    if (!isDissmisedBySystem)
+      Navigator.of(context, rootNavigator: useRootNavigator).pop();
   }
 }

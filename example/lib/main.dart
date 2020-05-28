@@ -1,4 +1,3 @@
-import 'package:awesome_dialog/animated_button.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:fancy_dialog_example/routes.dart';
 import 'package:flutter/material.dart';
@@ -26,34 +25,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  showDebugPrint() {
-    debugPrint('Print from Callback Function');
-  }
-
-  _slideMainPage(BuildContext context) {
-    showDebugPrint();
-    Navigator.of(context).pushNamed(RouteGenerator.testPage);
-  }
-
-  void showAlertDialogOnOkCallback(String title, String msg,
-      DialogType dialogType, BuildContext context, VoidCallback onOkPress) {
-    AwesomeDialog(
-      context: context,
-      animType: AnimType.TOPSLIDE,
-      dialogType: dialogType,
-      tittle: title,
-      desc: msg,
-      btnOkIcon: Icons.check_circle,
-      btnOkColor: Colors.green.shade900,
-      btnOkOnPress: onOkPress,
-    ).show();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Fancy Dialog Example'),
+          title: Text('Awesome Dialog Example'),
         ),
         body: Center(
             child: Container(
@@ -61,33 +37,18 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: <Widget>[
               AnimatedButton(
-                text: 'Issue Dialog',
-                pressEvent: () {
-                  showAlertDialogOnOkCallback(
-                      'Verified',
-                      'Sign In Success!, prees Ok to navigate.',
-                      DialogType.SUCCES,
-                      context,
-                      () => _slideMainPage(context));
-                },
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              AnimatedButton(
                 text: 'Info Dialog',
                 pressEvent: () {
                   AwesomeDialog(
-                          context: context,
-                          headerAnimationLoop: false,
-                          dialogType: DialogType.INFO,
-                          animType: AnimType.BOTTOMSLIDE,
-                          tittle: 'INFO',
-                          desc:
-                              'Dialog description here..................................................',
-                          btnCancelOnPress: () {},
-                          btnOkOnPress: showDebugPrint)
-                      .show();
+                    context: context,
+                    headerAnimationLoop: false,
+                    dialogType: DialogType.INFO,
+                    animType: AnimType.BOTTOMSLIDE,
+                    tittle: 'INFO',
+                    desc: 'Dialog description here...',
+                    btnCancelOnPress: () {},
+                    btnOkOnPress: () {},
+                  )..show();
                 },
               ),
               SizedBox(
@@ -103,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                     animType: AnimType.BOTTOMSLIDE,
                     tittle: 'INFO',
                     desc: 'Dialog de.',
-                  ).show();
+                  )..show();
                 },
               ),
               SizedBox(
@@ -114,16 +75,16 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.orange,
                 pressEvent: () {
                   AwesomeDialog(
-                          context: context,
-                          dialogType: DialogType.WARNING,
-                          headerAnimationLoop: false,
-                          animType: AnimType.TOPSLIDE,
-                          tittle: 'Warning',
-                          desc:
-                              'Dialog description here..................................................',
-                          btnCancelOnPress: () {},
-                          btnOkOnPress: () {})
-                      .show();
+                      context: context,
+                      dialogType: DialogType.WARNING,
+                      headerAnimationLoop: false,
+                      animType: AnimType.TOPSLIDE,
+                      tittle: 'Warning',
+                      desc:
+                          'Dialog description here..................................................',
+                      btnCancelOnPress: () {},
+                      btnOkOnPress: () {})
+                    ..show();
                 },
               ),
               SizedBox(
@@ -134,16 +95,16 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.red,
                 pressEvent: () {
                   AwesomeDialog(
-                          context: context,
-                          dialogType: DialogType.ERROR,
-                          animType: AnimType.RIGHSLIDE,
-                          headerAnimationLoop: false,
-                          tittle: 'Error',
-                          desc:
-                              'Dialog description here..................................................',
-                          btnOkOnPress: () {},
-                          btnOkColor: Colors.red)
-                      .show();
+                      context: context,
+                      dialogType: DialogType.ERROR,
+                      animType: AnimType.RIGHSLIDE,
+                      headerAnimationLoop: false,
+                      tittle: 'Error',
+                      desc:
+                          'Dialog description here..................................................',
+                      btnOkOnPress: () {},
+                      btnOkColor: Colors.red)
+                    ..show();
                 },
               ),
               SizedBox(
@@ -189,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     tittle: 'This is Ignored',
                     desc: 'This is also Ignored',
-                  ).show();
+                  )..show();
                 },
               ),
               SizedBox(
@@ -217,7 +178,24 @@ class _HomePageState extends State<HomePage> {
                     ),
                     //this is ignored
                     btnOkOnPress: () {},
-                  ).show();
+                  )..show();
+                },
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              AnimatedButton(
+                text: 'Auto Hide Dialog',
+                color: Colors.purple,
+                pressEvent: () {
+                  AwesomeDialog(
+                    context: context,
+                    dialogType: DialogType.INFO,
+                    animType: AnimType.SCALE,
+                    tittle: 'This is Custom',
+                    desc: 'This is custom button and header',
+                    autoHide: Duration(seconds: 2),
+                  )..show();
                 },
               ),
             ],

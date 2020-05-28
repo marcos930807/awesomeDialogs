@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_animations/simple_animations.dart';
 
 class AnimatedButton extends StatefulWidget {
   final Function pressEvent;
@@ -17,45 +18,30 @@ class AnimatedButton extends StatefulWidget {
   _AnimatedButtonState createState() => _AnimatedButtonState();
 }
 
-class _AnimatedButtonState extends State<AnimatedButton>
-    with SingleTickerProviderStateMixin {
+class _AnimatedButtonState extends State<AnimatedButton> with AnimationMixin {
   Animation<double> _scale;
-  AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 300),
-    )..addListener(() {
-        setState(() {});
-      });
     final curveAnimation = CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeInBack,
-        reverseCurve: Curves.easeOut);
-    _scale = Tween<double>(begin: 1, end: 0.8).animate(curveAnimation)
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          _controller.reverse();
-        }
-      });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+        parent: controller, curve: Curves.easeIn, reverseCurve: Curves.easeIn);
+    _scale = Tween<double>(begin: 1, end: 0.9).animate(curveAnimation);
   }
 
   void _onTapDown(TapDownDetails details) {
-    _controller.forward();
+    controller.play(duration: Duration(milliseconds: 150));
   }
 
-  // void _onTapUp(TapUpDetails details) {
-  //   _controller.reverse();
-  // }
+  void _onTapUp(TapUpDetails details) {
+    if (controller.isAnimating) {
+      controller.addStatusListener((status) {
+        if (status == AnimationStatus.completed)
+          controller.playReverse(duration: Duration(milliseconds: 100));
+      });
+    } else
+      controller.playReverse(duration: Duration(milliseconds: 100));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +51,12 @@ class _AnimatedButtonState extends State<AnimatedButton>
         //  _controller.forward();
       },
       onTapDown: _onTapDown,
-      // onTapUp: _onTapUp,
+      onTapUp: _onTapUp,
+      onTapCancel: () {
+        controller.playReverse(
+          duration: Duration(milliseconds: 100),
+        );
+      },
       child: Transform.scale(
         scale: _scale.value,
         child: _animatedButtonUI,
@@ -83,20 +74,28 @@ class _AnimatedButtonState extends State<AnimatedButton>
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             widget.icon != null
-                ? Icon(
-                    widget.icon,
-                    color: Colors.white,
+                ? Padding(
+                    padding: const EdgeInsets.only(left: 4.0),
+                    child: Icon(
+                      widget.icon,
+                      color: Colors.white,
+                    ),
                   )
                 : SizedBox(),
             SizedBox(
               width: 5,
             ),
-            Text(
-              '${widget.text}',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 16),
+            Flexible(
+              fit: FlexFit.loose,
+              child: Text(
+                '${widget.text}',
+                maxLines: 1,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16),
+              ),
             ),
           ],
         ),

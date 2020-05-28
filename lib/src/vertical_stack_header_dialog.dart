@@ -1,4 +1,3 @@
-import 'package:awesome_dialog/anims/anims.dart';
 import 'package:flutter/material.dart';
 
 class VerticalStackDialog extends StatelessWidget {
@@ -49,7 +48,7 @@ class VerticalStackDialog extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     SizedBox(
-                      height: 50.0,
+                      height: header != null ? 50.0 : 15,
                     ),
                     body ??
                         Column(
@@ -58,7 +57,7 @@ class VerticalStackDialog extends StatelessWidget {
                             Text(
                               title,
                               textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.title,
+                              style: Theme.of(context).textTheme.headline6,
                             ),
                             SizedBox(
                               height: 5.0,
@@ -108,16 +107,17 @@ class VerticalStackDialog extends StatelessWidget {
               ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CircleAvatar(
-                backgroundColor: Theme.of(context).cardColor,
-                radius: 55.0,
-                child: header,
-              ),
-            ],
-          ),
+          if (header != null)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                CircleAvatar(
+                  backgroundColor: Theme.of(context).cardColor,
+                  radius: 55.0,
+                  child: header,
+                ),
+              ],
+            ),
         ],
       ),
     );
