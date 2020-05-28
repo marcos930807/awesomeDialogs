@@ -1,3 +1,5 @@
+## [1.0.1] - 28/05/2020.
+* Exported anims helper class for external use.
 ## [1.0.0] - 28/05/2020.
 * Added AutoHide feature.
 * Added DialogType NO_HEADER feature.

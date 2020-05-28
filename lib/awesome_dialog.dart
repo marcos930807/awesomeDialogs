@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 export 'src/animated_button.dart';
 export 'src/anims/flare_header.dart';
+export 'src/anims/anims.dart';
 
 enum DialogType { INFO, WARNING, ERROR, SUCCES, NO_HEADER }
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
