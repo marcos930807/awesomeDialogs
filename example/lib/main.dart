@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
                     headerAnimationLoop: false,
                     dialogType: DialogType.INFO,
                     animType: AnimType.BOTTOMSLIDE,
-                    tittle: 'INFO',
+                    title: 'INFO',
                     desc: 'Dialog description here...',
                     btnCancelOnPress: () {},
                     btnOkOnPress: () {},
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                     headerAnimationLoop: false,
                     dialogType: DialogType.INFO,
                     animType: AnimType.BOTTOMSLIDE,
-                    tittle: 'INFO',
+                    title: 'INFO',
                     desc: 'Dialog de.',
                   )..show();
                 },
@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                       dialogType: DialogType.WARNING,
                       headerAnimationLoop: false,
                       animType: AnimType.TOPSLIDE,
-                      tittle: 'Warning',
+                      title: 'Warning',
                       desc:
                           'Dialog description here..................................................',
                       btnCancelOnPress: () {},
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                       dialogType: DialogType.ERROR,
                       animType: AnimType.RIGHSLIDE,
                       headerAnimationLoop: false,
-                      tittle: 'Error',
+                      title: 'Error',
                       desc:
                           'Dialog description here..................................................',
                       btnOkOnPress: () {},
@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                       animType: AnimType.LEFTSLIDE,
                       headerAnimationLoop: false,
                       dialogType: DialogType.SUCCES,
-                      tittle: 'Succes',
+                      title: 'Succes',
                       desc:
                           'Dialog description here..................................................',
                       btnOkOnPress: () {
@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(fontStyle: FontStyle.italic),
                       ),
                     ),
-                    tittle: 'This is Ignored',
+                    title: 'This is Ignored',
                     desc: 'This is also Ignored',
                   )..show();
                 },
@@ -169,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                       size: 50,
                     ),
 
-                    tittle: 'This is Custom',
+                    title: 'This is Custom',
                     desc: 'This is custom button and header',
                     btnOk: FlatButton(
                       child: Text('Custom Button'),
@@ -193,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                     context: context,
                     dialogType: DialogType.INFO,
                     animType: AnimType.SCALE,
-                    tittle: 'This is Custom',
+                    title: 'This is Custom',
                     desc: 'This is custom button and header',
                     autoHide: Duration(seconds: 2),
                   )..show();
@@ -212,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                     animType: AnimType.BOTTOMSLIDE,
                     btnCancelText: "Cancel Order",
                     btnOkText: "Yes, I will pay",
-                    tittle: 'Continue to pay?',
+                    title: 'Continue to pay?',
                     padding: const EdgeInsets.all(16.0),
                     desc:
                         'Please confirm that you will pay 3000 INR within 30 mins. Creating orders without paying will create penalty charges, and your account may be disabled.',
