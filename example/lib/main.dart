@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:fancy_dialog_example/routes.dart';
 import 'package:flutter/material.dart';
+
+import 'routes.dart';
 
 void main() => runApp(MyApp());
 
