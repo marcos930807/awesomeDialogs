@@ -167,6 +167,7 @@ class AwesomeDialog {
       );
 
   Widget get _buildFancyButtonOk => AnimatedButton(
+        isFixedHeight: false,
         pressEvent: () {
           Navigator.of(context, rootNavigator: useRootNavigator).pop();
           btnOkOnPress();
@@ -177,6 +178,7 @@ class AwesomeDialog {
       );
 
   Widget get _buildFancyButtonCancel => AnimatedButton(
+        isFixedHeight: false,
         pressEvent: () {
           Navigator.of(context, rootNavigator: useRootNavigator).pop();
           btnCancelOnPress();

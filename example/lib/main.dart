@@ -199,6 +199,28 @@ class _HomePageState extends State<HomePage> {
                   )..show();
                 },
               ),
+              SizedBox(
+                height: 16,
+              ),
+              AnimatedButton(
+                text: 'Testing Dialog',
+                color: Colors.orange,
+                pressEvent: () {
+                  AwesomeDialog(
+                    context: context,
+                    dialogType: DialogType.WARNING,
+                    animType: AnimType.BOTTOMSLIDE,
+                    btnCancelText: "Cancel Order",
+                    btnOkText: "Yes, I will pay",
+                    tittle: 'Continue to pay?',
+                    padding: const EdgeInsets.all(16.0),
+                    desc:
+                        'Please confirm that you will pay 3000 INR within 30 mins. Creating orders without paying will create penalty charges, and your account may be disabled.',
+                    btnCancelOnPress: () {},
+                    btnOkOnPress: () {},
+                  ).show();
+                },
+              ),
             ],
           ),
         )));

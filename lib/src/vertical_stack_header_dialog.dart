@@ -60,7 +60,7 @@ class VerticalStackDialog extends StatelessWidget {
                               style: Theme.of(context).textTheme.headline6,
                             ),
                             SizedBox(
-                              height: 5.0,
+                              height: 10.0,
                             ),
                             Flexible(
                               fit: FlexFit.loose,

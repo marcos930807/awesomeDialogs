@@ -6,6 +6,7 @@ class AnimatedButton extends StatefulWidget {
   final String text;
   final IconData icon;
   final double width;
+  final bool isFixedHeight;
   final Color color;
 
   const AnimatedButton(
@@ -13,6 +14,7 @@ class AnimatedButton extends StatefulWidget {
       this.text,
       this.icon,
       this.color,
+      this.isFixedHeight = true,
       this.width = double.infinity});
   @override
   _AnimatedButtonState createState() => _AnimatedButtonState();
@@ -65,8 +67,9 @@ class _AnimatedButtonState extends State<AnimatedButton> with AnimationMixin {
   }
 
   Widget get _animatedButtonUI => Container(
-        height: 50,
+        height: widget.isFixedHeight ? 50.0 : null,
         width: widget.width,
+        padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(100)),
             color: widget.color ?? Theme.of(context).primaryColor),
@@ -89,12 +92,12 @@ class _AnimatedButtonState extends State<AnimatedButton> with AnimationMixin {
               fit: FlexFit.loose,
               child: Text(
                 '${widget.text}',
-                maxLines: 1,
+                // maxLines: 1,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
-                    fontSize: 16),
+                    fontSize: 14),
               ),
             ),
           ],
