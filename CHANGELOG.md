@@ -1,3 +1,6 @@
+## [1.1.0] - 30/05/2020.
+* [Breaking Change in title Prop]
+* Meger Pull Request Fixed title prop and fixed some padding issues. #17, thanks to @iampawan.
 ## [1.0.1] - 28/05/2020.
 * Exported anims helper class for external use.
 ## [1.0.0] - 28/05/2020.

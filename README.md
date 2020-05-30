@@ -19,7 +19,7 @@ AwesomeDialog(
             context: context,
             dialogType: DialogType.INFO,
             animType: AnimType.BOTTOMSLIDE,
-            tittle: 'Dialog Title',
+            title: 'Dialog Title',
             desc: 'Dialog description here.............',
             btnCancelOnPress: () {},
             btnOkOnPress: () {},
@@ -38,7 +38,7 @@ AwesomeDialog(
                     'If the body is specified, then title and description will be ignored, this allows to further customize the dialogue.',
                     style: TextStyle(fontStyle: FontStyle.italic),
                   ),),
-            tittle: 'This is Ignored',
+            title: 'This is Ignored',
             desc:   'This is also Ignored',
             btnOkOnPress: () {},
                  )..show();
@@ -60,7 +60,7 @@ AwesomeDialog has onDissmissCallback() and can be dissmissed at any time using d
 | customHeader          | Widget             | Create your own header(if this is set DiaologType is ignored.)                                                                                                |                Null                 |
 | title                 | String             | Set the title of dialog.                                                                                                                                      |                Null                 |
 | desc                  | String             | Set the description text of the dialog.                                                                                                                       |                Null                 |
-| body                  | Widget             | Create your own Widget for body, if this property is set title and description will be ignored.                                                                |                Null                 |
+| body                  | Widget             | Create your own Widget for body, if this property is set title and description will be ignored.                                                               |                Null                 |
 | context               | BuildContext       | @required                                                                                                                                                     |                Null                 |
 | btnOkText             | String             | Text of positive button                                                                                                                                       |                'Ok'                 |
 | btnOkIcon             | IconData           | Icon of positive button                                                                                                                                       |                Null                 |
@@ -79,7 +79,7 @@ AwesomeDialog has onDissmissCallback() and can be dissmissed at any time using d
 | useRootNavigator      | bool               | Use the root navigator instead than the local. This is useful when the defaut cancel go to the previous screen instead to just close the dialog               |                false                |
 | headerAnimationLoop   | bool               | headerAnimationLoop control the loop for animation header                                                                                                     |                true                 |
 | padding               | EdgeInsetsGeometry | The padding of dialog elemets                                                                                                                                 | EdgeInsets.only(left: 5, right: 5), |
-| autoHide               | Duration | Hide the Dialog after this Duration                                                                                                                                 | null |
+| autoHide              | Duration           | Hide the Dialog after this Duration                                                                                                                           |                null                 |
 
 
 
