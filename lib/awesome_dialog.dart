@@ -24,7 +24,7 @@ class AwesomeDialog {
   final Widget customHeader;
 
   /// Dialog Title
-  final String tittle;
+  final String title;
 
   /// Set the description text of the dialog.
   final String desc;
@@ -81,7 +81,7 @@ class AwesomeDialog {
       {@required this.context,
       this.dialogType,
       this.customHeader,
-      this.tittle,
+      this.title,
       this.desc,
       this.body,
       this.btnOk,
@@ -156,7 +156,7 @@ class AwesomeDialog {
 
   Widget get _buildDialog => VerticalStackDialog(
         header: _buildHeader,
-        title: this.tittle,
+        title: this.title,
         desc: this.desc,
         body: this.body,
         isDense: isDense,
@@ -168,6 +168,7 @@ class AwesomeDialog {
       );
 
   Widget get _buildFancyButtonOk => AnimatedButton(
+        isFixedHeight: false,
         pressEvent: () {
           Navigator.of(context, rootNavigator: useRootNavigator).pop();
           btnOkOnPress();
@@ -178,6 +179,7 @@ class AwesomeDialog {
       );
 
   Widget get _buildFancyButtonCancel => AnimatedButton(
+        isFixedHeight: false,
         pressEvent: () {
           Navigator.of(context, rootNavigator: useRootNavigator).pop();
           btnCancelOnPress();
