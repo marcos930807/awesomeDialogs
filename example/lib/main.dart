@@ -64,7 +64,8 @@ class _HomePageState extends State<HomePage> {
                     dialogType: DialogType.INFO,
                     animType: AnimType.BOTTOMSLIDE,
                     title: 'INFO',
-                    desc: 'Dialog de.',
+                    desc:
+                        'Lorem ipsum dolor sit amet consectetur adipiscing elit eget ornare tempus, vestibulum sagittis rhoncus felis hendrerit lectus ultricies duis vel, id morbi cum ultrices tellus metus dis ut donec. Ut sagittis viverra venenatis eget euismod faucibus odio ligula phasellus,',
                   )..show();
                 },
               ),
@@ -104,6 +105,7 @@ class _HomePageState extends State<HomePage> {
                       desc:
                           'Dialog description here..................................................',
                       btnOkOnPress: () {},
+                      btnOkIcon: Icons.cancel,
                       btnOkColor: Colors.red)
                     ..show();
                 },
@@ -129,7 +131,29 @@ class _HomePageState extends State<HomePage> {
                       btnOkIcon: Icons.check_circle,
                       onDissmissCallback: () {
                         debugPrint('Dialog Dissmiss from callback');
-                      }).show();
+                      })
+                    ..show();
+                },
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              AnimatedButton(
+                text: 'No Header Dialog',
+                color: Colors.cyan,
+                pressEvent: () {
+                  AwesomeDialog(
+                    context: context,
+                    headerAnimationLoop: false,
+                    dialogType: DialogType.NO_HEADER,
+                    title: 'No Header',
+                    desc:
+                        'Dialog description here..................................................',
+                    btnOkOnPress: () {
+                      debugPrint('OnClcik');
+                    },
+                    btnOkIcon: Icons.check_circle,
+                  )..show();
                 },
               ),
               SizedBox(
@@ -158,34 +182,6 @@ class _HomePageState extends State<HomePage> {
                 height: 16,
               ),
               AnimatedButton(
-                text: 'Custom Buttons Dialog',
-                color: Colors.brown,
-                pressEvent: () {
-                  AwesomeDialog(
-                    context: context,
-                    animType: AnimType.SCALE,
-                    customHeader: Icon(
-                      Icons.face,
-                      size: 50,
-                    ),
-
-                    title: 'This is Custom',
-                    desc: 'This is custom button and header',
-                    btnOk: FlatButton(
-                      child: Text('Custom Button'),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                    //this is ignored
-                    btnOkOnPress: () {},
-                  )..show();
-                },
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              AnimatedButton(
                 text: 'Auto Hide Dialog',
                 color: Colors.purple,
                 pressEvent: () {
@@ -193,8 +189,8 @@ class _HomePageState extends State<HomePage> {
                     context: context,
                     dialogType: DialogType.INFO,
                     animType: AnimType.SCALE,
-                    title: 'This is Custom',
-                    desc: 'This is custom button and header',
+                    title: 'Auto Hide Dialog',
+                    desc: 'This dialog autoHide after 2 seconds',
                     autoHide: Duration(seconds: 2),
                   )..show();
                 },
