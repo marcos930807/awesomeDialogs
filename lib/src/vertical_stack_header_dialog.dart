@@ -10,6 +10,7 @@ class VerticalStackDialog extends StatelessWidget {
   final bool isDense;
   final AlignmentGeometry aligment;
   final EdgeInsetsGeometry padding;
+  final bool keyboardAware;
   const VerticalStackDialog({
     Key key,
     @required this.title,
@@ -21,13 +22,14 @@ class VerticalStackDialog extends StatelessWidget {
     this.isDense,
     @required this.header,
     this.padding,
+    this.keyboardAware,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      padding: EdgeInsets.only(
+          bottom: keyboardAware ? MediaQuery.of(context).viewInsets.bottom : 0),
       child: Container(
         alignment: aligment,
         child: Stack(

@@ -77,33 +77,37 @@ class AwesomeDialog {
   /// For Autho Hide Dialog after some Duration.
   final Duration autoHide;
 
-  AwesomeDialog(
-      {@required this.context,
-      this.dialogType,
-      this.customHeader,
-      this.title,
-      this.desc,
-      this.body,
-      this.btnOk,
-      this.btnCancel,
-      this.btnOkText,
-      this.btnOkIcon,
-      this.btnOkOnPress,
-      this.btnOkColor,
-      this.btnCancelText,
-      this.btnCancelIcon,
-      this.btnCancelOnPress,
-      this.btnCancelColor,
-      this.onDissmissCallback,
-      this.isDense = false,
-      this.dismissOnTouchOutside = true,
-      this.headerAnimationLoop = true,
-      this.aligment = Alignment.center,
-      this.animType = AnimType.SCALE,
-      this.padding,
-      this.useRootNavigator = false,
-      this.autoHide})
-      : assert(
+  ///Control if add or not the Padding EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom).
+  final bool keyboardAware;
+
+  AwesomeDialog({
+    @required this.context,
+    this.dialogType,
+    this.customHeader,
+    this.title,
+    this.desc,
+    this.body,
+    this.btnOk,
+    this.btnCancel,
+    this.btnOkText,
+    this.btnOkIcon,
+    this.btnOkOnPress,
+    this.btnOkColor,
+    this.btnCancelText,
+    this.btnCancelIcon,
+    this.btnCancelOnPress,
+    this.btnCancelColor,
+    this.onDissmissCallback,
+    this.isDense = false,
+    this.dismissOnTouchOutside = true,
+    this.headerAnimationLoop = true,
+    this.aligment = Alignment.center,
+    this.animType = AnimType.SCALE,
+    this.padding,
+    this.useRootNavigator = false,
+    this.autoHide,
+    this.keyboardAware = true,
+  }) : assert(
           (dialogType != null || customHeader != null),
           context != null,
         );
@@ -161,6 +165,7 @@ class AwesomeDialog {
         body: this.body,
         isDense: isDense,
         aligment: aligment,
+        keyboardAware: keyboardAware,
         padding: padding ?? EdgeInsets.only(left: 5, right: 5),
         btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
         btnCancel: btnCancel ??

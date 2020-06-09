@@ -229,6 +229,7 @@ class _HomePageState extends State<HomePage> {
                       context: context,
                       animType: AnimType.SCALE,
                       dialogType: DialogType.INFO,
+                      keyboardAware: false,
                       body: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(

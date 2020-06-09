@@ -1,3 +1,5 @@
+## [1.1.2] - 9/06/2020.
+* Added Property keyboardAware to control whenever or not add the Padding introducing on v1.1.1, and make it optional. Default value True.
 ## [1.1.1] - 9/06/2020.
 * Added Padding EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom) to AwesomeDialog to be aware of keyboard input
 ## [1.1.0] - 30/05/2020.
