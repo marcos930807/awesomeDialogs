@@ -1,3 +1,5 @@
+## [1.1.1] - 9/06/2020.
+* Added Padding EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom) to AwesomeDialog to be aware of keyboard input
 ## [1.1.0] - 30/05/2020.
 * [Breaking Change in title Prop]
 * Meger Pull Request Fixed title prop and fixed some padding issues. #17, thanks to @iampawan.

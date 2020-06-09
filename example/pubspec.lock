@@ -28,7 +28,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.1.0"
+    version: "1.1.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -143,35 +143,35 @@ packages:
       name: sa_anicoto
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.2"
   sa_multi_tween:
     dependency: transitive
     description:
       name: sa_multi_tween
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.1.1"
   sa_stateless_animation:
     dependency: transitive
     description:
       name: sa_stateless_animation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.1"
   sa_v1_migration:
     dependency: transitive
     description:
       name: sa_v1_migration
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.1"
+    version: "1.1.2"
   simple_animations:
     dependency: transitive
     description:
       name: simple_animations
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.2.1"
   sky_engine:
     dependency: transitive
     description: flutter
