@@ -205,6 +205,7 @@ class _HomePageState extends State<HomePage> {
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
+                      dismissOnBackKeyPress: false,
                       dialogType: DialogType.WARNING,
                       animType: AnimType.BOTTOMSLIDE,
                       btnCancelText: "Cancel Order",

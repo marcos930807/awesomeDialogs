@@ -81,6 +81,7 @@ AwesomeDialog has onDissmissCallback() and can be dissmissed at any time using d
 | padding               | EdgeInsetsGeometry | The padding of dialog elemets                                                                                                                                 | EdgeInsets.only(left: 5, right: 5), |
 | autoHide              | Duration           | Hide the Dialog after this Duration                                                                                                                           |                null                 |
 | keyboardAware         | bool               | Control if add or not the Padding EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom).                                                          |                true                 |
+| dismissOnBackKeyPress | bool               | control if AwesomeDialog is dissmisable by back button.                                                                                                       |                true                 |
 
 
 

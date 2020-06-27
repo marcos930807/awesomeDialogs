@@ -65,7 +65,7 @@ class AwesomeDialog {
   /// Padding off inner content of Dialog
   final EdgeInsetsGeometry padding;
 
-  /// this Prop is usefull to Take advantage of screen dimensions
+  /// This Prop is usefull to Take advantage of screen dimensions
   final bool isDense;
 
   /// Whenever the animation Header loops or not.
@@ -79,6 +79,9 @@ class AwesomeDialog {
 
   ///Control if add or not the Padding EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom).
   final bool keyboardAware;
+
+  ///Control if Dialog is dissmis by back key.
+  final bool dismissOnBackKeyPress;
 
   AwesomeDialog({
     @required this.context,
@@ -107,6 +110,7 @@ class AwesomeDialog {
     this.useRootNavigator = false,
     this.autoHide,
     this.keyboardAware = true,
+    this.dismissOnBackKeyPress = true,
   }) : assert(
           (dialogType != null || customHeader != null),
           context != null,
@@ -158,18 +162,21 @@ class AwesomeDialog {
     );
   }
 
-  Widget get _buildDialog => VerticalStackDialog(
-        header: _buildHeader,
-        title: this.title,
-        desc: this.desc,
-        body: this.body,
-        isDense: isDense,
-        aligment: aligment,
-        keyboardAware: keyboardAware,
-        padding: padding ?? EdgeInsets.only(left: 5, right: 5),
-        btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
-        btnCancel: btnCancel ??
-            (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
+  Widget get _buildDialog => WillPopScope(
+        onWillPop: _onWillPop,
+        child: VerticalStackDialog(
+          header: _buildHeader,
+          title: this.title,
+          desc: this.desc,
+          body: this.body,
+          isDense: isDense,
+          aligment: aligment,
+          keyboardAware: keyboardAware,
+          padding: padding ?? EdgeInsets.only(left: 5, right: 5),
+          btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
+          btnCancel: btnCancel ??
+              (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
+        ),
       );
 
   Widget get _buildFancyButtonOk => AnimatedButton(
@@ -198,4 +205,6 @@ class AwesomeDialog {
     if (!isDissmisedBySystem)
       Navigator.of(context, rootNavigator: useRootNavigator).pop();
   }
+
+  Future<bool> _onWillPop() async => dismissOnBackKeyPress;
 }
