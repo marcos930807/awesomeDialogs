@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                   height: 16,
                 ),
                 AnimatedButton(
-                  text: 'Succes Dialog',
+                  text: 'Success Dialog',
                   color: Colors.green,
                   pressEvent: () {
                     AwesomeDialog(
@@ -123,11 +123,11 @@ class _HomePageState extends State<HomePage> {
                         animType: AnimType.LEFTSLIDE,
                         headerAnimationLoop: false,
                         dialogType: DialogType.SUCCES,
-                        title: 'Succes',
+                        title: 'Success',
                         desc:
                             'Dialog description here..................................................',
                         btnOkOnPress: () {
-                          debugPrint('OnClcik');
+                          debugPrint('OnClick');
                         },
                         btnOkIcon: Icons.check_circle,
                         onDissmissCallback: () {
