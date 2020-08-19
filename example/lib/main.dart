@@ -205,6 +205,7 @@ class _HomePageState extends State<HomePage> {
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
+                      keyboardAware: true,
                       dismissOnBackKeyPress: false,
                       dialogType: DialogType.WARNING,
                       animType: AnimType.BOTTOMSLIDE,
@@ -226,11 +227,12 @@ class _HomePageState extends State<HomePage> {
                   text: 'Body with Input',
                   color: Colors.blueGrey,
                   pressEvent: () {
-                    AwesomeDialog(
+                    AwesomeDialog dialog;
+                    dialog = AwesomeDialog(
                       context: context,
                       animType: AnimType.SCALE,
                       dialogType: DialogType.INFO,
-                      keyboardAware: false,
+                      keyboardAware: true,
                       body: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
@@ -274,6 +276,14 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            AnimatedButton(
+                                text: 'Close',
+                                pressEvent: () {
+                                  dialog.dissmiss();
+                                })
                           ],
                         ),
                       ),
