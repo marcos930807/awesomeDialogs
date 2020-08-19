@@ -1,4 +1,6 @@
-## [1.1.3] - 26/06/2020.
+## [1.2.0] - 19/08/2020.
+* Added Property width to control the maximum width of the dialog, especially useful in web flutter, or landscape mode, by default it is MediaQuery.of(context).size.width.
+## [1.1.3] - 27/06/2020.
 * Added Property dismissOnBackKeyPress to control if AwesomeDialog is dissmisable by back button
 ## [1.1.2] - 9/06/2020.
 * Added Property keyboardAware to control whenever or not add the Padding introducing on v1.1.1, and make it optional. Default value True.

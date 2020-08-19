@@ -83,9 +83,12 @@ class AwesomeDialog {
   ///Control if Dialog is dissmis by back key.
   final bool dismissOnBackKeyPress;
 
+  ///Max with of entire Dialog
+  final double width;
+
   AwesomeDialog({
     @required this.context,
-    this.dialogType,
+    this.dialogType = DialogType.INFO,
     this.customHeader,
     this.title,
     this.desc,
@@ -111,8 +114,8 @@ class AwesomeDialog {
     this.autoHide,
     this.keyboardAware = true,
     this.dismissOnBackKeyPress = true,
+    this.width,
   }) : assert(
-          (dialogType != null || customHeader != null),
           context != null,
         );
 
@@ -172,6 +175,7 @@ class AwesomeDialog {
           isDense: isDense,
           aligment: aligment,
           keyboardAware: keyboardAware,
+          width: width,
           padding: padding ?? EdgeInsets.only(left: 5, right: 5),
           btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
           btnCancel: btnCancel ??

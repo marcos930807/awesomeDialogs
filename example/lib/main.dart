@@ -39,12 +39,12 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: <Widget>[
                 AnimatedButton(
-                  text: 'Info Dialog',
+                  text: 'Info Dialog fixed width',
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
+                      width: 280,
                       headerAnimationLoop: false,
-                      dialogType: DialogType.INFO,
                       animType: AnimType.BOTTOMSLIDE,
                       title: 'INFO',
                       desc: 'Dialog description here...',
@@ -62,7 +62,6 @@ class _HomePageState extends State<HomePage> {
                     AwesomeDialog(
                       context: context,
                       headerAnimationLoop: false,
-                      dialogType: DialogType.INFO,
                       animType: AnimType.BOTTOMSLIDE,
                       title: 'INFO',
                       desc:
@@ -191,7 +190,7 @@ class _HomePageState extends State<HomePage> {
                       dialogType: DialogType.INFO,
                       animType: AnimType.SCALE,
                       title: 'Auto Hide Dialog',
-                      desc: 'This dialog autoHide after 2 seconds',
+                      desc: 'AutoHide after 2 seconds',
                       autoHide: Duration(seconds: 2),
                     )..show();
                   },
