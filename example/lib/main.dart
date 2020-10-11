@@ -39,11 +39,12 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: <Widget>[
                 AnimatedButton(
-                  text: 'Info Dialog fixed width',
+                  text: 'Info Dialog fixed width and sqare buttons',
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
                       width: 280,
+                      buttonsBorderRadius: BorderRadius.all(Radius.circular(2)),
                       headerAnimationLoop: false,
                       animType: AnimType.BOTTOMSLIDE,
                       title: 'INFO',

@@ -8,14 +8,17 @@ class AnimatedButton extends StatefulWidget {
   final double width;
   final bool isFixedHeight;
   final Color color;
+  final BorderRadiusGeometry borderRadius;
 
-  const AnimatedButton(
-      {@required this.pressEvent,
-      this.text,
-      this.icon,
-      this.color,
-      this.isFixedHeight = true,
-      this.width = double.infinity});
+  const AnimatedButton({
+    @required this.pressEvent,
+    this.text,
+    this.icon,
+    this.color,
+    this.isFixedHeight = true,
+    this.width = double.infinity,
+    this.borderRadius,
+  });
   @override
   _AnimatedButtonState createState() => _AnimatedButtonState();
 }
@@ -71,7 +74,8 @@ class _AnimatedButtonState extends State<AnimatedButton> with AnimationMixin {
         width: widget.width,
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(100)),
+            borderRadius:
+                widget.borderRadius ?? BorderRadius.all(Radius.circular(100)),
             color: widget.color ?? Theme.of(context).primaryColor),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

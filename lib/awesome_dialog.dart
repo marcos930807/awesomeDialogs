@@ -86,6 +86,9 @@ class AwesomeDialog {
   ///Max with of entire Dialog
   final double width;
 
+  ///Max with of entire Dialog
+  final BorderRadiusGeometry buttonsBorderRadius;
+
   AwesomeDialog({
     @required this.context,
     this.dialogType = DialogType.INFO,
@@ -115,6 +118,7 @@ class AwesomeDialog {
     this.keyboardAware = true,
     this.dismissOnBackKeyPress = true,
     this.width,
+    this.buttonsBorderRadius,
   }) : assert(
           context != null,
         );
@@ -186,28 +190,30 @@ class AwesomeDialog {
   Widget get _buildFancyButtonOk => AnimatedButton(
         isFixedHeight: false,
         pressEvent: () {
-          Navigator.of(context, rootNavigator: useRootNavigator).pop();
-          btnOkOnPress();
+          dissmiss();
+          btnOkOnPress?.call();
         },
         text: btnOkText ?? 'Ok',
         color: btnOkColor ?? Color(0xFF00CA71),
         icon: btnOkIcon,
+        borderRadius: buttonsBorderRadius,
       );
 
   Widget get _buildFancyButtonCancel => AnimatedButton(
         isFixedHeight: false,
         pressEvent: () {
-          Navigator.of(context, rootNavigator: useRootNavigator).pop();
-          btnCancelOnPress();
+          dissmiss();
+          btnCancelOnPress?.call();
         },
         text: btnCancelText ?? 'Cancel',
         color: btnCancelColor ?? Colors.red,
         icon: btnCancelIcon,
+        borderRadius: buttonsBorderRadius,
       );
 
   dissmiss() {
     if (!isDissmisedBySystem)
-      Navigator.of(context, rootNavigator: useRootNavigator).pop();
+      Navigator.of(context, rootNavigator: useRootNavigator)?.pop();
   }
 
   Future<bool> _onWillPop() async => dismissOnBackKeyPress;

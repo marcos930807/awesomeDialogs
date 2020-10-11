@@ -1,3 +1,6 @@
+## [1.2.1] - 11/10/2020.
+* Added Property buttonsBorderRadius.
+* Safe Call operator on Navigation.of(context) before trying to dissmiss the Dialog.
 ## [1.2.0] - 19/08/2020.
 * Added Property width to control the maximum width of the dialog, especially useful in web flutter, or landscape mode, by default it is MediaQuery.of(context).size.width.
 ## [1.1.3] - 27/06/2020.
