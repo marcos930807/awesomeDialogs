@@ -42,11 +42,11 @@ class FlareHeader extends StatelessWidget {
           animation: 'Error',
         );
         break;
-      case DialogType.SUCCES:
+      case DialogType.SUCCESS:
         return FlareActor(
           loop
-              ? "packages/awesome_dialog/assets/flare/succes.flr"
-              : "packages/awesome_dialog/assets/flare/succes_without_loop.flr",
+              ? "packages/awesome_dialog/assets/flare/success.flr"
+              : "packages/awesome_dialog/assets/flare/success_without_loop.flr",
           alignment: Alignment.center,
           fit: BoxFit.fill,
           animation: 'Untitled',
