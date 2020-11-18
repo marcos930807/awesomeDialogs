@@ -10,14 +10,14 @@ export 'src/animated_button.dart';
 export 'src/anims/flare_header.dart';
 export 'src/anims/anims.dart';
 
-enum DialogType { INFO, WARNING, ERROR, SUCCES, NO_HEADER }
+enum DialogType { INFO, WARNING, ERROR, SUCCESS, NO_HEADER }
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
 
 class AwesomeDialog {
   /// [@required]
   final BuildContext context;
 
-  /// Dialog Type can be INFO, WARNING, ERROR, SUCCES, NO_HEADER
+  /// Dialog Type can be INFO, WARNING, ERROR, SUCCESS, NO_HEADER
   final DialogType dialogType;
 
   /// Widget with priority over DialogType, for a custom header widget
