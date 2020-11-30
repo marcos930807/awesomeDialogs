@@ -12,6 +12,7 @@ class VerticalStackDialog extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final bool keyboardAware;
   final double width;
+  final bool showCloseIcon;
   const VerticalStackDialog({
     Key key,
     @required this.title,
@@ -126,6 +127,7 @@ class VerticalStackDialog extends StatelessWidget {
                 ],
               ),
             ),
+          if (showCloseIcon)
           Positioned(
             right: 40.0,
             top: 0.0,
