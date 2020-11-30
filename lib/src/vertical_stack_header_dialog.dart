@@ -126,6 +126,23 @@ class VerticalStackDialog extends StatelessWidget {
                 ],
               ),
             ),
+          Positioned(
+            right: 40.0,
+            top: 0.0,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: Align(
+                alignment: Alignment.topRight,
+                child: CircleAvatar(
+                  radius: 14.0,
+                  backgroundColor: Colors.white,
+                  child: Icon(Icons.close, color: Colors.red),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
