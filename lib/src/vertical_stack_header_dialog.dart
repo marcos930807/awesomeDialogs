@@ -26,6 +26,7 @@ class VerticalStackDialog extends StatelessWidget {
     this.padding,
     this.keyboardAware,
     this.width,
+    this.showCloseIcon,
   }) : super(key: key);
 
   @override
