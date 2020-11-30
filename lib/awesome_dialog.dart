@@ -88,6 +88,9 @@ class AwesomeDialog {
 
   ///Max with of entire Dialog
   final BorderRadiusGeometry buttonsBorderRadius;
+  
+  /// Control if close icon is appear.
+  final bool showCloseIcon;
 
   AwesomeDialog({
     @required this.context,
@@ -119,6 +122,7 @@ class AwesomeDialog {
     this.dismissOnBackKeyPress = true,
     this.width,
     this.buttonsBorderRadius,
+    this.showCloseIcon = false,
   }) : assert(
           context != null,
         );
@@ -184,6 +188,7 @@ class AwesomeDialog {
           btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
           btnCancel: btnCancel ??
               (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
+          showCloseIcon: this.showCloseIcon,
         ),
       );
 
