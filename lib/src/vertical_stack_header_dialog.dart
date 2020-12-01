@@ -130,19 +130,20 @@ class VerticalStackDialog extends StatelessWidget {
             ),
           if (showCloseIcon)
             Positioned(
-              right: 40.0,
-              top: 0.0,
+              right: 45.0,
+              top: 70.0,
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).pop();
                 },
                 child: Align(
                   alignment: Alignment.topRight,
-                  child: CircleAvatar(
-                    radius: 14.0,
-                    backgroundColor: Colors.white,
-                    child: Icon(Icons.close, color: Colors.red),
-                  ),
+                  child: Icon(Icons.close, color: Colors.red),
+                  // child: CircleAvatar(
+                  //   radius: 14.0,
+                  //   backgroundColor: Colors.white,
+                  //   child: Icon(Icons.close, color: Colors.red),
+                  // ),
                 ),
               ),
             ),
