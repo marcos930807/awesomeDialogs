@@ -2,7 +2,7 @@
 * Added Property showCloseIcon, to control if close icon appear.
 * Added Property closeIcon, to build a custom close icon.
 * Added QUESTION dialogType support.
-* Added INFO dialogType to show info mark.
+* Updated INFO dialogType to show info mark.
 ## [1.2.1] - 11/10/2020.
 * Added Property buttonsBorderRadius.
 * Safe Call operator on Navigation.of(context) before trying to dissmiss the Dialog.
