@@ -84,6 +84,10 @@ AwesomeDialog has onDissmissCallback() and can be dissmissed at any time using d
 | autoHide              | Duration             | Hide the Dialog after this Duration                                                                                                                           |                  null                  |
 | keyboardAware         | bool                 | Control if add or not the Padding EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom).                                                          |                  true                  |
 | dismissOnBackKeyPress | bool                 | control if AwesomeDialog is dissmisable by back button.                                                                                                       |                  true                  |
+| buttonsBorderRadius | BorderRadiusGeometry                 | Border Radius for built in buttons.                                                                                       |                  BorderRadius.all(Radius.circular(100)                  |
+| showCloseIcon | bool                 | Control if close icon is appear.                                                     |                  false                  |
+| closeIcon | Widget                 | Custom closeIcon.                                    |                  null                  |
+
 
 
 
