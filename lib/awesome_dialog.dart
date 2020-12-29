@@ -83,11 +83,17 @@ class AwesomeDialog {
   ///Control if Dialog is dissmis by back key.
   final bool dismissOnBackKeyPress;
 
-  ///Max with of entire Dialog
+  ///Max with of entire Dialog.
   final double width;
 
-  ///Max with of entire Dialog
+  ///Border Radius for built in buttons.
   final BorderRadiusGeometry buttonsBorderRadius;
+
+  /// Control if close icon is appear.
+  final bool showCloseIcon;
+
+  /// Custom closeIcon.
+  final Widget closeIcon;
 
   AwesomeDialog({
     @required this.context,
@@ -119,6 +125,8 @@ class AwesomeDialog {
     this.dismissOnBackKeyPress = true,
     this.width,
     this.buttonsBorderRadius,
+    this.showCloseIcon = false,
+    this.closeIcon,
   }) : assert(
           context != null,
         );
@@ -182,8 +190,10 @@ class AwesomeDialog {
           width: width,
           padding: padding ?? EdgeInsets.only(left: 5, right: 5),
           btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
-          btnCancel: btnCancel ??
-              (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
+          btnCancel: btnCancel ?? (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
+          showCloseIcon: this.showCloseIcon,
+          onClose: dissmiss,
+          closeIcon: closeIcon,
         ),
       );
 
@@ -212,8 +222,7 @@ class AwesomeDialog {
       );
 
   dissmiss() {
-    if (!isDissmisedBySystem)
-      Navigator.of(context, rootNavigator: useRootNavigator)?.pop();
+    if (!isDissmisedBySystem) Navigator.of(context, rootNavigator: useRootNavigator)?.pop();
   }
 
   Future<bool> _onWillPop() async => dismissOnBackKeyPress;
