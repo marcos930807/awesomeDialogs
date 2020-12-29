@@ -60,11 +60,30 @@ class _HomePageState extends State<HomePage> {
                   height: 16,
                 ),
                 AnimatedButton(
+                  text: 'Question Dialog',
+                  pressEvent: () {
+                    AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.QUESTION,
+                      headerAnimationLoop: false,
+                      animType: AnimType.BOTTOMSLIDE,
+                      title: 'Question',
+                      desc: 'Dialog description here...',
+                      showCloseIcon: true,
+                      btnCancelOnPress: () {},
+                      btnOkOnPress: () {},
+                    )..show();
+                  },
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                AnimatedButton(
                   text: 'Info Dialog Without buttons',
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
-                      headerAnimationLoop: false,
+                      headerAnimationLoop: true,
                       animType: AnimType.BOTTOMSLIDE,
                       title: 'INFO',
                       desc:

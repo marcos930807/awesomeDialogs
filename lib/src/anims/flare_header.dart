@@ -3,8 +3,7 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class FlareHeader extends StatelessWidget {
-  const FlareHeader({Key key, @required this.dialogType, @required this.loop})
-      : super(key: key);
+  const FlareHeader({Key key, @required this.dialogType, @required this.loop}) : super(key: key);
   final DialogType dialogType;
   final bool loop;
 
@@ -13,12 +12,19 @@ class FlareHeader extends StatelessWidget {
     switch (dialogType) {
       case DialogType.INFO:
         return FlareActor(
-          loop
-              ? "packages/awesome_dialog/assets/flare/info.flr"
-              : "packages/awesome_dialog/assets/flare/info_without_loop.flr",
+          "packages/awesome_dialog/assets/flare/info2.flr",
           alignment: Alignment.center,
           fit: BoxFit.cover,
-          animation: 'appear',
+          animation: loop ? 'appear_loop' : 'appear',
+          callback: (call) {},
+        );
+        break;
+      case DialogType.QUESTION:
+        return FlareActor(
+          "packages/awesome_dialog/assets/flare/question.flr",
+          alignment: Alignment.center,
+          fit: BoxFit.cover,
+          animation: loop ? 'anim_loop' : 'anim',
           callback: (call) {},
         );
         break;
