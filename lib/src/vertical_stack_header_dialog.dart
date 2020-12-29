@@ -13,6 +13,8 @@ class VerticalStackDialog extends StatelessWidget {
   final bool keyboardAware;
   final double width;
   final bool showCloseIcon;
+  final Function onClose;
+  final Widget closeIcon;
   const VerticalStackDialog({
     Key key,
     @required this.title,
@@ -27,26 +29,25 @@ class VerticalStackDialog extends StatelessWidget {
     this.keyboardAware,
     this.width,
     this.showCloseIcon,
+    @required this.onClose,
+    this.closeIcon,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: aligment,
-      padding: EdgeInsets.only(
-          bottom: keyboardAware ? MediaQuery.of(context).viewInsets.bottom : 0),
+      padding:
+          EdgeInsets.only(bottom: keyboardAware ? MediaQuery.of(context).viewInsets.bottom : 0),
       child: Stack(
         children: <Widget>[
           Container(
             width: width ?? MediaQuery.of(context).size.width,
             padding: isDense
-                ? const EdgeInsets.only(
-                    top: 65.0, left: 15.0, right: 15.0, bottom: 10.0)
-                : const EdgeInsets.only(
-                    top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
+                ? const EdgeInsets.only(top: 65.0, left: 15.0, right: 15.0, bottom: 10.0)
+                : const EdgeInsets.only(top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
             child: Material(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
               elevation: 0.5,
               color: Theme.of(context).cardColor,
               child: Padding(
@@ -88,8 +89,7 @@ class VerticalStackDialog extends StatelessWidget {
                       ),
                       if (btnOk != null || btnCancel != null)
                         Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
+                          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -130,21 +130,13 @@ class VerticalStackDialog extends StatelessWidget {
             ),
           if (showCloseIcon)
             Positioned(
-              right: 45.0,
-              top: 70.0,
+              right: 50.0,
+              top: 75.0,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pop();
+                  onClose?.call();
                 },
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: Icon(Icons.close, color: Colors.red),
-                  // child: CircleAvatar(
-                  //   radius: 14.0,
-                  //   backgroundColor: Colors.white,
-                  //   child: Icon(Icons.close, color: Colors.red),
-                  // ),
-                ),
+                child: closeIcon ?? Icon(Icons.close),
               ),
             ),
         ],

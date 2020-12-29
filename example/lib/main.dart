@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Fancy Dialog Example',
+      theme: ThemeData.dark(),
       initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,
     );
@@ -49,6 +50,7 @@ class _HomePageState extends State<HomePage> {
                       animType: AnimType.BOTTOMSLIDE,
                       title: 'INFO',
                       desc: 'Dialog description here...',
+                      showCloseIcon: true,
                       btnCancelOnPress: () {},
                       btnOkOnPress: () {},
                     )..show();
@@ -82,6 +84,8 @@ class _HomePageState extends State<HomePage> {
                         dialogType: DialogType.WARNING,
                         headerAnimationLoop: false,
                         animType: AnimType.TOPSLIDE,
+                        showCloseIcon: true,
+                        closeIcon: Icon(Icons.close_fullscreen_outlined),
                         title: 'Warning',
                         desc:
                             'Dialog description here..................................................',
