@@ -95,6 +95,9 @@ class AwesomeDialog {
   /// Custom closeIcon.
   final Widget closeIcon;
 
+  /// Custom background color for dialog + header
+  final Color dialogBackgroundColor;
+
   AwesomeDialog({
     @required this.context,
     this.dialogType = DialogType.INFO,
@@ -127,6 +130,7 @@ class AwesomeDialog {
     this.buttonsBorderRadius,
     this.showCloseIcon = false,
     this.closeIcon,
+    this.dialogBackgroundColor,
   }) : assert(
           context != null,
         );

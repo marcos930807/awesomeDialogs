@@ -15,6 +15,7 @@ class VerticalStackDialog extends StatelessWidget {
   final bool showCloseIcon;
   final Function onClose;
   final Widget closeIcon;
+  final Color dialogBackgroundColor;
   const VerticalStackDialog({
     Key key,
     @required this.title,
@@ -31,6 +32,7 @@ class VerticalStackDialog extends StatelessWidget {
     this.showCloseIcon,
     @required this.onClose,
     this.closeIcon,
+    this.dialogBackgroundColor
   }) : super(key: key);
 
   @override
@@ -49,7 +51,7 @@ class VerticalStackDialog extends StatelessWidget {
             child: Material(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
               elevation: 0.5,
-              color: Theme.of(context).cardColor,
+              color: dialogBackgroundColor == null ? Theme.of(context).cardColor : dialogBackgroundColor,
               child: Padding(
                 padding: padding,
                 child: SingleChildScrollView(
@@ -121,7 +123,7 @@ class VerticalStackDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   CircleAvatar(
-                    backgroundColor: Theme.of(context).cardColor,
+                    backgroundColor: dialogBackgroundColor == null ? Theme.of(context).cardColor : dialogBackgroundColor,
                     radius: 55.0,
                     child: header,
                   ),
