@@ -51,7 +51,7 @@ class VerticalStackDialog extends StatelessWidget {
             child: Material(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
               elevation: 0.5,
-              color: dialogBackgroundColor == null ? Theme.of(context).cardColor : dialogBackgroundColor,
+              color: dialogBackgroundColor ?? Theme.of(context).cardColor,
               child: Padding(
                 padding: padding,
                 child: SingleChildScrollView(
@@ -123,7 +123,7 @@ class VerticalStackDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   CircleAvatar(
-                    backgroundColor: dialogBackgroundColor == null ? Theme.of(context).cardColor : dialogBackgroundColor,
+                    backgroundColor: dialogBackgroundColor ?? Theme.of(context).cardColor,
                     radius: 55.0,
                     child: header,
                   ),
