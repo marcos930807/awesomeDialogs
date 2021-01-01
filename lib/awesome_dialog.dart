@@ -184,6 +184,7 @@ class AwesomeDialog {
   Widget get _buildDialog => WillPopScope(
         onWillPop: _onWillPop,
         child: VerticalStackDialog(
+          dialogBackgroundColor: dialogBackgroundColor,
           header: _buildHeader,
           title: this.title,
           desc: this.desc,
