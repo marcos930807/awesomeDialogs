@@ -98,14 +98,8 @@ class AwesomeDialog {
   /// Custom background color for dialog + header
   final Color dialogBackgroundColor;
 
-  /// Control if border should be shown
-  final bool showBorder;
-
-  /// Set Border color
-  final Color borderColor;
-
-  /// Set Border width
-  final double borderWidth;
+  /// Set BorderSide of DialogShape
+  final BorderSide borderSide;
 
   AwesomeDialog({
     @required this.context,
@@ -140,9 +134,7 @@ class AwesomeDialog {
     this.showCloseIcon = false,
     this.closeIcon,
     this.dialogBackgroundColor,
-    this.showBorder = false,
-    this.borderColor,
-    this.borderWidth
+    this.borderSide,
   }) : assert(
           context != null,
         );
@@ -197,9 +189,7 @@ class AwesomeDialog {
         onWillPop: _onWillPop,
         child: VerticalStackDialog(
           dialogBackgroundColor: dialogBackgroundColor,
-          showBorder: showBorder,
-          borderWidth: borderWidth,
-          borderColor: borderColor,
+          borderSide: borderSide,
           header: _buildHeader,
           title: this.title,
           desc: this.desc,
