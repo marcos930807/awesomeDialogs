@@ -16,40 +16,52 @@ class VerticalStackDialog extends StatelessWidget {
   final Function onClose;
   final Widget closeIcon;
   final Color dialogBackgroundColor;
-  const VerticalStackDialog({
-    Key key,
-    @required this.title,
-    @required this.desc,
-    this.btnOk,
-    this.btnCancel,
-    this.body,
-    this.aligment,
-    this.isDense,
-    @required this.header,
-    this.padding,
-    this.keyboardAware,
-    this.width,
-    this.showCloseIcon,
-    @required this.onClose,
-    this.closeIcon,
-    this.dialogBackgroundColor
-  }) : super(key: key);
+  final bool showBorder;
+  final Color borderColor;
+  final double borderWidth;
+
+  const VerticalStackDialog(
+      {Key key,
+      @required this.title,
+      @required this.desc,
+      this.btnOk,
+      this.btnCancel,
+      this.body,
+      this.aligment,
+      this.isDense,
+      @required this.header,
+      this.padding,
+      this.keyboardAware,
+      this.width,
+      this.showCloseIcon,
+      @required this.onClose,
+      this.closeIcon,
+      this.dialogBackgroundColor,
+      this.showBorder = false,
+      this.borderWidth,
+      this.borderColor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: aligment,
-      padding:
-          EdgeInsets.only(bottom: keyboardAware ? MediaQuery.of(context).viewInsets.bottom : 0),
+      padding: EdgeInsets.only(
+          bottom: keyboardAware ? MediaQuery.of(context).viewInsets.bottom : 0),
       child: Stack(
         children: <Widget>[
           Container(
             width: width ?? MediaQuery.of(context).size.width,
             padding: isDense
-                ? const EdgeInsets.only(top: 65.0, left: 15.0, right: 15.0, bottom: 10.0)
-                : const EdgeInsets.only(top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
+                ? const EdgeInsets.only(
+                    top: 65.0, left: 15.0, right: 15.0, bottom: 10.0)
+                : const EdgeInsets.only(
+                    top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
             child: Material(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+              shape: showBorder ? RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                side: BorderSide(color: borderColor, width: borderWidth)
+              ) : null,
               elevation: 0.5,
               color: dialogBackgroundColor ?? Theme.of(context).cardColor,
               child: Padding(
@@ -91,7 +103,8 @@ class VerticalStackDialog extends StatelessWidget {
                       ),
                       if (btnOk != null || btnCancel != null)
                         Container(
-                          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -122,10 +135,17 @@ class VerticalStackDialog extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  CircleAvatar(
-                    backgroundColor: dialogBackgroundColor ?? Theme.of(context).cardColor,
-                    radius: 55.0,
-                    child: header,
+                  Container(
+                    decoration: showBorder ? BoxDecoration(
+                      border: Border.all(color: borderColor, width: borderWidth),
+                      shape: BoxShape.circle
+                    ) : null,
+                    child: CircleAvatar(
+                      backgroundColor:
+                          dialogBackgroundColor ?? Theme.of(context).cardColor,
+                      radius: 55.0,
+                      child: header,
+                    ),
                   ),
                 ],
               ),
