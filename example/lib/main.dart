@@ -43,8 +43,8 @@ class _HomePageState extends State<HomePage> {
                   text: 'Info Dialog fixed width and sqare buttons',
                   pressEvent: () {
                     AwesomeDialog(
-                      dialogBackgroundColor: Colors.red,
                       context: context,
+                      borderSide: BorderSide(color: Colors.green, width: 2),
                       width: 280,
                       buttonsBorderRadius: BorderRadius.all(Radius.circular(2)),
                       headerAnimationLoop: false,

@@ -98,6 +98,9 @@ class AwesomeDialog {
   /// Custom background color for dialog + header
   final Color dialogBackgroundColor;
 
+  /// Set BorderSide of DialogShape
+  final BorderSide borderSide;
+
   AwesomeDialog({
     @required this.context,
     this.dialogType = DialogType.INFO,
@@ -131,6 +134,7 @@ class AwesomeDialog {
     this.showCloseIcon = false,
     this.closeIcon,
     this.dialogBackgroundColor,
+    this.borderSide,
   }) : assert(
           context != null,
         );
@@ -185,6 +189,7 @@ class AwesomeDialog {
         onWillPop: _onWillPop,
         child: VerticalStackDialog(
           dialogBackgroundColor: dialogBackgroundColor,
+          borderSide: borderSide,
           header: _buildHeader,
           title: this.title,
           desc: this.desc,
