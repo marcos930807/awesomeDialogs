@@ -44,6 +44,7 @@ class _HomePageState extends State<HomePage> {
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
+                      borderSide: BorderSide(color: Colors.green, width: 2),
                       width: 280,
                       buttonsBorderRadius: BorderRadius.all(Radius.circular(2)),
                       headerAnimationLoop: false,

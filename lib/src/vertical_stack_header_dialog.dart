@@ -15,6 +15,9 @@ class VerticalStackDialog extends StatelessWidget {
   final bool showCloseIcon;
   final Function onClose;
   final Widget closeIcon;
+  final Color dialogBackgroundColor;
+  final BorderSide borderSide;
+
   const VerticalStackDialog({
     Key key,
     @required this.title,
@@ -31,6 +34,8 @@ class VerticalStackDialog extends StatelessWidget {
     this.showCloseIcon,
     @required this.onClose,
     this.closeIcon,
+    this.dialogBackgroundColor,
+    this.borderSide,
   }) : super(key: key);
 
   @override
@@ -47,9 +52,12 @@ class VerticalStackDialog extends StatelessWidget {
                 ? const EdgeInsets.only(top: 65.0, left: 15.0, right: 15.0, bottom: 10.0)
                 : const EdgeInsets.only(top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
             child: Material(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                side: borderSide ?? BorderSide.none,
+              ),
               elevation: 0.5,
-              color: Theme.of(context).cardColor,
+              color: dialogBackgroundColor ?? Theme.of(context).cardColor,
               child: Padding(
                 padding: padding,
                 child: SingleChildScrollView(
@@ -120,10 +128,15 @@ class VerticalStackDialog extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  CircleAvatar(
-                    backgroundColor: Theme.of(context).cardColor,
-                    radius: 55.0,
-                    child: header,
+                  Material(
+                    shape: CircleBorder(
+                      side: borderSide ?? BorderSide.none,
+                    ),
+                    child: CircleAvatar(
+                      backgroundColor: dialogBackgroundColor ?? Theme.of(context).cardColor,
+                      radius: 55.0,
+                      child: header,
+                    ),
                   ),
                 ],
               ),
