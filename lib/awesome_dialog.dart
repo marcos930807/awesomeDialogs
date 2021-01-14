@@ -10,7 +10,7 @@ export 'src/animated_button.dart';
 export 'src/anims/flare_header.dart';
 export 'src/anims/anims.dart';
 
-enum DialogType { INFO, WARNING, ERROR, SUCCES, QUESTION, NO_HEADER }
+enum DialogType { INFO, WARNING, ERROR, SUCCES, NO_HEADER }
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
 
 class AwesomeDialog {
@@ -83,23 +83,11 @@ class AwesomeDialog {
   ///Control if Dialog is dissmis by back key.
   final bool dismissOnBackKeyPress;
 
-  ///Max with of entire Dialog.
+  ///Max with of entire Dialog
   final double width;
 
-  ///Border Radius for built in buttons.
-  final BorderRadiusGeometry buttonsBorderRadius;
-
-  /// Control if close icon is appear.
-  final bool showCloseIcon;
-
-  /// Custom closeIcon.
-  final Widget closeIcon;
-
-  /// Custom background color for dialog + header
-  final Color dialogBackgroundColor;
-
-  /// Set BorderSide of DialogShape
-  final BorderSide borderSide;
+  /// If true btnOkOnPress must return true/false in order to dismiss dialog or not
+  final bool validate;
 
   AwesomeDialog({
     @required this.context,
@@ -130,11 +118,7 @@ class AwesomeDialog {
     this.keyboardAware = true,
     this.dismissOnBackKeyPress = true,
     this.width,
-    this.buttonsBorderRadius,
-    this.showCloseIcon = false,
-    this.closeIcon,
-    this.dialogBackgroundColor,
-    this.borderSide,
+    this.validate = false,
   }) : assert(
           context != null,
         );
@@ -150,11 +134,7 @@ class AwesomeDialog {
             }
             switch (animType) {
               case AnimType.SCALE:
-                return ScaleFade(
-                    scale: 0.1,
-                    fade: true,
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    child: _buildDialog);
+                return ScaleFade(scale: 0.1, fade: true, curve: Curves.fastLinearToSlowEaseIn, child: _buildDialog);
                 break;
               case AnimType.LEFTSLIDE:
                 return FadeIn(from: SlideFrom.LEFT, child: _buildDialog);
@@ -188,8 +168,6 @@ class AwesomeDialog {
   Widget get _buildDialog => WillPopScope(
         onWillPop: _onWillPop,
         child: VerticalStackDialog(
-          dialogBackgroundColor: dialogBackgroundColor,
-          borderSide: borderSide,
           header: _buildHeader,
           title: this.title,
           desc: this.desc,
@@ -201,38 +179,40 @@ class AwesomeDialog {
           padding: padding ?? EdgeInsets.only(left: 5, right: 5),
           btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
           btnCancel: btnCancel ?? (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
-          showCloseIcon: this.showCloseIcon,
-          onClose: dissmiss,
-          closeIcon: closeIcon,
         ),
       );
 
   Widget get _buildFancyButtonOk => AnimatedButton(
         isFixedHeight: false,
         pressEvent: () {
-          dissmiss();
-          btnOkOnPress?.call();
+          if (validate) {
+            bool valid = btnOkOnPress();
+            if (valid) {
+              Navigator.of(context, rootNavigator: useRootNavigator).pop();
+            }
+          } else {
+            Navigator.of(context, rootNavigator: useRootNavigator).pop();
+            btnOkOnPress();
+          }
         },
         text: btnOkText ?? 'Ok',
         color: btnOkColor ?? Color(0xFF00CA71),
         icon: btnOkIcon,
-        borderRadius: buttonsBorderRadius,
       );
 
   Widget get _buildFancyButtonCancel => AnimatedButton(
         isFixedHeight: false,
         pressEvent: () {
-          dissmiss();
-          btnCancelOnPress?.call();
+          Navigator.of(context, rootNavigator: useRootNavigator).pop();
+          btnCancelOnPress();
         },
         text: btnCancelText ?? 'Cancel',
         color: btnCancelColor ?? Colors.red,
         icon: btnCancelIcon,
-        borderRadius: buttonsBorderRadius,
       );
 
   dissmiss() {
-    if (!isDissmisedBySystem) Navigator.of(context, rootNavigator: useRootNavigator)?.pop();
+    if (!isDissmisedBySystem) Navigator.of(context, rootNavigator: useRootNavigator).pop();
   }
 
   Future<bool> _onWillPop() async => dismissOnBackKeyPress;
