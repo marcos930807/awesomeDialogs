@@ -9,6 +9,7 @@ class AnimatedButton extends StatefulWidget {
   final bool isFixedHeight;
   final Color color;
   final BorderRadiusGeometry borderRadius;
+  final TextStyle buttonTextStyle;
 
   const AnimatedButton({
     @required this.pressEvent,
@@ -18,6 +19,7 @@ class AnimatedButton extends StatefulWidget {
     this.isFixedHeight = true,
     this.width = double.infinity,
     this.borderRadius,
+    this.buttonTextStyle
   });
   @override
   _AnimatedButtonState createState() => _AnimatedButtonState();
@@ -98,7 +100,7 @@ class _AnimatedButtonState extends State<AnimatedButton> with AnimationMixin {
                 '${widget.text}',
                 // maxLines: 1,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: widget.buttonTextStyle ?? TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
                     fontSize: 14),
