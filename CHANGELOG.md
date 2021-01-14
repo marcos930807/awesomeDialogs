@@ -1,3 +1,8 @@
+## [1.3.1] - 13/1/2021.
+* Added Property buttonTextStyle, to AnimatedButton pr#56.
+* Added Property borderSide, to customize the edges of the dialog pr#55.
+* Added Property dialogBackgroundColor, to add custom background color pr#54.
+
 ## [1.3.0] - 30/12/2020.
 * Added Property showCloseIcon, to control if close icon appear.
 * Added Property closeIcon, to build a custom close icon.

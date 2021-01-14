@@ -87,6 +87,8 @@ AwesomeDialog has onDissmissCallback() and can be dissmissed at any time using d
 | buttonsBorderRadius | BorderRadiusGeometry                 | Border Radius for built in buttons.                                                                                       |                  BorderRadius.all(Radius.circular(100)                  |
 | showCloseIcon | bool                 | Control if close icon is appear.                                                     |                  false                  |
 | closeIcon | Widget                 | Custom closeIcon.                                    |                  null                  |
+| dialogBackgroundColor | Color                 |   custom background color for entire dialog.                               |                  Theme.of(context).cardColor                    |
+| borderSide | BorderSide                 |   enable border en entire dialog shape                               |                  null                    |
 
 
 
