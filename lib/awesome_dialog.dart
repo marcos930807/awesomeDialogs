@@ -100,9 +100,12 @@ class AwesomeDialog {
 
   /// Set BorderSide of DialogShape
   final BorderSide borderSide;
-  
+
   /// If true btnOkOnPress must return true/false in order to dismiss dialog or not
-  final bool validate;  
+  final bool validate;
+
+  /// Set to true if the btnOkOnPress function is asynchronous
+  final bool isAsync;
 
   AwesomeDialog({
     @required this.context,
@@ -138,7 +141,8 @@ class AwesomeDialog {
     this.closeIcon,
     this.dialogBackgroundColor,
     this.borderSide,
-    this.validate = false,    
+    this.validate = false,
+    this.isAsync,
   }) : assert(
           context != null,
         );
@@ -154,11 +158,7 @@ class AwesomeDialog {
             }
             switch (animType) {
               case AnimType.SCALE:
-                return ScaleFade(
-                    scale: 0.1,
-                    fade: true,
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    child: _buildDialog);
+                return ScaleFade(scale: 0.1, fade: true, curve: Curves.fastLinearToSlowEaseIn, child: _buildDialog);
                 break;
               case AnimType.LEFTSLIDE:
                 return FadeIn(from: SlideFrom.LEFT, child: _buildDialog);
@@ -213,10 +213,11 @@ class AwesomeDialog {
 
   Widget get _buildFancyButtonOk => AnimatedButton(
         isFixedHeight: false,
-        pressEvent: () {
+        pressEvent: () async {
           if (validate) {
             if (btnOkOnPress != null) {
-              bool valid = btnOkOnPress();
+              bool valid = false;
+              isAsync ? await btnOkOnPress() : btnOkOnPress();
               if (valid) {
                 dissmiss();
               }
@@ -224,7 +225,7 @@ class AwesomeDialog {
           } else {
             if (btnOkOnPress != null) {
               dissmiss();
-              btnOkOnPress();
+              isAsync ? await btnOkOnPress() : btnOkOnPress();
             }
           }
         },
