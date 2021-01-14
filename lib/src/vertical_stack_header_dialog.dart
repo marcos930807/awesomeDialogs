@@ -12,9 +12,15 @@ class VerticalStackDialog extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final bool keyboardAware;
   final double width;
+  final bool showCloseIcon;
+  final Function onClose;
+  final Widget closeIcon;
+  final Color dialogBackgroundColor;
+  final BorderSide borderSide;
+
   const VerticalStackDialog({
     Key key,
-    this.title,
+    @required this.title,
     @required this.desc,
     this.btnOk,
     this.btnCancel,
@@ -25,13 +31,19 @@ class VerticalStackDialog extends StatelessWidget {
     this.padding,
     this.keyboardAware,
     this.width,
+    this.showCloseIcon,
+    @required this.onClose,
+    this.closeIcon,
+    this.dialogBackgroundColor,
+    this.borderSide,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: aligment,
-      padding: EdgeInsets.only(bottom: keyboardAware ? MediaQuery.of(context).viewInsets.bottom : 0),
+      padding:
+          EdgeInsets.only(bottom: keyboardAware ? MediaQuery.of(context).viewInsets.bottom : 0),
       child: Stack(
         children: <Widget>[
           Container(
@@ -40,9 +52,12 @@ class VerticalStackDialog extends StatelessWidget {
                 ? const EdgeInsets.only(top: 65.0, left: 15.0, right: 15.0, bottom: 10.0)
                 : const EdgeInsets.only(top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
             child: Material(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                side: borderSide ?? BorderSide.none,
+              ),
               elevation: 0.5,
-              color: Theme.of(context).cardColor,
+              color: dialogBackgroundColor ?? Theme.of(context).cardColor,
               child: Padding(
                 padding: padding,
                 child: SingleChildScrollView(
@@ -115,12 +130,28 @@ class VerticalStackDialog extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  CircleAvatar(
-                    backgroundColor: Theme.of(context).cardColor,
-                    radius: 55.0,
-                    child: header,
+                  Material(
+                    shape: CircleBorder(
+                      side: borderSide ?? BorderSide.none,
+                    ),
+                    child: CircleAvatar(
+                      backgroundColor: dialogBackgroundColor ?? Theme.of(context).cardColor,
+                      radius: 55.0,
+                      child: header,
+                    ),
                   ),
                 ],
+              ),
+            ),
+          if (showCloseIcon)
+            Positioned(
+              right: 50.0,
+              top: 75.0,
+              child: GestureDetector(
+                onTap: () {
+                  onClose?.call();
+                },
+                child: closeIcon ?? Icon(Icons.close),
               ),
             ),
         ],
