@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 export 'src/animated_button.dart';
 export 'src/anims/flare_header.dart';
 export 'src/anims/anims.dart';
+import 'package:flutter/services.dart';
 
 enum DialogType { INFO, WARNING, ERROR, SUCCES, QUESTION, NO_HEADER }
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
@@ -142,43 +143,49 @@ class AwesomeDialog {
     this.dialogBackgroundColor,
     this.borderSide,
     this.validate = false,
-    this.isAsync,
+    this.isAsync = false,
   }) : assert(
           context != null,
         );
 
   bool isDissmisedBySystem = false;
 
-  Future show() => showDialog(
-          context: this.context,
-          barrierDismissible: dismissOnTouchOutside,
-          builder: (BuildContext context) {
-            if (autoHide != null) {
-              Future.delayed(autoHide).then((value) => dissmiss());
-            }
-            switch (animType) {
-              case AnimType.SCALE:
-                return ScaleFade(scale: 0.1, fade: true, curve: Curves.fastLinearToSlowEaseIn, child: _buildDialog);
-                break;
-              case AnimType.LEFTSLIDE:
-                return FadeIn(from: SlideFrom.LEFT, child: _buildDialog);
-                break;
-              case AnimType.RIGHSLIDE:
-                return FadeIn(from: SlideFrom.RIGHT, child: _buildDialog);
-                break;
-              case AnimType.BOTTOMSLIDE:
-                return FadeIn(from: SlideFrom.BOTTOM, child: _buildDialog);
-                break;
-              case AnimType.TOPSLIDE:
-                return FadeIn(from: SlideFrom.TOP, child: _buildDialog);
-                break;
-              default:
-                return _buildDialog;
-            }
-          }).then((_) {
-        isDissmisedBySystem = true;
-        if (onDissmissCallback != null) onDissmissCallback();
-      });
+  Future<bool> show() async {
+    bool result = await showDialog<bool>(
+        context: this.context,
+        barrierDismissible: dismissOnTouchOutside,
+        builder: (BuildContext context) {
+          if (autoHide != null) {
+            Future.delayed(autoHide).then((value) => dissmiss());
+          }
+          switch (animType) {
+            case AnimType.SCALE:
+              return ScaleFade(scale: 0.1, fade: true, curve: Curves.fastLinearToSlowEaseIn, child: _buildDialog);
+              break;
+            case AnimType.LEFTSLIDE:
+              return FadeIn(from: SlideFrom.LEFT, child: _buildDialog);
+              break;
+            case AnimType.RIGHSLIDE:
+              return FadeIn(from: SlideFrom.RIGHT, child: _buildDialog);
+              break;
+            case AnimType.BOTTOMSLIDE:
+              return FadeIn(from: SlideFrom.BOTTOM, child: _buildDialog);
+              break;
+            case AnimType.TOPSLIDE:
+              return FadeIn(from: SlideFrom.TOP, child: _buildDialog);
+              break;
+            default:
+              return _buildDialog;
+          }
+        });
+
+    return result;
+
+    //     .then((_) {
+    //   isDissmisedBySystem = true;
+    //   if (onDissmissCallback != null) onDissmissCallback();
+    // });
+  }
 
   Widget get _buildHeader {
     if (customHeader != null) return customHeader;
@@ -248,8 +255,13 @@ class AwesomeDialog {
       );
 
   dissmiss() {
-    if (!isDissmisedBySystem) Navigator.of(context, rootNavigator: useRootNavigator)?.pop();
+    if (!isDissmisedBySystem) {
+      Navigator.of(context, rootNavigator: useRootNavigator)?.pop();
+    }
   }
 
-  Future<bool> _onWillPop() async => dismissOnBackKeyPress;
+  Future<bool> _onWillPop() async {
+    // SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+    return dismissOnBackKeyPress;
+  }
 }
