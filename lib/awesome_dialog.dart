@@ -231,8 +231,8 @@ class AwesomeDialog {
             }
           } else {
             if (btnOkOnPress != null) {
-              dissmiss();
               isAsync ? await btnOkOnPress() : btnOkOnPress();
+              dissmiss();
             }
           }
         },
@@ -256,12 +256,11 @@ class AwesomeDialog {
 
   dissmiss() {
     if (!isDissmisedBySystem) {
-      Navigator.of(context, rootNavigator: useRootNavigator)?.pop();
+      // Navigator.of(context, rootNavigator: useRootNavigator)?.pop();
     }
   }
 
   Future<bool> _onWillPop() async {
-    // SystemChannels.platform.invokeMethod('SystemNavigator.pop');
     return dismissOnBackKeyPress;
   }
 }
