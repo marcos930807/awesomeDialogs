@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 export 'src/animated_button.dart';
 export 'src/anims/flare_header.dart';
 export 'src/anims/anims.dart';
+import 'package:flutter/services.dart';
 
 enum DialogType { INFO, WARNING, ERROR, SUCCES, QUESTION, NO_HEADER }
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
@@ -101,6 +102,12 @@ class AwesomeDialog {
   /// Set BorderSide of DialogShape
   final BorderSide borderSide;
 
+  /// If true btnOkOnPress must return true/false in order to dismiss dialog or not
+  final bool validate;
+
+  /// Set to true if the btnOkOnPress function is asynchronous
+  final bool isAsync;
+
   AwesomeDialog({
     @required this.context,
     this.dialogType = DialogType.INFO,
@@ -135,46 +142,50 @@ class AwesomeDialog {
     this.closeIcon,
     this.dialogBackgroundColor,
     this.borderSide,
+    this.validate = false,
+    this.isAsync = false,
   }) : assert(
           context != null,
         );
 
   bool isDissmisedBySystem = false;
 
-  Future show() => showDialog(
-          context: this.context,
-          barrierDismissible: dismissOnTouchOutside,
-          builder: (BuildContext context) {
-            if (autoHide != null) {
-              Future.delayed(autoHide).then((value) => dissmiss());
-            }
-            switch (animType) {
-              case AnimType.SCALE:
-                return ScaleFade(
-                    scale: 0.1,
-                    fade: true,
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    child: _buildDialog);
-                break;
-              case AnimType.LEFTSLIDE:
-                return FadeIn(from: SlideFrom.LEFT, child: _buildDialog);
-                break;
-              case AnimType.RIGHSLIDE:
-                return FadeIn(from: SlideFrom.RIGHT, child: _buildDialog);
-                break;
-              case AnimType.BOTTOMSLIDE:
-                return FadeIn(from: SlideFrom.BOTTOM, child: _buildDialog);
-                break;
-              case AnimType.TOPSLIDE:
-                return FadeIn(from: SlideFrom.TOP, child: _buildDialog);
-                break;
-              default:
-                return _buildDialog;
-            }
-          }).then((_) {
-        isDissmisedBySystem = true;
-        if (onDissmissCallback != null) onDissmissCallback();
-      });
+  Future<bool> show() async {
+    bool result = await showDialog<bool>(
+        context: this.context,
+        barrierDismissible: dismissOnTouchOutside,
+        builder: (BuildContext context) {
+          if (autoHide != null) {
+            Future.delayed(autoHide).then((value) => dissmiss());
+          }
+          switch (animType) {
+            case AnimType.SCALE:
+              return ScaleFade(scale: 0.1, fade: true, curve: Curves.fastLinearToSlowEaseIn, child: _buildDialog);
+              break;
+            case AnimType.LEFTSLIDE:
+              return FadeIn(from: SlideFrom.LEFT, child: _buildDialog);
+              break;
+            case AnimType.RIGHSLIDE:
+              return FadeIn(from: SlideFrom.RIGHT, child: _buildDialog);
+              break;
+            case AnimType.BOTTOMSLIDE:
+              return FadeIn(from: SlideFrom.BOTTOM, child: _buildDialog);
+              break;
+            case AnimType.TOPSLIDE:
+              return FadeIn(from: SlideFrom.TOP, child: _buildDialog);
+              break;
+            default:
+              return _buildDialog;
+          }
+        });
+
+    return result;
+
+    //     .then((_) {
+    //   isDissmisedBySystem = true;
+    //   if (onDissmissCallback != null) onDissmissCallback();
+    // });
+  }
 
   Widget get _buildHeader {
     if (customHeader != null) return customHeader;
@@ -209,9 +220,21 @@ class AwesomeDialog {
 
   Widget get _buildFancyButtonOk => AnimatedButton(
         isFixedHeight: false,
-        pressEvent: () {
-          dissmiss();
-          btnOkOnPress?.call();
+        pressEvent: () async {
+          if (validate) {
+            if (btnOkOnPress != null) {
+              bool valid = false;
+              isAsync ? await btnOkOnPress() : btnOkOnPress();
+              if (valid) {
+                dissmiss();
+              }
+            }
+          } else {
+            if (btnOkOnPress != null) {
+              isAsync ? await btnOkOnPress() : btnOkOnPress();
+              dissmiss();
+            }
+          }
         },
         text: btnOkText ?? 'Ok',
         color: btnOkColor ?? Color(0xFF00CA71),
@@ -232,8 +255,12 @@ class AwesomeDialog {
       );
 
   dissmiss() {
-    if (!isDissmisedBySystem) Navigator.of(context, rootNavigator: useRootNavigator)?.pop();
+    if (!isDissmisedBySystem) {
+      // Navigator.of(context, rootNavigator: useRootNavigator)?.pop();
+    }
   }
 
-  Future<bool> _onWillPop() async => dismissOnBackKeyPress;
+  Future<bool> _onWillPop() async {
+    return dismissOnBackKeyPress;
+  }
 }

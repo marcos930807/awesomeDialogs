@@ -68,15 +68,17 @@ class VerticalStackDialog extends StatelessWidget {
                       SizedBox(
                         height: header != null ? 50.0 : 15,
                       ),
+                      title != null
+                          ? Text(
+                              title,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.headline6,
+                            )
+                          : Container(),
                       body ??
                           Column(
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
-                              Text(
-                                title,
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.headline6,
-                              ),
                               SizedBox(
                                 height: 10.0,
                               ),
