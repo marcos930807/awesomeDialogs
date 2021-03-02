@@ -31,8 +31,8 @@ class _AnimatedButtonState extends State<AnimatedButton> with AnimationMixin {
   @override
   void initState() {
     super.initState();
-    final curveAnimation =
-        CurvedAnimation(parent: controller, curve: Curves.easeIn, reverseCurve: Curves.easeIn);
+    final curveAnimation = CurvedAnimation(
+        parent: controller, curve: Curves.easeIn, reverseCurve: Curves.easeIn);
     _scale = Tween<double>(begin: 1, end: 0.9).animate(curveAnimation);
   }
 
@@ -76,7 +76,8 @@ class _AnimatedButtonState extends State<AnimatedButton> with AnimationMixin {
         width: widget.width,
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-            borderRadius: widget.borderRadius ?? BorderRadius.all(Radius.circular(100)),
+            borderRadius:
+                widget.borderRadius ?? BorderRadius.all(Radius.circular(100)),
             color: widget.color ?? Theme.of(context).primaryColor),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -100,7 +101,10 @@ class _AnimatedButtonState extends State<AnimatedButton> with AnimationMixin {
                 // maxLines: 1,
                 textAlign: TextAlign.center,
                 style: widget.buttonTextStyle ??
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14),
+                    TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14),
               ),
             ),
           ],

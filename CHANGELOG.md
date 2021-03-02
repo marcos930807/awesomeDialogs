@@ -1,3 +1,5 @@
+## [1.3.2] - 2/3/2021.
+* Added Property buttonsTextStyle, to AwesomeDialog to easy customize built in buttons.
 ## [1.3.1] - 13/1/2021.
 * Added Property buttonTextStyle, to AnimatedButton pr#56.
 * Added Property borderSide, to customize the edges of the dialog pr#55.

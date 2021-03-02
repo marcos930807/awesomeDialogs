@@ -89,6 +89,9 @@ class AwesomeDialog {
   ///Border Radius for built in buttons.
   final BorderRadiusGeometry buttonsBorderRadius;
 
+  ///TextStyle for built in buttons.
+  final TextStyle buttonsTextStyle;
+
   /// Control if close icon is appear.
   final bool showCloseIcon;
 
@@ -135,6 +138,7 @@ class AwesomeDialog {
     this.closeIcon,
     this.dialogBackgroundColor,
     this.borderSide,
+    this.buttonsTextStyle,
   }) : assert(
           context != null,
         );
@@ -200,7 +204,8 @@ class AwesomeDialog {
           width: width,
           padding: padding ?? EdgeInsets.only(left: 5, right: 5),
           btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
-          btnCancel: btnCancel ?? (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
+          btnCancel: btnCancel ??
+              (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
           showCloseIcon: this.showCloseIcon,
           onClose: dissmiss,
           closeIcon: closeIcon,
@@ -217,6 +222,7 @@ class AwesomeDialog {
         color: btnOkColor ?? Color(0xFF00CA71),
         icon: btnOkIcon,
         borderRadius: buttonsBorderRadius,
+        buttonTextStyle: buttonsTextStyle,
       );
 
   Widget get _buildFancyButtonCancel => AnimatedButton(
@@ -229,10 +235,12 @@ class AwesomeDialog {
         color: btnCancelColor ?? Colors.red,
         icon: btnCancelIcon,
         borderRadius: buttonsBorderRadius,
+        buttonTextStyle: buttonsTextStyle,
       );
 
   dissmiss() {
-    if (!isDissmisedBySystem) Navigator.of(context, rootNavigator: useRootNavigator)?.pop();
+    if (!isDissmisedBySystem)
+      Navigator.of(context, rootNavigator: useRootNavigator)?.pop();
   }
 
   Future<bool> _onWillPop() async => dismissOnBackKeyPress;

@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                   height: 16,
                 ),
                 AnimatedButton(
-                  text: 'Question Dialog',
+                  text: 'Question Dialog With Custom BTN Style',
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
@@ -70,6 +70,7 @@ class _HomePageState extends State<HomePage> {
                       animType: AnimType.BOTTOMSLIDE,
                       title: 'Question',
                       desc: 'Dialog description here...',
+                      buttonsTextStyle: TextStyle(color: Colors.black),
                       showCloseIcon: true,
                       btnCancelOnPress: () {},
                       btnOkOnPress: () {},
