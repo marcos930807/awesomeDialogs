@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatefulWidget {
   const HomePage({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -252,7 +252,7 @@ class _HomePageState extends State<HomePage> {
                   text: 'Body with Input',
                   color: Colors.blueGrey,
                   pressEvent: () {
-                    AwesomeDialog dialog;
+                    late AwesomeDialog dialog;
                     dialog = AwesomeDialog(
                       context: context,
                       animType: AnimType.SCALE,

@@ -28,7 +28,7 @@ enum AniProps { opacity, translateX, scale }
 
 class FadeIn extends StatelessWidget {
   final double delay;
-  final Widget child;
+  final Widget? child;
   final CustomAnimationControl control;
   final SlideFrom from;
   final bool fade;
@@ -70,7 +70,7 @@ class FadeIn extends StatelessWidget {
 class Slide extends StatelessWidget {
   final double delay;
   final double duration;
-  final Widget child;
+  final Widget? child;
   final CustomAnimationControl control;
   final SlideFrom from;
   final double slideDistance;
@@ -112,7 +112,7 @@ class Slide extends StatelessWidget {
 
 class ScaleFade extends StatelessWidget {
   final double delay;
-  final Widget child;
+  final Widget? child;
   final CustomAnimationControl control;
   final double duration;
   final bool fade;
@@ -159,7 +159,7 @@ class ScaleFade extends StatelessWidget {
 
 class ShowHide extends StatelessWidget {
   final double delay;
-  final Widget child;
+  final Widget? child;
   final double duration;
   final bool isShow;
   ShowHide({

@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
 
 class VerticalStackDialog extends StatelessWidget {
-  final String title;
-  final String desc;
-  final Widget btnOk;
-  final Widget btnCancel;
-  final Widget header;
-  final Widget body;
-  final bool isDense;
-  final AlignmentGeometry aligment;
-  final EdgeInsetsGeometry padding;
-  final bool keyboardAware;
-  final double width;
-  final bool showCloseIcon;
+  final String? title;
+  final String? desc;
+  final Widget? btnOk;
+  final Widget? btnCancel;
+  final Widget? header;
+  final Widget? body;
+  final bool? isDense;
+  final AlignmentGeometry? aligment;
+  final EdgeInsetsGeometry? padding;
+  final bool? keyboardAware;
+  final double? width;
+  final bool? showCloseIcon;
   final Function onClose;
-  final Widget closeIcon;
-  final Color dialogBackgroundColor;
-  final BorderSide borderSide;
+  final Widget? closeIcon;
+  final Color? dialogBackgroundColor;
+  final BorderSide? borderSide;
 
   const VerticalStackDialog({
-    Key key,
-    @required this.title,
-    @required this.desc,
+    Key? key,
+    required this.title,
+    required this.desc,
     this.btnOk,
     this.btnCancel,
     this.body,
     this.aligment,
     this.isDense,
-    @required this.header,
+    required this.header,
     this.padding,
     this.keyboardAware,
     this.width,
     this.showCloseIcon,
-    @required this.onClose,
+    required this.onClose,
     this.closeIcon,
     this.dialogBackgroundColor,
     this.borderSide,
@@ -42,17 +42,15 @@ class VerticalStackDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: aligment,
-      padding: EdgeInsets.only(
-          bottom: keyboardAware ? MediaQuery.of(context).viewInsets.bottom : 0),
+      padding:
+          EdgeInsets.only(bottom: keyboardAware! ? MediaQuery.of(context).viewInsets.bottom : 0),
       child: Stack(
         children: <Widget>[
           Container(
             width: width ?? MediaQuery.of(context).size.width,
-            padding: isDense
-                ? const EdgeInsets.only(
-                    top: 65.0, left: 15.0, right: 15.0, bottom: 10.0)
-                : const EdgeInsets.only(
-                    top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
+            padding: isDense!
+                ? const EdgeInsets.only(top: 65.0, left: 15.0, right: 15.0, bottom: 10.0)
+                : const EdgeInsets.only(top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
             child: Material(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
@@ -61,7 +59,7 @@ class VerticalStackDialog extends StatelessWidget {
               elevation: 0.5,
               color: dialogBackgroundColor ?? Theme.of(context).cardColor,
               child: Padding(
-                padding: padding,
+                padding: padding!,
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,7 +73,7 @@ class VerticalStackDialog extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               Text(
-                                title,
+                                title!,
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context).textTheme.headline6,
                               ),
@@ -87,7 +85,7 @@ class VerticalStackDialog extends StatelessWidget {
                                 child: SingleChildScrollView(
                                   physics: BouncingScrollPhysics(),
                                   child: Text(
-                                    desc,
+                                    desc!,
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
@@ -99,8 +97,7 @@ class VerticalStackDialog extends StatelessWidget {
                       ),
                       if (btnOk != null || btnCancel != null)
                         Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
+                          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -114,7 +111,7 @@ class VerticalStackDialog extends StatelessWidget {
                                 ),
                               if (btnOk != null)
                                 Expanded(
-                                  child: btnOk,
+                                  child: btnOk!,
                                 )
                             ],
                           ),
@@ -136,8 +133,7 @@ class VerticalStackDialog extends StatelessWidget {
                       side: borderSide ?? BorderSide.none,
                     ),
                     child: CircleAvatar(
-                      backgroundColor:
-                          dialogBackgroundColor ?? Theme.of(context).cardColor,
+                      backgroundColor: dialogBackgroundColor ?? Theme.of(context).cardColor,
                       radius: 55.0,
                       child: header,
                     ),
@@ -145,13 +141,13 @@ class VerticalStackDialog extends StatelessWidget {
                 ],
               ),
             ),
-          if (showCloseIcon)
+          if (showCloseIcon!)
             Positioned(
               right: 50.0,
               top: 75.0,
               child: GestureDetector(
                 onTap: () {
-                  onClose?.call();
+                  onClose.call();
                 },
                 child: closeIcon ?? Icon(Icons.close),
               ),

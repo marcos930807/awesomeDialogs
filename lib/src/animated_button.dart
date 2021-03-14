@@ -3,16 +3,16 @@ import 'package:simple_animations/simple_animations.dart';
 
 class AnimatedButton extends StatefulWidget {
   final Function pressEvent;
-  final String text;
-  final IconData icon;
+  final String? text;
+  final IconData? icon;
   final double width;
   final bool isFixedHeight;
-  final Color color;
-  final BorderRadiusGeometry borderRadius;
-  final TextStyle buttonTextStyle;
+  final Color? color;
+  final BorderRadiusGeometry? borderRadius;
+  final TextStyle? buttonTextStyle;
 
   const AnimatedButton({
-    @required this.pressEvent,
+    required this.pressEvent,
     this.text,
     this.icon,
     this.color,
@@ -26,7 +26,7 @@ class AnimatedButton extends StatefulWidget {
 }
 
 class _AnimatedButtonState extends State<AnimatedButton> with AnimationMixin {
-  Animation<double> _scale;
+  late Animation<double> _scale;
 
   @override
   void initState() {

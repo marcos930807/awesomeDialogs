@@ -3,7 +3,7 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class FlareHeader extends StatelessWidget {
-  const FlareHeader({Key key, @required this.dialogType, @required this.loop})
+  const FlareHeader({Key? key, required this.dialogType, required this.loop})
       : super(key: key);
   final DialogType dialogType;
   final bool loop;
