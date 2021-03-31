@@ -19,7 +19,15 @@ class FlareHeader extends StatelessWidget {
           animation: loop ? 'appear_loop' : 'appear',
           callback: (call) {},
         );
-        break;
+      case DialogType.INFO_REVERSED:
+        return FlareActor(
+          loop
+              ? "packages/awesome_dialog/assets/flare/info.flr"
+              : "packages/awesome_dialog/assets/flare/info_without_loop.flr",
+          alignment: Alignment.center,
+          fit: BoxFit.cover,
+          animation: 'appear',
+        );
       case DialogType.QUESTION:
         return FlareActor(
           "packages/awesome_dialog/assets/flare/question.flr",
@@ -28,7 +36,6 @@ class FlareHeader extends StatelessWidget {
           animation: loop ? 'anim_loop' : 'anim',
           callback: (call) {},
         );
-        break;
       case DialogType.WARNING:
         return FlareActor(
           loop
@@ -38,7 +45,6 @@ class FlareHeader extends StatelessWidget {
           fit: BoxFit.cover,
           animation: 'appear',
         );
-        break;
       case DialogType.ERROR:
         return FlareActor(
           loop
@@ -48,7 +54,6 @@ class FlareHeader extends StatelessWidget {
           fit: BoxFit.fill,
           animation: 'Error',
         );
-        break;
       case DialogType.SUCCES:
         return FlareActor(
           loop
@@ -58,16 +63,8 @@ class FlareHeader extends StatelessWidget {
           fit: BoxFit.fill,
           animation: 'Untitled',
         );
-        break;
       default:
-        return FlareActor(
-          loop
-              ? "packages/awesome_dialog/assets/flare/info.flr"
-              : "packages/awesome_dialog/assets/flare/info_without_loop.flr",
-          alignment: Alignment.center,
-          fit: BoxFit.cover,
-          animation: 'appear',
-        );
+        return const SizedBox.shrink();
     }
   }
 }
