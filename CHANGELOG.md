@@ -1,3 +1,5 @@
+## [2.0.0-nullsafety.1] - 31/3/2021.
+* Added DialogType INFO_REVERSED
 ## [2.0.0-nullsafety.0] - 13/3/2021.
 * Migrated to Null Safety.
 ## [1.3.2] - 2/3/2021.

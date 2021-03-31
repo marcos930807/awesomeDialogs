@@ -1,6 +1,6 @@
 name: awesome_dialog
 description: >-
-  Flutter package to show beautiful dialogs(INFO,WARNING,SUCCESS,ERROR) with animations as simply as possible.
+  Flutter package to show beautiful dialogs(INFO,QUESTION,WARNING,SUCCESS,ERROR) with animations as simply as possible.
 version: 2.0.0-nullsafety.1
 homepage: https://github.com/marcos930807/awesomeDialogs
 
