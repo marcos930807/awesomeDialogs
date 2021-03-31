@@ -28,7 +28,6 @@ class FlareHeader extends StatelessWidget {
           fit: BoxFit.cover,
           animation: 'appear',
         );
-
       case DialogType.QUESTION:
         return FlareActor(
           "packages/awesome_dialog/assets/flare/question.flr",
