@@ -13,6 +13,14 @@ class FlareHeader extends StatelessWidget {
     switch (dialogType) {
       case DialogType.INFO:
         return FlareActor(
+          "packages/awesome_dialog/assets/flare/info2.flr",
+          alignment: Alignment.center,
+          fit: BoxFit.cover,
+          animation: loop ? 'appear_loop' : 'appear',
+          callback: (call) {},
+        );
+      case DialogType.INFO_REVERSED:
+        return FlareActor(
           loop
               ? "packages/awesome_dialog/assets/flare/info.flr"
               : "packages/awesome_dialog/assets/flare/info_without_loop.flr",
@@ -20,14 +28,7 @@ class FlareHeader extends StatelessWidget {
           fit: BoxFit.cover,
           animation: 'appear',
         );
-      case DialogType.INFOREVERSED:
-        return FlareActor(
-          "packages/awesome_dialog/assets/flare/info2.flr",
-          alignment: Alignment.center,
-          fit: BoxFit.cover,
-          animation: loop ? 'appear_loop' : 'appear',
-          callback: (call) {},
-        );
+
       case DialogType.QUESTION:
         return FlareActor(
           "packages/awesome_dialog/assets/flare/question.flr",

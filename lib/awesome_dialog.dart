@@ -10,7 +10,7 @@ export 'src/animated_button.dart';
 export 'src/anims/flare_header.dart';
 export 'src/anims/anims.dart';
 
-enum DialogType { INFO, INFOREVERSED, WARNING, ERROR, SUCCES, QUESTION, NO_HEADER }
+enum DialogType { INFO, INFO_REVERSED, WARNING, ERROR, SUCCES, QUESTION, NO_HEADER }
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
 
 class AwesomeDialog {
