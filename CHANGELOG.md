@@ -1,3 +1,5 @@
+## [2.0.0-nullsafety.0] - 13/3/2021.
+* Migrated to Null Safety.
 ## [1.3.2] - 2/3/2021.
 * Added Property buttonsTextStyle, to AwesomeDialog to easy customize built in buttons.
 ## [1.3.1] - 13/1/2021.
