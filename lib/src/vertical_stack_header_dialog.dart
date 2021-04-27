@@ -90,9 +90,10 @@ class VerticalStackDialog extends StatelessWidget {
                                 ),
                             ],
                           ),
-                      const SizedBox(
-                        height: 16.0,
-                      ),
+                      if (desc != null)
+                        const SizedBox(
+                          height: 16.0,
+                        ),
                       if (btnOk != null || btnCancel != null)
                         Container(
                           padding: EdgeInsets.symmetric(
