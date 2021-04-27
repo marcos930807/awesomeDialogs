@@ -59,7 +59,7 @@ class AwesomeDialog {
   /// Anim Type can be { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
   final AnimType animType;
 
-  /// Aligment of the Dialog
+  /// Alignment of the Dialog
   final AlignmentGeometry aligment;
 
   /// Padding off inner content of Dialog
@@ -197,7 +197,7 @@ class AwesomeDialog {
           desc: this.desc,
           body: this.body,
           isDense: isDense,
-          aligment: aligment,
+          alignment: aligment,
           keyboardAware: keyboardAware,
           width: width,
           padding: padding ?? EdgeInsets.only(left: 5, right: 5),
