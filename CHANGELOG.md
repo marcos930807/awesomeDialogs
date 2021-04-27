@@ -1,3 +1,5 @@
+## [2.0.0] - 27/4/2021.
+* Null safety stable release.
 ## [2.0.0-nullsafety.1] - 31/3/2021.
 * Added DialogType INFO_REVERSED
 ## [2.0.0-nullsafety.0] - 13/3/2021.

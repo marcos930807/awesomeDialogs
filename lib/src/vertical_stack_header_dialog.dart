@@ -7,10 +7,10 @@ class VerticalStackDialog extends StatelessWidget {
   final Widget? btnCancel;
   final Widget? header;
   final Widget? body;
-  final bool? isDense;
+  final bool isDense;
   final AlignmentGeometry? alignment;
-  final EdgeInsetsGeometry? padding;
-  final bool? keyboardAware;
+  final EdgeInsetsGeometry padding;
+  final bool keyboardAware;
   final double? width;
   final bool? showCloseIcon;
   final Function onClose;
@@ -26,10 +26,10 @@ class VerticalStackDialog extends StatelessWidget {
     this.btnCancel,
     this.body,
     this.alignment,
-    this.isDense,
+    this.isDense = true,
     required this.header,
-    this.padding,
-    this.keyboardAware,
+    required this.padding,
+    this.keyboardAware = true,
     this.width,
     this.showCloseIcon,
     required this.onClose,
@@ -44,17 +44,14 @@ class VerticalStackDialog extends StatelessWidget {
     final MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Container(
       alignment: alignment,
-      padding: EdgeInsets.only(
-          bottom: keyboardAware! ? mediaQueryData.viewInsets.bottom : 0),
+      padding: EdgeInsets.only(bottom: keyboardAware ? mediaQueryData.viewInsets.bottom : 0),
       child: Stack(
         children: <Widget>[
           Container(
             width: width ?? mediaQueryData.size.width,
-            padding: isDense!
-                ? const EdgeInsets.only(
-                    top: 65.0, left: 15.0, right: 15.0, bottom: 10.0)
-                : const EdgeInsets.only(
-                    top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
+            padding: isDense
+                ? const EdgeInsets.only(top: 65.0, left: 15.0, right: 15.0, bottom: 10.0)
+                : const EdgeInsets.only(top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
             child: Material(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
@@ -63,7 +60,7 @@ class VerticalStackDialog extends StatelessWidget {
               elevation: 0.5,
               color: dialogBackgroundColor ?? theme.cardColor,
               child: Padding(
-                padding: padding!,
+                padding: padding,
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -96,8 +93,7 @@ class VerticalStackDialog extends StatelessWidget {
                         ),
                       if (btnOk != null || btnCancel != null)
                         Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
+                          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
