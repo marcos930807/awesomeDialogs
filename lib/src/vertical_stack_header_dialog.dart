@@ -58,7 +58,7 @@ class VerticalStackDialog extends StatelessWidget {
             child: Material(
               shape: RoundedRectangleBorder(
                 borderRadius: const BorderRadius.all(
-                  Radius.circular(10),
+                  const Radius.circular(10),
                 ),
                 side: borderSide ?? BorderSide.none,
               ),
