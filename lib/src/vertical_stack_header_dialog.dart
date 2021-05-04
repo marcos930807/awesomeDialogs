@@ -57,7 +57,9 @@ class VerticalStackDialog extends StatelessWidget {
                     top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
             child: Material(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
+                ),
                 side: borderSide ?? BorderSide.none,
               ),
               elevation: 0.5,
@@ -96,8 +98,10 @@ class VerticalStackDialog extends StatelessWidget {
                         ),
                       if (btnOk != null || btnCancel != null)
                         Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 20),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 20,
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
