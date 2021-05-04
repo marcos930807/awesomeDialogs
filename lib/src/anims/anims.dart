@@ -8,16 +8,12 @@ Offset getOffset(MultiTweenValues<AniProps> animation, SlideFrom from) {
   switch (from) {
     case SlideFrom.TOP:
       return Offset(0, -animation.get(AniProps.translateX));
-      break;
     case SlideFrom.BOTTOM:
       return Offset(0, animation.get(AniProps.translateX));
-      break;
     case SlideFrom.LEFT:
       return Offset(-animation.get(AniProps.translateX), 0);
-      break;
     case SlideFrom.RIGHT:
       return Offset(animation.get(AniProps.translateX), 0);
-      break;
     default:
       return Offset(0, 0);
   }
@@ -38,7 +34,7 @@ class FadeIn extends StatelessWidget {
       {this.delay = 0,
       this.child,
       this.fade = true,
-      this.control = CustomAnimationControl.PLAY,
+      this.control = CustomAnimationControl.play,
       this.from = SlideFrom.RIGHT,
       this.curve = Curves.ease});
 
@@ -81,7 +77,7 @@ class Slide extends StatelessWidget {
       this.child,
       this.duration = 1,
       this.slideDistance = 60.0,
-      this.control = CustomAnimationControl.PLAY,
+      this.control = CustomAnimationControl.play,
       this.from = SlideFrom.RIGHT,
       this.curve = Curves.ease});
 
@@ -118,13 +114,14 @@ class ScaleFade extends StatelessWidget {
   final bool fade;
   final double scale;
   final Curve curve;
+
   ScaleFade({
     this.delay = 1,
     this.duration = 1,
     this.child,
     this.fade = true,
     this.scale = 0.7,
-    this.control = CustomAnimationControl.PLAY,
+    this.control = CustomAnimationControl.play,
     this.curve = Curves.easeIn,
   });
 
@@ -162,6 +159,7 @@ class ShowHide extends StatelessWidget {
   final Widget? child;
   final double duration;
   final bool isShow;
+
   ShowHide({
     this.delay = 1,
     this.duration = 1,
@@ -178,8 +176,8 @@ class ShowHide extends StatelessWidget {
     return CustomAnimation<MultiTweenValues<AniProps>>(
       delay: Duration(milliseconds: (200 * delay).round()),
       control: isShow
-          ? CustomAnimationControl.PLAY
-          : CustomAnimationControl.PLAY_REVERSE,
+          ? CustomAnimationControl.play
+          : CustomAnimationControl.playReverse,
       duration: tween.duration,
       tween: tween,
       child: child,

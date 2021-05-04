@@ -208,7 +208,7 @@ class AwesomeDialog {
           alignment: aligment,
           keyboardAware: keyboardAware,
           width: width,
-          padding: padding ?? EdgeInsets.only(left: 5, right: 5),
+          padding: padding ?? const EdgeInsets.only(left: 5, right: 5),
           btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
           btnCancel: btnCancel ??
               (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
@@ -225,7 +225,7 @@ class AwesomeDialog {
           btnOkOnPress?.call();
         },
         text: btnOkText ?? 'Ok',
-        color: btnOkColor ?? Color(0xFF00CA71),
+        color: btnOkColor ?? const Color(0xFF00CA71),
         icon: btnOkIcon,
         borderRadius: buttonsBorderRadius,
         buttonTextStyle: buttonsTextStyle,
