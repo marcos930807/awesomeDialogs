@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:simple_animations/simple_animations.dart';
 
 class AnimatedButton extends StatefulWidget {
   final Function pressEvent;
@@ -21,51 +20,64 @@ class AnimatedButton extends StatefulWidget {
     this.borderRadius,
     this.buttonTextStyle,
   });
+
   @override
   _AnimatedButtonState createState() => _AnimatedButtonState();
 }
 
-class _AnimatedButtonState extends State<AnimatedButton> with AnimationMixin {
+class _AnimatedButtonState extends State<AnimatedButton>
+    with SingleTickerProviderStateMixin {
+  static const int _forwardDurationNumber = 150;
+  late AnimationController _animationController;
   late Animation<double> _scale;
 
   @override
   void initState() {
     super.initState();
-    final curveAnimation = CurvedAnimation(
-        parent: controller, curve: Curves.easeIn, reverseCurve: Curves.easeIn);
-    _scale = Tween<double>(begin: 1, end: 0.9).animate(curveAnimation);
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: _forwardDurationNumber),
+      reverseDuration: const Duration(milliseconds: 100),
+    )..addStatusListener(
+        _animationStatusListener,
+      );
+    _scale = Tween<double>(
+      begin: 1,
+      end: 0.9,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeIn,
+        reverseCurve: Curves.easeIn,
+      ),
+    );
   }
 
-  void _onTapDown(TapDownDetails details) {
-    controller.play(duration: Duration(milliseconds: 150));
+  void _animationStatusListener(AnimationStatus status) {
+    if (status == AnimationStatus.completed) _animationController.reverse();
   }
 
-  void _onTapUp(TapUpDetails details) {
-    if (controller.isAnimating) {
-      controller.addStatusListener((status) {
-        if (status == AnimationStatus.completed)
-          controller.playReverse(duration: Duration(milliseconds: 100));
-      });
-    } else
-      controller.playReverse(duration: Duration(milliseconds: 100));
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void _onTap() async {
+    _animationController.forward();
+    //Delayed added in purpose to keep same animation behavior as previous version when dialog was closed while animation was still playing
+    await Future.delayed(
+      const Duration(milliseconds: _forwardDurationNumber ~/ 2),
+    );
+    widget.pressEvent();
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        widget.pressEvent();
-        //  _controller.forward();
-      },
-      onTapDown: _onTapDown,
-      onTapUp: _onTapUp,
-      onTapCancel: () {
-        controller.playReverse(
-          duration: Duration(milliseconds: 100),
-        );
-      },
-      child: Transform.scale(
-        scale: _scale.value,
+      onTap: _onTap,
+      child: ScaleTransition(
+        scale: _scale,
         child: _animatedButtonUI,
       ),
     );
@@ -76,8 +88,10 @@ class _AnimatedButtonState extends State<AnimatedButton> with AnimationMixin {
         width: widget.width,
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-            borderRadius:
-                widget.borderRadius ?? BorderRadius.all(Radius.circular(100)),
+            borderRadius: widget.borderRadius ??
+                const BorderRadius.all(
+                  Radius.circular(100),
+                ),
             color: widget.color ?? Theme.of(context).primaryColor),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -90,8 +104,8 @@ class _AnimatedButtonState extends State<AnimatedButton> with AnimationMixin {
                       color: Colors.white,
                     ),
                   )
-                : SizedBox(),
-            SizedBox(
+                : const SizedBox.shrink(),
+            const SizedBox(
               width: 5,
             ),
             Flexible(
@@ -101,10 +115,11 @@ class _AnimatedButtonState extends State<AnimatedButton> with AnimationMixin {
                 // maxLines: 1,
                 textAlign: TextAlign.center,
                 style: widget.buttonTextStyle ??
-                    TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14),
+                    const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                    ),
               ),
             ),
           ],
