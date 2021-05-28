@@ -5,6 +5,7 @@ class AnimatedButton extends StatefulWidget {
   final String? text;
   final IconData? icon;
   final double width;
+  final double? height;
   final bool isFixedHeight;
   final Color? color;
   final BorderRadiusGeometry? borderRadius;
@@ -15,6 +16,7 @@ class AnimatedButton extends StatefulWidget {
     this.text,
     this.icon,
     this.color,
+    this.height,
     this.isFixedHeight = true,
     this.width = double.infinity,
     this.borderRadius,
@@ -25,8 +27,7 @@ class AnimatedButton extends StatefulWidget {
   _AnimatedButtonState createState() => _AnimatedButtonState();
 }
 
-class _AnimatedButtonState extends State<AnimatedButton>
-    with SingleTickerProviderStateMixin {
+class _AnimatedButtonState extends State<AnimatedButton> with SingleTickerProviderStateMixin {
   static const int _forwardDurationNumber = 150;
   late AnimationController _animationController;
   late Animation<double> _scale;
@@ -74,55 +75,57 @@ class _AnimatedButtonState extends State<AnimatedButton>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: _onTap,
-      child: ScaleTransition(
-        scale: _scale,
-        child: _animatedButtonUI,
-      ),
+    return ScaleTransition(
+      scale: _scale,
+      child: _animatedButtonUI,
     );
   }
 
-  Widget get _animatedButtonUI => Container(
-        height: widget.isFixedHeight ? 50.0 : null,
+  Widget get _animatedButtonUI => SizedBox(
         width: widget.width,
-        padding: const EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-            borderRadius: widget.borderRadius ??
-                const BorderRadius.all(
-                  Radius.circular(100),
+        height: widget.isFixedHeight ? 50 : widget.height,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              elevation: 0,
+              primary: widget.color,
+              shape: RoundedRectangleBorder(
+                borderRadius: widget.borderRadius ??
+                    const BorderRadius.all(
+                      Radius.circular(100),
+                    ),
+              )),
+          onPressed: _onTap,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              if (widget.icon != null) ...[
+                Padding(
+                  padding: const EdgeInsets.only(left: 4.0),
+                  child: Icon(
+                    widget.icon,
+                    color: Colors.white,
+                  ),
                 ),
-            color: widget.color ?? Theme.of(context).primaryColor),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            widget.icon != null
-                ? Padding(
-                    padding: const EdgeInsets.only(left: 4.0),
-                    child: Icon(
-                      widget.icon,
-                      color: Colors.white,
-                    ),
-                  )
-                : const SizedBox.shrink(),
-            const SizedBox(
-              width: 5,
-            ),
-            Flexible(
-              fit: FlexFit.loose,
-              child: Text(
-                '${widget.text}',
-                // maxLines: 1,
-                textAlign: TextAlign.center,
-                style: widget.buttonTextStyle ??
-                    const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                    ),
+                const SizedBox(
+                  width: 5,
+                ),
+              ],
+              Flexible(
+                fit: FlexFit.loose,
+                child: Text(
+                  '${widget.text}',
+                  // maxLines: 1,
+                  textAlign: TextAlign.center,
+                  style: widget.buttonTextStyle ??
+                      const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14,
+                      ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
 }

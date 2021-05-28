@@ -10,15 +10,7 @@ export 'src/animated_button.dart';
 export 'src/anims/flare_header.dart';
 export 'src/anims/anims.dart';
 
-enum DialogType {
-  INFO,
-  INFO_REVERSED,
-  WARNING,
-  ERROR,
-  SUCCES,
-  QUESTION,
-  NO_HEADER
-}
+enum DialogType { INFO, INFO_REVERSED, WARNING, ERROR, SUCCES, QUESTION, NO_HEADER }
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
 
 class AwesomeDialog {
@@ -210,8 +202,7 @@ class AwesomeDialog {
           width: width,
           padding: padding ?? const EdgeInsets.only(left: 5, right: 5),
           btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
-          btnCancel: btnCancel ??
-              (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
+          btnCancel: btnCancel ?? (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
           showCloseIcon: this.showCloseIcon,
           onClose: dissmiss,
           closeIcon: closeIcon,
@@ -245,8 +236,7 @@ class AwesomeDialog {
       );
 
   dissmiss() {
-    if (!isDissmisedBySystem)
-      Navigator.of(context, rootNavigator: useRootNavigator).pop();
+    if (!isDissmisedBySystem) Navigator.of(context, rootNavigator: useRootNavigator).pop();
   }
 
   Future<bool> _onWillPop() async => dismissOnBackKeyPress;

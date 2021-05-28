@@ -44,6 +44,7 @@ class _HomePageState extends State<HomePage> {
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
+                      dialogType: DialogType.INFO_REVERSED,
                       borderSide: BorderSide(color: Colors.green, width: 2),
                       width: 280,
                       buttonsBorderRadius: BorderRadius.all(Radius.circular(2)),
@@ -237,7 +238,7 @@ class _HomePageState extends State<HomePage> {
                       btnCancelText: "Cancel Order",
                       btnOkText: "Yes, I will pay",
                       title: 'Continue to pay?',
-                      padding: const EdgeInsets.all(16.0),
+                      // padding: const EdgeInsets.all(5.0),
                       desc:
                           'Please confirm that you will pay 3000 INR within 30 mins. Creating orders without paying will create penalty charges, and your account may be disabled.',
                       btnCancelOnPress: () {},
@@ -305,6 +306,7 @@ class _HomePageState extends State<HomePage> {
                               height: 10,
                             ),
                             AnimatedButton(
+                                isFixedHeight: false,
                                 text: 'Close',
                                 pressEvent: () {
                                   dialog.dissmiss();
