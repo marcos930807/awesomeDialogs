@@ -3,8 +3,7 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class FlareHeader extends StatelessWidget {
-  const FlareHeader({Key? key, required this.dialogType, required this.loop})
-      : super(key: key);
+  const FlareHeader({Key? key, required this.dialogType, required this.loop}) : super(key: key);
   final DialogType dialogType;
   final bool loop;
 
@@ -47,12 +46,10 @@ class FlareHeader extends StatelessWidget {
         );
       case DialogType.ERROR:
         return FlareActor(
-          loop
-              ? "packages/awesome_dialog/assets/flare/error.flr"
-              : "packages/awesome_dialog/assets/flare/error_without_loop.flr",
+          "packages/awesome_dialog/assets/flare/error.flr",
           alignment: Alignment.center,
           fit: BoxFit.fill,
-          animation: 'Error',
+          animation: loop ? 'Error' : 'Error_no_loop',
         );
       case DialogType.SUCCES:
         return FlareActor(

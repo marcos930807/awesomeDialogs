@@ -112,6 +112,9 @@ class _HomePageState extends State<HomePage> {
                         desc:
                             'Dialog description here..................................................',
                         btnCancelOnPress: () {},
+                        onDissmissCallback: (type) {
+                          debugPrint('Dialog Dissmiss from callback $type');
+                        },
                         btnOkOnPress: () {})
                       ..show();
                   },
@@ -127,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                         context: context,
                         dialogType: DialogType.ERROR,
                         animType: AnimType.RIGHSLIDE,
-                        headerAnimationLoop: false,
+                        headerAnimationLoop: true,
                         title: 'Error',
                         desc:
                             'Dialog description here..................................................',
@@ -149,6 +152,7 @@ class _HomePageState extends State<HomePage> {
                         animType: AnimType.LEFTSLIDE,
                         headerAnimationLoop: false,
                         dialogType: DialogType.SUCCES,
+                        showCloseIcon: true,
                         title: 'Succes',
                         desc:
                             'Dialog description here..................................................',
@@ -156,8 +160,8 @@ class _HomePageState extends State<HomePage> {
                           debugPrint('OnClcik');
                         },
                         btnOkIcon: Icons.check_circle,
-                        onDissmissCallback: () {
-                          debugPrint('Dialog Dissmiss from callback');
+                        onDissmissCallback: (type) {
+                          debugPrint('Dialog Dissmiss from callback $type');
                         })
                       ..show();
                   },
@@ -309,7 +313,7 @@ class _HomePageState extends State<HomePage> {
                                 isFixedHeight: false,
                                 text: 'Close',
                                 pressEvent: () {
-                                  dialog.dissmiss();
+                                  dialog.dismiss();
                                 })
                           ],
                         ),

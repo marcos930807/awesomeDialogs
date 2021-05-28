@@ -12,6 +12,7 @@ export 'src/anims/anims.dart';
 
 enum DialogType { INFO, INFO_REVERSED, WARNING, ERROR, SUCCES, QUESTION, NO_HEADER }
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
+enum DismissType { BTN_OK, BTN_CANCEL, TOP_ICON, OTHER }
 
 class AwesomeDialog {
   /// [@required]
@@ -54,7 +55,7 @@ class AwesomeDialog {
   final bool dismissOnTouchOutside;
 
   /// Callback to execute after dialog get dissmised
-  final Function? onDissmissCallback;
+  final Function(DismissType type)? onDissmissCallback;
 
   /// Anim Type can be { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
   final AnimType animType;
@@ -143,12 +144,14 @@ class AwesomeDialog {
 
   bool isDissmisedBySystem = false;
 
+  DismissType _dismissType = DismissType.OTHER;
+
   Future show() => showDialog(
           context: this.context,
           barrierDismissible: dismissOnTouchOutside,
           builder: (BuildContext context) {
             if (autoHide != null) {
-              Future.delayed(autoHide!).then((value) => dissmiss());
+              Future.delayed(autoHide!).then((value) => dismiss());
             }
             switch (animType) {
               case AnimType.SCALE:
@@ -175,7 +178,7 @@ class AwesomeDialog {
             }
           }).then((_) {
         isDissmisedBySystem = true;
-        if (onDissmissCallback != null) onDissmissCallback!();
+        if (onDissmissCallback != null) onDissmissCallback?.call(_dismissType);
       });
 
   Widget? get _buildHeader {
@@ -204,7 +207,10 @@ class AwesomeDialog {
           btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
           btnCancel: btnCancel ?? (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
           showCloseIcon: this.showCloseIcon,
-          onClose: dissmiss,
+          onClose: () {
+            _dismissType = DismissType.TOP_ICON;
+            dismiss.call();
+          },
           closeIcon: closeIcon,
         ),
       );
@@ -212,7 +218,8 @@ class AwesomeDialog {
   Widget get _buildFancyButtonOk => AnimatedButton(
         isFixedHeight: false,
         pressEvent: () {
-          dissmiss();
+          _dismissType = DismissType.BTN_OK;
+          dismiss();
           btnOkOnPress?.call();
         },
         text: btnOkText ?? 'Ok',
@@ -225,7 +232,8 @@ class AwesomeDialog {
   Widget get _buildFancyButtonCancel => AnimatedButton(
         isFixedHeight: false,
         pressEvent: () {
-          dissmiss();
+          _dismissType = DismissType.BTN_CANCEL;
+          dismiss();
           btnCancelOnPress?.call();
         },
         text: btnCancelText ?? 'Cancel',
@@ -235,7 +243,7 @@ class AwesomeDialog {
         buttonTextStyle: buttonsTextStyle,
       );
 
-  dissmiss() {
+  dismiss() {
     if (!isDissmisedBySystem) Navigator.of(context, rootNavigator: useRootNavigator).pop();
   }
 

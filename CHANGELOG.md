@@ -1,3 +1,7 @@
+## [2.1.0] - 27/5/2021.
+* Migrated AnimatedButton to underline use ElevetedButton from flutter core.
+* Improve padding in Error Animation.
+* onDismiss Callback now indicates by which method the dialog was dismissed using an Enum. 
 ## [2.0.0] - 27/4/2021.
 * Null safety stable release.
 ## [2.0.0-nullsafety.1] - 31/3/2021.
