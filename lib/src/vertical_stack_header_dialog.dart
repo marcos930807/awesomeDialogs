@@ -17,6 +17,7 @@ class VerticalStackDialog extends StatelessWidget {
   final Widget? closeIcon;
   final Color? dialogBackgroundColor;
   final BorderSide? borderSide;
+  final BorderRadiusGeometry? borderRadius;
 
   const VerticalStackDialog({
     Key? key,
@@ -36,6 +37,7 @@ class VerticalStackDialog extends StatelessWidget {
     this.closeIcon,
     this.dialogBackgroundColor,
     this.borderSide,
+    this.borderRadius,
   }) : super(key: key);
 
   @override
@@ -57,9 +59,10 @@ class VerticalStackDialog extends StatelessWidget {
                     top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
             child: Material(
               shape: RoundedRectangleBorder(
-                borderRadius: const BorderRadius.all(
-                  const Radius.circular(10),
-                ),
+                borderRadius: borderRadius ??
+                    const BorderRadius.all(
+                      const Radius.circular(10),
+                    ),
                 side: borderSide ?? BorderSide.none,
               ),
               elevation: 0.5,
