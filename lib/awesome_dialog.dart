@@ -60,6 +60,9 @@ class AwesomeDialog {
   /// Anim Type can be { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
   final AnimType animType;
 
+  ///Border Radius for the Dialog
+  final BorderRadiusGeometry? dialogBorderRadius;
+
   /// Alignment of the Dialog
   final AlignmentGeometry aligment;
 
@@ -134,6 +137,7 @@ class AwesomeDialog {
     this.keyboardAware = true,
     this.dismissOnBackKeyPress = true,
     this.width,
+    this.dialogBorderRadius,
     this.buttonsBorderRadius,
     this.showCloseIcon = false,
     this.closeIcon,
@@ -196,6 +200,7 @@ class AwesomeDialog {
         child: VerticalStackDialog(
           dialogBackgroundColor: dialogBackgroundColor,
           borderSide: borderSide,
+          borderRadius: dialogBorderRadius,
           header: _buildHeader,
           title: this.title,
           desc: this.desc,
