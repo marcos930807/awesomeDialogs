@@ -1,3 +1,5 @@
+## [2.1.1] - 17/8/2021.
+* Fix useRootNavigator for nested routes.
 ## [2.1.0] - 27/5/2021.
 * Migrated AnimatedButton to underline use ElevetedButton from flutter core.
 * Improve padding in Error Animation.
