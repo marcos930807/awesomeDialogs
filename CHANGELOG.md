@@ -1,3 +1,5 @@
+## [2.1.2] - 11/12/2021.
+* Dependencies updated!!
 ## [2.1.1] - 17/8/2021.
 * Fix useRootNavigator for nested routes.
 ## [2.1.0] - 27/5/2021.
