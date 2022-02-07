@@ -1,6 +1,5 @@
 import 'package:fancy_dialog_example/main.dart';
 import 'package:fancy_dialog_example/test_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
@@ -12,9 +11,9 @@ class RouteGenerator {
 
     switch (settings.name) {
       case testPage:
-        return MaterialPageRoute(builder: (_) => TestPage());
+        return MaterialPageRoute(builder: (_) => const TestPage());
       case splashPage:
-        return MaterialPageRoute(builder: (_) => HomePage());
+        return MaterialPageRoute(builder: (_) => const HomePage());
 
       default:
         // If there is no such named route in the switch statement, e.g. /third
@@ -23,15 +22,17 @@ class RouteGenerator {
   }
 
   static Route<dynamic> _errorRoute() {
-    return MaterialPageRoute(builder: (_) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Error'),
-        ),
-        body: Center(
-          child: Text('ERROR'),
-        ),
-      );
-    });
+    return MaterialPageRoute(
+      builder: (_) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Error'),
+          ),
+          body: const Center(
+            child: Text('ERROR'),
+          ),
+        );
+      },
+    );
   }
 }
