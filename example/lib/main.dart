@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 
 import 'routes.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,12 +32,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Awesome Dialog Example'),
-        ),
-        body: Center(
-            child: Container(
-          padding: EdgeInsets.all(16),
+      appBar: AppBar(
+        title: const Text('Awesome Dialog Example'),
+      ),
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.all(16),
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -45,9 +47,14 @@ class _HomePageState extends State<HomePage> {
                     AwesomeDialog(
                       context: context,
                       dialogType: DialogType.INFO_REVERSED,
-                      borderSide: BorderSide(color: Colors.green, width: 2),
+                      borderSide: const BorderSide(
+                        color: Colors.green,
+                        width: 2,
+                      ),
                       width: 280,
-                      buttonsBorderRadius: BorderRadius.all(Radius.circular(2)),
+                      buttonsBorderRadius: const BorderRadius.all(
+                        Radius.circular(2),
+                      ),
                       headerAnimationLoop: false,
                       animType: AnimType.BOTTOMSLIDE,
                       title: 'INFO',
@@ -55,10 +62,10 @@ class _HomePageState extends State<HomePage> {
                       showCloseIcon: true,
                       btnCancelOnPress: () {},
                       btnOkOnPress: () {},
-                    )..show();
+                    ).show();
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 AnimatedButton(
@@ -71,14 +78,14 @@ class _HomePageState extends State<HomePage> {
                       animType: AnimType.BOTTOMSLIDE,
                       title: 'Question',
                       desc: 'Dialog description here...',
-                      buttonsTextStyle: TextStyle(color: Colors.black),
+                      buttonsTextStyle: const TextStyle(color: Colors.black),
                       showCloseIcon: true,
                       btnCancelOnPress: () {},
                       btnOkOnPress: () {},
-                    )..show();
+                    ).show();
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 AnimatedButton(
@@ -91,10 +98,10 @@ class _HomePageState extends State<HomePage> {
                       title: 'INFO',
                       desc:
                           'Lorem ipsum dolor sit amet consectetur adipiscing elit eget ornare tempus, vestibulum sagittis rhoncus felis hendrerit lectus ultricies duis vel, id morbi cum ultrices tellus metus dis ut donec. Ut sagittis viverra venenatis eget euismod faucibus odio ligula phasellus,',
-                    )..show();
+                    ).show();
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 AnimatedButton(
@@ -102,24 +109,24 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.orange,
                   pressEvent: () {
                     AwesomeDialog(
-                        context: context,
-                        dialogType: DialogType.WARNING,
-                        headerAnimationLoop: false,
-                        animType: AnimType.TOPSLIDE,
-                        showCloseIcon: true,
-                        closeIcon: Icon(Icons.close_fullscreen_outlined),
-                        title: 'Warning',
-                        desc:
-                            'Dialog description here..................................................',
-                        btnCancelOnPress: () {},
-                        onDissmissCallback: (type) {
-                          debugPrint('Dialog Dissmiss from callback $type');
-                        },
-                        btnOkOnPress: () {})
-                      ..show();
+                      context: context,
+                      dialogType: DialogType.WARNING,
+                      headerAnimationLoop: false,
+                      animType: AnimType.TOPSLIDE,
+                      showCloseIcon: true,
+                      closeIcon: const Icon(Icons.close_fullscreen_outlined),
+                      title: 'Warning',
+                      desc:
+                          'Dialog description here..................................................',
+                      btnCancelOnPress: () {},
+                      onDissmissCallback: (type) {
+                        debugPrint('Dialog Dissmiss from callback $type');
+                      },
+                      btnOkOnPress: () {},
+                    ).show();
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 AnimatedButton(
@@ -127,20 +134,20 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.red,
                   pressEvent: () {
                     AwesomeDialog(
-                        context: context,
-                        dialogType: DialogType.ERROR,
-                        animType: AnimType.RIGHSLIDE,
-                        headerAnimationLoop: true,
-                        title: 'Error',
-                        desc:
-                            'Dialog description here..................................................',
-                        btnOkOnPress: () {},
-                        btnOkIcon: Icons.cancel,
-                        btnOkColor: Colors.red)
-                      ..show();
+                      context: context,
+                      dialogType: DialogType.ERROR,
+                      animType: AnimType.RIGHSLIDE,
+                      headerAnimationLoop: true,
+                      title: 'Error',
+                      desc:
+                          'Dialog description here..................................................',
+                      btnOkOnPress: () {},
+                      btnOkIcon: Icons.cancel,
+                      btnOkColor: Colors.red,
+                    ).show();
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 AnimatedButton(
@@ -148,25 +155,25 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.green,
                   pressEvent: () {
                     AwesomeDialog(
-                        context: context,
-                        animType: AnimType.LEFTSLIDE,
-                        headerAnimationLoop: false,
-                        dialogType: DialogType.SUCCES,
-                        showCloseIcon: true,
-                        title: 'Succes',
-                        desc:
-                            'Dialog description here..................................................',
-                        btnOkOnPress: () {
-                          debugPrint('OnClcik');
-                        },
-                        btnOkIcon: Icons.check_circle,
-                        onDissmissCallback: (type) {
-                          debugPrint('Dialog Dissmiss from callback $type');
-                        })
-                      ..show();
+                      context: context,
+                      animType: AnimType.LEFTSLIDE,
+                      headerAnimationLoop: false,
+                      dialogType: DialogType.SUCCES,
+                      showCloseIcon: true,
+                      title: 'Succes',
+                      desc:
+                          'Dialog description here..................................................',
+                      btnOkOnPress: () {
+                        debugPrint('OnClcik');
+                      },
+                      btnOkIcon: Icons.check_circle,
+                      onDissmissCallback: (type) {
+                        debugPrint('Dialog Dissmiss from callback $type');
+                      },
+                    ).show();
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 AnimatedButton(
@@ -184,10 +191,10 @@ class _HomePageState extends State<HomePage> {
                         debugPrint('OnClcik');
                       },
                       btnOkIcon: Icons.check_circle,
-                    )..show();
+                    ).show();
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 AnimatedButton(
@@ -198,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                       context: context,
                       animType: AnimType.SCALE,
                       dialogType: DialogType.INFO,
-                      body: Center(
+                      body: const Center(
                         child: Text(
                           'If the body is specified, then title and description will be ignored, this allows to further customize the dialogue.',
                           style: TextStyle(fontStyle: FontStyle.italic),
@@ -206,10 +213,10 @@ class _HomePageState extends State<HomePage> {
                       ),
                       title: 'This is Ignored',
                       desc: 'This is also Ignored',
-                    )..show();
+                    ).show();
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 AnimatedButton(
@@ -222,11 +229,11 @@ class _HomePageState extends State<HomePage> {
                       animType: AnimType.SCALE,
                       title: 'Auto Hide Dialog',
                       desc: 'AutoHide after 2 seconds',
-                      autoHide: Duration(seconds: 2),
-                    )..show();
+                      autoHide: const Duration(seconds: 2),
+                    ).show();
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 AnimatedButton(
@@ -250,7 +257,7 @@ class _HomePageState extends State<HomePage> {
                     ).show();
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 AnimatedButton(
@@ -271,7 +278,7 @@ class _HomePageState extends State<HomePage> {
                               'Form Data',
                               style: Theme.of(context).textTheme.headline6,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Material(
@@ -280,14 +287,14 @@ class _HomePageState extends State<HomePage> {
                               child: TextFormField(
                                 autofocus: true,
                                 minLines: 1,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   labelText: 'Title',
                                   prefixIcon: Icon(Icons.text_fields),
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Material(
@@ -296,25 +303,25 @@ class _HomePageState extends State<HomePage> {
                               child: TextFormField(
                                 autofocus: true,
                                 keyboardType: TextInputType.multiline,
-                                maxLengthEnforced: true,
                                 minLines: 2,
                                 maxLines: null,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   labelText: 'Description',
                                   prefixIcon: Icon(Icons.text_fields),
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             AnimatedButton(
-                                isFixedHeight: false,
-                                text: 'Close',
-                                pressEvent: () {
-                                  dialog.dismiss();
-                                })
+                              isFixedHeight: false,
+                              text: 'Close',
+                              pressEvent: () {
+                                dialog.dismiss();
+                              },
+                            )
                           ],
                         ),
                       ),
@@ -324,6 +331,8 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-        )));
+        ),
+      ),
+    );
   }
 }

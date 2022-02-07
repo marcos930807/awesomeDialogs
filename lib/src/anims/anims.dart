@@ -15,7 +15,7 @@ Offset getOffset(MultiTweenValues<AniProps> animation, SlideFrom from) {
     case SlideFrom.RIGHT:
       return Offset(animation.get(AniProps.translateX), 0);
     default:
-      return Offset(0, 0);
+      return const Offset(0, 0);
   }
 }
 
@@ -30,21 +30,23 @@ class FadeIn extends StatelessWidget {
   final bool fade;
   final Curve curve;
 
-  FadeIn(
-      {this.delay = 0,
-      this.child,
-      this.fade = true,
-      this.control = CustomAnimationControl.play,
-      this.from = SlideFrom.RIGHT,
-      this.curve = Curves.ease});
+  const FadeIn({
+    Key? key,
+    this.delay = 0,
+    this.child,
+    this.fade = true,
+    this.control = CustomAnimationControl.play,
+    this.from = SlideFrom.RIGHT,
+    this.curve = Curves.ease,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final newTween = MultiTween<AniProps>()
       ..add(AniProps.opacity, Tween(begin: 0.0, end: 1.0),
-          Duration(milliseconds: 500))
+          const Duration(milliseconds: 500))
       ..add(AniProps.translateX, Tween(begin: 60.0, end: 0.0),
-          Duration(milliseconds: 500), curve);
+          const Duration(milliseconds: 500), curve);
 
     return CustomAnimation<MultiTweenValues<AniProps>>(
       delay: Duration(milliseconds: (200 * delay).round()),
@@ -72,14 +74,16 @@ class Slide extends StatelessWidget {
   final double slideDistance;
   final Curve curve;
 
-  Slide(
-      {this.delay = 0,
-      this.child,
-      this.duration = 1,
-      this.slideDistance = 60.0,
-      this.control = CustomAnimationControl.play,
-      this.from = SlideFrom.RIGHT,
-      this.curve = Curves.ease});
+  const Slide({
+    Key? key,
+    this.delay = 0,
+    this.child,
+    this.duration = 1,
+    this.slideDistance = 60.0,
+    this.control = CustomAnimationControl.play,
+    this.from = SlideFrom.RIGHT,
+    this.curve = Curves.ease,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +119,8 @@ class ScaleFade extends StatelessWidget {
   final double scale;
   final Curve curve;
 
-  ScaleFade({
+  const ScaleFade({
+    Key? key,
     this.delay = 1,
     this.duration = 1,
     this.child,
@@ -123,7 +128,7 @@ class ScaleFade extends StatelessWidget {
     this.scale = 0.7,
     this.control = CustomAnimationControl.play,
     this.curve = Curves.easeIn,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -160,12 +165,13 @@ class ShowHide extends StatelessWidget {
   final double duration;
   final bool isShow;
 
-  ShowHide({
+  const ShowHide({
+    Key? key,
     this.delay = 1,
     this.duration = 1,
     this.child,
     this.isShow = true,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
