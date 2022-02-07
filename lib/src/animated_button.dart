@@ -12,6 +12,7 @@ class AnimatedButton extends StatefulWidget {
   final TextStyle? buttonTextStyle;
 
   const AnimatedButton({
+    Key? key,
     required this.pressEvent,
     this.text,
     this.icon,
@@ -21,7 +22,7 @@ class AnimatedButton extends StatefulWidget {
     this.width = double.infinity,
     this.borderRadius,
     this.buttonTextStyle,
-  });
+  }) : super(key: key);
 
   @override
   _AnimatedButtonState createState() => _AnimatedButtonState();

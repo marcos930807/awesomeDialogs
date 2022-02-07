@@ -159,7 +159,7 @@ class AwesomeDialog {
   DismissType _dismissType = DismissType.OTHER;
 
   Future show() => showDialog(
-          context: this.context,
+          context: context,
           useRootNavigator: useRootNavigator,
           barrierDismissible: dismissOnTouchOutside,
           builder: (BuildContext context) {
@@ -199,7 +199,7 @@ class AwesomeDialog {
     if (dialogType == DialogType.NO_HEADER) return null;
     return FlareHeader(
       loop: headerAnimationLoop,
-      dialogType: this.dialogType,
+      dialogType: dialogType,
     );
   }
 
@@ -210,9 +210,9 @@ class AwesomeDialog {
           borderSide: borderSide,
           borderRadius: dialogBorderRadius,
           header: _buildHeader,
-          title: this.title,
-          desc: this.desc,
-          body: this.body,
+          title: title,
+          desc: desc,
+          body: body,
           isDense: isDense,
           alignment: aligment,
           keyboardAware: keyboardAware,
@@ -221,7 +221,7 @@ class AwesomeDialog {
           btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
           btnCancel: btnCancel ??
               (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
-          showCloseIcon: this.showCloseIcon,
+          showCloseIcon: showCloseIcon,
           onClose: () {
             _dismissType = DismissType.TOP_ICON;
             dismiss.call();
@@ -259,8 +259,9 @@ class AwesomeDialog {
       );
 
   dismiss() {
-    if (!isDissmisedBySystem)
+    if (!isDissmisedBySystem) {
       Navigator.of(context, rootNavigator: useRootNavigator).pop();
+    }
   }
 
   Future<bool> _onWillPop() async => dismissOnBackKeyPress;
