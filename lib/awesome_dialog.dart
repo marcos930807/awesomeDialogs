@@ -116,6 +116,9 @@ class AwesomeDialog {
   /// Set BorderSide of DialogShape
   final BorderSide? borderSide;
 
+  /// Useful when you want to pass data from [Navigator.pop]
+  final bool autoDismiss;
+
   AwesomeDialog({
     required this.context,
     this.dialogType = DialogType.INFO,
@@ -152,46 +155,45 @@ class AwesomeDialog {
     this.dialogBackgroundColor,
     this.borderSide,
     this.buttonsTextStyle,
-  });
-
-  bool isDissmisedBySystem = false;
+    this.autoDismiss = true,
+  }) : assert(
+          autoDismiss || onDissmissCallback != null,
+          "If autoDismiss is false, you must provide an onDissmissCallback to pop the dialog",
+        );
 
   DismissType _dismissType = DismissType.OTHER;
 
   Future show() => showDialog(
-          context: context,
-          useRootNavigator: useRootNavigator,
-          barrierDismissible: dismissOnTouchOutside,
-          builder: (BuildContext context) {
-            if (autoHide != null) {
-              Future.delayed(autoHide!).then((value) => dismiss());
-            }
-            switch (animType) {
-              case AnimType.SCALE:
-                return ScaleFade(
-                    scale: 0.1,
-                    fade: true,
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    child: _buildDialog);
+      context: context,
+      useRootNavigator: useRootNavigator,
+      barrierDismissible: dismissOnTouchOutside,
+      builder: (BuildContext context) {
+        if (autoHide != null) {
+          Future.delayed(autoHide!).then((value) => dismiss());
+        }
+        switch (animType) {
+          case AnimType.SCALE:
+            return ScaleFade(
+                scale: 0.1,
+                fade: true,
+                curve: Curves.fastLinearToSlowEaseIn,
+                child: _buildDialog);
 
-              case AnimType.LEFTSLIDE:
-                return FadeIn(from: SlideFrom.LEFT, child: _buildDialog);
+          case AnimType.LEFTSLIDE:
+            return FadeIn(from: SlideFrom.LEFT, child: _buildDialog);
 
-              case AnimType.RIGHSLIDE:
-                return FadeIn(from: SlideFrom.RIGHT, child: _buildDialog);
+          case AnimType.RIGHSLIDE:
+            return FadeIn(from: SlideFrom.RIGHT, child: _buildDialog);
 
-              case AnimType.BOTTOMSLIDE:
-                return FadeIn(from: SlideFrom.BOTTOM, child: _buildDialog);
+          case AnimType.BOTTOMSLIDE:
+            return FadeIn(from: SlideFrom.BOTTOM, child: _buildDialog);
 
-              case AnimType.TOPSLIDE:
-                return FadeIn(from: SlideFrom.TOP, child: _buildDialog);
+          case AnimType.TOPSLIDE:
+            return FadeIn(from: SlideFrom.TOP, child: _buildDialog);
 
-              default:
-                return _buildDialog;
-            }
-          }).then((_) {
-        isDissmisedBySystem = true;
-        if (onDissmissCallback != null) onDissmissCallback?.call(_dismissType);
+          default:
+            return _buildDialog;
+        }
       });
 
   Widget? get _buildHeader {
@@ -259,8 +261,11 @@ class AwesomeDialog {
       );
 
   dismiss() {
-    if (!isDissmisedBySystem) {
+    if (autoDismiss) {
       Navigator.of(context, rootNavigator: useRootNavigator).pop();
+    }
+    if (onDissmissCallback != null) {
+      onDissmissCallback?.call(_dismissType);
     }
   }
 
