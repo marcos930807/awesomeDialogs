@@ -1,3 +1,5 @@
+## [2.1.3] - 27/03/2022.
+* New feature to pass data back from dialog.
 ## [2.1.2] - 11/12/2021.
 * Dependencies updated!!
 ## [2.1.1] - 17/8/2021.
