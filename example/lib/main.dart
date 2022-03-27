@@ -328,6 +328,37 @@ class _HomePageState extends State<HomePage> {
                     )..show();
                   },
                 ),
+                const SizedBox(
+                  height: 16,
+                ),
+                AnimatedButton(
+                  text: 'Passing Data Back from Dialog',
+                  pressEvent: () async {
+                    final dismissMode = await AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.NO_HEADER,
+                      buttonsBorderRadius: const BorderRadius.all(
+                        Radius.circular(2),
+                      ),
+                      animType: AnimType.RIGHSLIDE,
+                      title: 'Passing Data Back',
+                      desc: 'Dialog description here...',
+                      showCloseIcon: true,
+                      btnCancelOnPress: () {},
+                      btnOkOnPress: () {},
+                      autoDismiss: false,
+                      onDissmissCallback: (type) {
+                        Navigator.of(context).pop(type);
+                      },
+                    ).show();
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Dismissed by $dismissMode'),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),
