@@ -122,7 +122,7 @@ class VerticalStackDialog extends StatelessWidget {
                                 )
                             ],
                           ),
-                        )
+                        ),
                     ],
                   ),
                 ),

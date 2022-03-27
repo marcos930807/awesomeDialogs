@@ -164,37 +164,39 @@ class AwesomeDialog {
   DismissType _dismissType = DismissType.OTHER;
 
   Future show() => showDialog(
-      context: context,
-      useRootNavigator: useRootNavigator,
-      barrierDismissible: dismissOnTouchOutside,
-      builder: (BuildContext context) {
-        if (autoHide != null) {
-          Future.delayed(autoHide!).then((value) => dismiss());
-        }
-        switch (animType) {
-          case AnimType.SCALE:
-            return ScaleFade(
+        context: context,
+        useRootNavigator: useRootNavigator,
+        barrierDismissible: dismissOnTouchOutside,
+        builder: (BuildContext context) {
+          if (autoHide != null) {
+            Future.delayed(autoHide!).then((value) => dismiss());
+          }
+          switch (animType) {
+            case AnimType.SCALE:
+              return ScaleFade(
                 scale: 0.1,
                 fade: true,
                 curve: Curves.fastLinearToSlowEaseIn,
-                child: _buildDialog);
+                child: _buildDialog,
+              );
 
-          case AnimType.LEFTSLIDE:
-            return FadeIn(from: SlideFrom.LEFT, child: _buildDialog);
+            case AnimType.LEFTSLIDE:
+              return FadeIn(from: SlideFrom.LEFT, child: _buildDialog);
 
-          case AnimType.RIGHSLIDE:
-            return FadeIn(from: SlideFrom.RIGHT, child: _buildDialog);
+            case AnimType.RIGHSLIDE:
+              return FadeIn(from: SlideFrom.RIGHT, child: _buildDialog);
 
-          case AnimType.BOTTOMSLIDE:
-            return FadeIn(from: SlideFrom.BOTTOM, child: _buildDialog);
+            case AnimType.BOTTOMSLIDE:
+              return FadeIn(from: SlideFrom.BOTTOM, child: _buildDialog);
 
-          case AnimType.TOPSLIDE:
-            return FadeIn(from: SlideFrom.TOP, child: _buildDialog);
+            case AnimType.TOPSLIDE:
+              return FadeIn(from: SlideFrom.TOP, child: _buildDialog);
 
-          default:
-            return _buildDialog;
-        }
-      });
+            default:
+              return _buildDialog;
+          }
+        },
+      );
 
   Widget? get _buildHeader {
     if (customHeader != null) return customHeader;
