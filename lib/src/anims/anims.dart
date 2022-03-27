@@ -43,10 +43,17 @@ class FadeIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final newTween = MultiTween<AniProps>()
-      ..add(AniProps.opacity, Tween(begin: 0.0, end: 1.0),
-          const Duration(milliseconds: 500))
-      ..add(AniProps.translateX, Tween(begin: 60.0, end: 0.0),
-          const Duration(milliseconds: 500), curve);
+      ..add(
+        AniProps.opacity,
+        Tween(begin: 0.0, end: 1.0),
+        const Duration(milliseconds: 500),
+      )
+      ..add(
+        AniProps.translateX,
+        Tween(begin: 60.0, end: 0.0),
+        const Duration(milliseconds: 500),
+        curve,
+      );
 
     return CustomAnimation<MultiTweenValues<AniProps>>(
       delay: Duration(milliseconds: (200 * delay).round()),
@@ -89,12 +96,13 @@ class Slide extends StatelessWidget {
   Widget build(BuildContext context) {
     final tween = MultiTween<AniProps>()
       ..add(
-          AniProps.translateX,
-          Tween(begin: slideDistance, end: 0.0),
-          Duration(
-            milliseconds: (500 * duration).round(),
-          ),
-          curve);
+        AniProps.translateX,
+        Tween(begin: slideDistance, end: 0.0),
+        Duration(
+          milliseconds: (500 * duration).round(),
+        ),
+        curve,
+      );
     return CustomAnimation<MultiTweenValues<AniProps>>(
       delay: Duration(milliseconds: (200 * delay).round()),
       control: control,
@@ -138,24 +146,29 @@ class ScaleFade extends StatelessWidget {
         fade ? Tween(begin: 0.0, end: 1.0) : Tween(begin: 1.0, end: 1.0),
         Duration(milliseconds: (500 * duration).round()),
       )
-      ..add(AniProps.scale, Tween(begin: scale, end: 1.0),
-          Duration(milliseconds: (500 * duration).round()), curve);
+      ..add(
+        AniProps.scale,
+        Tween(begin: scale, end: 1.0),
+        Duration(milliseconds: (500 * duration).round()),
+        curve,
+      );
 
     return CustomAnimation<MultiTweenValues<AniProps>>(
-        delay: Duration(milliseconds: (200 * delay).round()),
-        control: control,
-        duration: tween.duration,
-        tween: tween,
-        child: child,
-        builder: (context, child, animation) => Opacity(
-              opacity: animation.get(AniProps.opacity),
-              child: Transform.scale(
-                scale: animation.get(AniProps.scale),
-                alignment: Alignment.center,
-                child: child,
-                //offset: Offset(animation["translateX"], 0), child: child),
-              ),
-            ));
+      delay: Duration(milliseconds: (200 * delay).round()),
+      control: control,
+      duration: tween.duration,
+      tween: tween,
+      child: child,
+      builder: (context, child, animation) => Opacity(
+        opacity: animation.get(AniProps.opacity),
+        child: Transform.scale(
+          scale: animation.get(AniProps.scale),
+          alignment: Alignment.center,
+          child: child,
+          //offset: Offset(animation["translateX"], 0), child: child),
+        ),
+      ),
+    );
   }
 }
 
@@ -176,8 +189,12 @@ class ShowHide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tween = MultiTween<AniProps>()
-      ..add(AniProps.scale, Tween(begin: 0.0, end: 1.0),
-          Duration(milliseconds: (500 * duration).round()), Curves.linear);
+      ..add(
+        AniProps.scale,
+        Tween(begin: 0.0, end: 1.0),
+        Duration(milliseconds: (500 * duration).round()),
+        Curves.linear,
+      );
 
     return CustomAnimation<MultiTweenValues<AniProps>>(
       delay: Duration(milliseconds: (200 * delay).round()),

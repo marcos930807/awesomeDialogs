@@ -88,14 +88,15 @@ class _AnimatedButtonState extends State<AnimatedButton>
         height: widget.isFixedHeight ? 50 : widget.height,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-              elevation: 0,
-              primary: widget.color,
-              shape: RoundedRectangleBorder(
-                borderRadius: widget.borderRadius ??
-                    const BorderRadius.all(
-                      Radius.circular(100),
-                    ),
-              )),
+            elevation: 0,
+            primary: widget.color,
+            shape: RoundedRectangleBorder(
+              borderRadius: widget.borderRadius ??
+                  const BorderRadius.all(
+                    Radius.circular(100),
+                  ),
+            ),
+          ),
           onPressed: _onTap,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
