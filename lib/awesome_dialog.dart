@@ -10,7 +10,15 @@ export 'src/animated_button.dart';
 export 'src/anims/flare_header.dart';
 export 'src/anims/anims.dart';
 
-enum DialogType { INFO, INFO_REVERSED, WARNING, ERROR, SUCCES, QUESTION, NO_HEADER }
+enum DialogType {
+  INFO,
+  INFO_REVERSED,
+  WARNING,
+  ERROR,
+  SUCCES,
+  QUESTION,
+  NO_HEADER
+}
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
 enum DismissType { BTN_OK, BTN_CANCEL, TOP_ICON, OTHER }
 
@@ -215,7 +223,8 @@ class AwesomeDialog {
           width: width,
           padding: padding ?? const EdgeInsets.only(left: 5, right: 5),
           btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
-          btnCancel: btnCancel ?? (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
+          btnCancel: btnCancel ??
+              (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
           showCloseIcon: showCloseIcon,
           onClose: () {
             _dismissType = DismissType.TOP_ICON;
