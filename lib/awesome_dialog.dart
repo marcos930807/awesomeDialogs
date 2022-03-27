@@ -269,5 +269,11 @@ class AwesomeDialog {
     }
   }
 
-  Future<bool> _onWillPop() async => dismissOnBackKeyPress;
+  Future<bool> _onWillPop() async {
+    if (dismissOnBackKeyPress) {
+      _dismissType = DismissType.OTHER;
+      dismiss();
+    }
+    return dismissOnBackKeyPress;
+  }
 }
