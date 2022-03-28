@@ -350,6 +350,7 @@ class _HomePageState extends State<HomePage> {
                       onDissmissCallback: (type) {
                         Navigator.of(context).pop(type);
                       },
+                      barrierColor: Colors.purple[900]?.withOpacity(0.54),
                     ).show();
 
                     ScaffoldMessenger.of(context).showSnackBar(
