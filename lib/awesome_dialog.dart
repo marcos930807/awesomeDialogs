@@ -125,6 +125,11 @@ class AwesomeDialog {
   /// Defaults to `true`
   final bool autoDismiss;
 
+  /// [Color] of the barrier around the dialog
+  ///
+  /// Defaults to `Colors.black54`
+  final Color? barrierColor;
+
   /// Creates a Dialog that is shown using the [showDialog] function
   ///
   /// Returns null if [autoDismiss] is true, else returns data passed to custom [Navigator.pop] function
@@ -165,6 +170,7 @@ class AwesomeDialog {
     this.borderSide,
     this.buttonsTextStyle,
     this.autoDismiss = true,
+    this.barrierColor = Colors.black54,
   }) : assert(
           autoDismiss || onDissmissCallback != null,
           "If autoDismiss is false, you must provide an onDissmissCallback to pop the dialog",
@@ -184,6 +190,7 @@ class AwesomeDialog {
         context: context,
         useRootNavigator: useRootNavigator,
         barrierDismissible: dismissOnTouchOutside,
+        barrierColor: barrierColor,
         builder: (BuildContext context) {
           if (autoHide != null) {
             Future.delayed(autoHide!).then((value) => dismiss());
