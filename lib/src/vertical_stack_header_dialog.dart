@@ -164,6 +164,7 @@ class VerticalStackDialog extends StatelessWidget {
     );
   }
 
+  /// The default widget for the Title of dialog
   List<Widget> _titleBody(String title, ThemeData theme) => [
         Text(
           title,

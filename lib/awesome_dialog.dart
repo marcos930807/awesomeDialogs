@@ -33,16 +33,28 @@ class AwesomeDialog {
   /// Create your own Widget for body, if this property is set title and description will be ignored.
   final Widget? body;
 
-  /// Btn OK props
+  /// Text for the Ok button
   final String? btnOkText;
+
+  /// Icon to use for the Ok button
   final IconData? btnOkIcon;
+
+  /// Function to execute when Ok button is pressed
   final Function? btnOkOnPress;
+
+  /// Color of the Ok Button
   final Color? btnOkColor;
 
-  /// Btn Cancel props
+  /// Text for the Cancel button
   final String? btnCancelText;
+
+  /// Icon to use for the Cancel button
   final IconData? btnCancelIcon;
+
+  /// Function to execute when Cancel button is pressed
   final Function? btnCancelOnPress;
+
+  /// Color of the Cancel Button
   final Color? btnCancelColor;
 
   /// Custom Btn OK
@@ -108,9 +120,14 @@ class AwesomeDialog {
   /// Set BorderSide of DialogShape
   final BorderSide? borderSide;
 
-  /// Useful when you want to pass data from [Navigator.pop]
+  /// Set to `false` when you want to pass data from custom [Navigator.pop]
+  ///
+  /// Defaults to `true`
   final bool autoDismiss;
 
+  /// Creates a Dialog that is shown using the [showDialog] function
+  ///
+  /// Returns null if [autoDismiss] is true, else returns data passed to custom [Navigator.pop] function
   AwesomeDialog({
     required this.context,
     this.dialogType = DialogType.INFO,
@@ -153,8 +170,16 @@ class AwesomeDialog {
           "If autoDismiss is false, you must provide an onDissmissCallback to pop the dialog",
         );
 
+  /// The type for dismissal of the dialog
   DismissType _dismissType = DismissType.OTHER;
 
+  /// Used to call the `onDissmissCallback` if dialog
+  /// is popped using custom [Navigator.pop] method.
+  bool _onDissmissCallbackCalled = false;
+
+  /// Shows the dialog using the [showDialog] function
+  ///
+  /// Returns `null` if [autoDismiss] is true, else returns data passed to custom [Navigator.pop] function
   Future show() => showDialog(
         context: context,
         useRootNavigator: useRootNavigator,
@@ -188,8 +213,13 @@ class AwesomeDialog {
               return _buildDialog;
           }
         },
-      );
+      )..then(
+          (value) => _onDissmissCallbackCalled
+              ? null
+              : onDissmissCallback?.call(_dismissType),
+        );
 
+  /// Return the header of the dialog
   Widget? get _buildHeader {
     if (customHeader != null) return customHeader;
     if (dialogType == DialogType.NO_HEADER) return null;
@@ -199,6 +229,7 @@ class AwesomeDialog {
     );
   }
 
+  /// Returns the body of the dialog
   Widget get _buildDialog => WillPopScope(
         onWillPop: _onWillPop,
         child: VerticalStackDialog(
@@ -225,6 +256,7 @@ class AwesomeDialog {
         ),
       );
 
+  /// Returns the default `Ok Button` widget
   Widget get _buildFancyButtonOk => AnimatedButton(
         isFixedHeight: false,
         pressEvent: () {
@@ -239,6 +271,7 @@ class AwesomeDialog {
         buttonTextStyle: buttonsTextStyle,
       );
 
+  /// Returns the default `Cancel Button` widget
   Widget get _buildFancyButtonCancel => AnimatedButton(
         isFixedHeight: false,
         pressEvent: () {
@@ -253,13 +286,17 @@ class AwesomeDialog {
         buttonTextStyle: buttonsTextStyle,
       );
 
+  /// Called to dismiss the dialog using the [Navigator.pop] method
+  /// or calls the [onDissmissCallback] function if [autoDismiss] is `false`
   void dismiss() {
     if (autoDismiss) {
       Navigator.of(context, rootNavigator: useRootNavigator).pop();
     }
     onDissmissCallback?.call(_dismissType);
+    _onDissmissCallbackCalled = true;
   }
 
+  /// Executes when `back button` pressed or `barrier dismissed`
   Future<bool> _onWillPop() async {
     if (dismissOnBackKeyPress) {
       _dismissType = DismissType.OTHER;
