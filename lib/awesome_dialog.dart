@@ -286,6 +286,8 @@ class AwesomeDialog {
         buttonTextStyle: buttonsTextStyle,
       );
 
+  /// Called to dismiss the dialog using the [Navigator.pop] method
+  /// or calls the [onDissmissCallback] function if [autoDismiss] is `false`
   void dismiss() {
     if (autoDismiss) {
       Navigator.of(context, rootNavigator: useRootNavigator).pop();
