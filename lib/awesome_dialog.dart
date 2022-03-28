@@ -155,6 +155,10 @@ class AwesomeDialog {
 
   DismissType _dismissType = DismissType.OTHER;
 
+  /// Used to call the `onDissmissCallback` if dialog
+  /// is popped using custom [Navigator.pop] method.
+  bool _onDissmissCallbackCalled = false;
+
   Future show() => showDialog(
         context: context,
         useRootNavigator: useRootNavigator,
@@ -188,7 +192,11 @@ class AwesomeDialog {
               return _buildDialog;
           }
         },
-      );
+      )..then(
+          (value) => _onDissmissCallbackCalled
+              ? null
+              : onDissmissCallback?.call(_dismissType),
+        );
 
   Widget? get _buildHeader {
     if (customHeader != null) return customHeader;
@@ -258,6 +266,7 @@ class AwesomeDialog {
       Navigator.of(context, rootNavigator: useRootNavigator).pop();
     }
     onDissmissCallback?.call(_dismissType);
+    _onDissmissCallbackCalled = true;
   }
 
   Future<bool> _onWillPop() async {
