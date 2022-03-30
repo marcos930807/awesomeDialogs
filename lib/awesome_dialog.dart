@@ -249,21 +249,7 @@ class AwesomeDialog {
   /// Returns the body of the dialog
   Widget get _buildDialog => WillPopScope(
         onWillPop: _onWillPop,
-        child: RawKeyboardListener(
-          focusNode: FocusNode(),
-          autofocus: true,
-          onKey: (event) {
-            if (!enableEnterKey) return;
-
-            if (event.isKeyPressed(LogicalKeyboardKey.enter) ||
-                event.isKeyPressed(LogicalKeyboardKey.numpadEnter)) {
-              if (btnOk == null && btnOkOnPress != null) {
-                _dismissType = DismissType.BTN_OK;
-                dismiss();
-                btnOkOnPress?.call();
-              }
-            }
-          },
+        child: _getDialogWidget(
           child: VerticalStackDialog(
             dialogBackgroundColor: dialogBackgroundColor,
             borderSide: borderSide,
@@ -288,6 +274,26 @@ class AwesomeDialog {
           ),
         ),
       );
+
+  Widget _getDialogWidget({required Widget child}) {
+    return enableEnterKey
+        ? RawKeyboardListener(
+            focusNode: FocusNode(),
+            autofocus: true,
+            onKey: (event) {
+              if (event.isKeyPressed(LogicalKeyboardKey.enter) ||
+                  event.isKeyPressed(LogicalKeyboardKey.numpadEnter)) {
+                if (btnOk == null && btnOkOnPress != null) {
+                  _dismissType = DismissType.BTN_OK;
+                  dismiss();
+                  btnOkOnPress?.call();
+                }
+              }
+            },
+            child: child,
+          )
+        : child;
+  }
 
   /// Returns the default `Ok Button` widget
   Widget get _buildFancyButtonOk => AnimatedButton(
