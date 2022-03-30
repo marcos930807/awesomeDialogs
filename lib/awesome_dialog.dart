@@ -1,5 +1,7 @@
 library awesome_dialog;
 
+import 'package:flutter/services.dart';
+
 import 'src/anims/anims.dart';
 import 'src/animated_button.dart';
 import 'src/anims/flare_header.dart';
@@ -130,6 +132,13 @@ class AwesomeDialog {
   /// Defaults to `Colors.black54`
   final Color? barrierColor;
 
+  /// If true, then hitting `Enter` key will be equivalent to clicking `Ok` button.
+  ///
+  /// Useful for desktop or web platforms.
+  ///
+  /// Defaults to `false`
+  final bool enableEnterKey;
+
   /// Creates a Dialog that is shown using the [showDialog] function
   ///
   /// Returns null if [autoDismiss] is true, else returns data passed to custom [Navigator.pop] function
@@ -171,6 +180,7 @@ class AwesomeDialog {
     this.buttonsTextStyle,
     this.autoDismiss = true,
     this.barrierColor = Colors.black54,
+    this.enableEnterKey = false,
   }) : assert(
           autoDismiss || onDissmissCallback != null,
           "If autoDismiss is false, you must provide an onDissmissCallback to pop the dialog",
@@ -239,29 +249,51 @@ class AwesomeDialog {
   /// Returns the body of the dialog
   Widget get _buildDialog => WillPopScope(
         onWillPop: _onWillPop,
-        child: VerticalStackDialog(
-          dialogBackgroundColor: dialogBackgroundColor,
-          borderSide: borderSide,
-          borderRadius: dialogBorderRadius,
-          header: _buildHeader,
-          title: title,
-          desc: desc,
-          body: body,
-          isDense: isDense,
-          alignment: aligment,
-          keyboardAware: keyboardAware,
-          width: width,
-          padding: padding ?? const EdgeInsets.only(left: 5, right: 5),
-          btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
-          btnCancel: btnCancel ?? (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
-          showCloseIcon: showCloseIcon,
-          onClose: () {
-            _dismissType = DismissType.TOP_ICON;
-            dismiss.call();
-          },
-          closeIcon: closeIcon,
+        child: _getDialogWidget(
+          child: VerticalStackDialog(
+            dialogBackgroundColor: dialogBackgroundColor,
+            borderSide: borderSide,
+            borderRadius: dialogBorderRadius,
+            header: _buildHeader,
+            title: title,
+            desc: desc,
+            body: body,
+            isDense: isDense,
+            alignment: aligment,
+            keyboardAware: keyboardAware,
+            width: width,
+            padding: padding ?? const EdgeInsets.only(left: 5, right: 5),
+            btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
+            btnCancel: btnCancel ?? (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
+            showCloseIcon: showCloseIcon,
+            onClose: () {
+              _dismissType = DismissType.TOP_ICON;
+              dismiss.call();
+            },
+            closeIcon: closeIcon,
+          ),
         ),
       );
+
+  Widget _getDialogWidget({required Widget child}) {
+    return enableEnterKey
+        ? RawKeyboardListener(
+            focusNode: FocusNode(),
+            autofocus: true,
+            onKey: (event) {
+              if (event.isKeyPressed(LogicalKeyboardKey.enter) ||
+                  event.isKeyPressed(LogicalKeyboardKey.numpadEnter)) {
+                if (btnOk == null && btnOkOnPress != null) {
+                  _dismissType = DismissType.BTN_OK;
+                  dismiss();
+                  btnOkOnPress?.call();
+                }
+              }
+            },
+            child: child,
+          )
+        : child;
+  }
 
   /// Returns the default `Ok Button` widget
   Widget get _buildFancyButtonOk => AnimatedButton(

@@ -92,9 +92,9 @@ AwesomeDialog has onDissmissCallback() and can be dissmissed at any time using d
 | closeIcon | Widget                 | Custom closeIcon.                                    |                  null                  |
 | dialogBackgroundColor | Color                 |   custom background color for entire dialog.                               |                  Theme.of(context).cardColor                    |
 | borderSide | BorderSide                 |   enable border en entire dialog shape                               |                  null                    |
-
-
-
+| autoDismiss | bool                 |   When setted to `false` clicking **Ok** or **Cancel** button won't dismiss the dialog. You can pass custom `Navigator.pop` function in the `onDissmissCallback`.                               |                  true                    |
+| barrierColor | Color                 |   Color for the `barrier` around the dialog                               |                  Colors.black54                    |
+| enableEnterKey | bool                 |   If `true`, hitting `Enter` key will act like pressing the **Ok** button.                               |                  false                    |
 
 
 
