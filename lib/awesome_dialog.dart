@@ -29,8 +29,18 @@ class AwesomeDialog {
   /// Dialog Title
   final String? title;
 
+  /// The [TextStyle] of the title
+  /// 
+  /// If not set, it will be the [ThemeData.textTheme.headline6]
+  final TextStyle? titleTextStyle;
+
   /// Set the description text of the dialog.
   final String? desc;
+
+  /// The [TextStyle] of the description
+  /// 
+  /// If not set, it will be the [DefaultTextStyle]
+  final TextStyle? descTextStyle;
 
   /// Create your own Widget for body, if this property is set title and description will be ignored.
   final Widget? body;
@@ -147,7 +157,9 @@ class AwesomeDialog {
     this.dialogType = DialogType.INFO,
     this.customHeader,
     this.title,
+    this.titleTextStyle,
     this.desc,
+    this.descTextStyle,
     this.body,
     this.btnOk,
     this.btnCancel,
@@ -256,7 +268,9 @@ class AwesomeDialog {
             borderRadius: dialogBorderRadius,
             header: _buildHeader,
             title: title,
+            titleStyle: titleTextStyle,
             desc: desc,
+            descStyle: descTextStyle,
             body: body,
             isDense: isDense,
             alignment: aligment,

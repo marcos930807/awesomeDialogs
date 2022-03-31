@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class VerticalStackDialog extends StatelessWidget {
   final String? title;
+  final TextStyle? titleStyle;
   final String? desc;
+  final TextStyle? descStyle;
   final Widget? btnOk;
   final Widget? btnCancel;
   final Widget? header;
@@ -22,7 +24,9 @@ class VerticalStackDialog extends StatelessWidget {
   const VerticalStackDialog({
     Key? key,
     this.title,
+    this.titleStyle,
     this.desc,
+    this.descStyle,
     this.btnOk,
     this.btnCancel,
     this.body,
@@ -90,6 +94,7 @@ class VerticalStackDialog extends StatelessWidget {
                                     child: Text(
                                       desc!,
                                       textAlign: TextAlign.center,
+                                      style: descStyle,
                                     ),
                                   ),
                                 ),
@@ -169,7 +174,7 @@ class VerticalStackDialog extends StatelessWidget {
         Text(
           title,
           textAlign: TextAlign.center,
-          style: theme.textTheme.headline6,
+          style: titleStyle ?? theme.textTheme.headline6,
         ),
         const SizedBox(
           height: 10.0,
