@@ -20,6 +20,7 @@ class VerticalStackDialog extends StatelessWidget {
   final Color? dialogBackgroundColor;
   final BorderSide? borderSide;
   final BorderRadiusGeometry? borderRadius;
+  final double bodyHeaderDistance;
 
   const VerticalStackDialog({
     Key? key,
@@ -42,6 +43,7 @@ class VerticalStackDialog extends StatelessWidget {
     this.dialogBackgroundColor,
     this.borderSide,
     this.borderRadius,
+    this.bodyHeaderDistance = 15.0,
   }) : super(key: key);
 
   @override
@@ -79,7 +81,7 @@ class VerticalStackDialog extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       SizedBox(
-                        height: header != null ? 50.0 : 15,
+                        height: header != null ? 50.0 : bodyHeaderDistance,
                       ),
                       body ??
                           Column(
