@@ -149,6 +149,12 @@ class AwesomeDialog {
   /// Defaults to `false`
   final bool enableEnterKey;
 
+  /// Sets **gap/distance** between the top of the body and header
+  /// when [dialogType] is [DialogType.NO_HEADER]
+  ///
+  /// Defaults to `15.0`
+  final double bodyHeaderDistance;
+
   /// Creates a Dialog that is shown using the [showDialog] function
   ///
   /// Returns null if [autoDismiss] is true, else returns data passed to custom [Navigator.pop] function
@@ -193,6 +199,7 @@ class AwesomeDialog {
     this.autoDismiss = true,
     this.barrierColor = Colors.black54,
     this.enableEnterKey = false,
+    this.bodyHeaderDistance = 15.0,
   }) : assert(
           autoDismiss || onDissmissCallback != null,
           "If autoDismiss is false, you must provide an onDissmissCallback to pop the dialog",
@@ -277,6 +284,7 @@ class AwesomeDialog {
             keyboardAware: keyboardAware,
             width: width,
             padding: padding ?? const EdgeInsets.only(left: 5, right: 5),
+            bodyHeaderDistance: bodyHeaderDistance,
             btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
             btnCancel: btnCancel ?? (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
             showCloseIcon: showCloseIcon,
