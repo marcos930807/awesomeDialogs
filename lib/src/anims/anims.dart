@@ -7,15 +7,15 @@ enum SlideFrom { TOP, BOTTOM, LEFT, RIGHT }
 Offset getOffset(MultiTweenValues<AniProps> animation, SlideFrom from) {
   switch (from) {
     case SlideFrom.TOP:
-      return Offset(0, -animation.get(AniProps.translateX));
+      return Offset(0, -(animation.get(AniProps.translateX) as double));
     case SlideFrom.BOTTOM:
       return Offset(0, animation.get(AniProps.translateX));
     case SlideFrom.LEFT:
-      return Offset(-animation.get(AniProps.translateX), 0);
+      return Offset(-(animation.get(AniProps.translateX) as double), 0);
     case SlideFrom.RIGHT:
       return Offset(animation.get(AniProps.translateX), 0);
     default:
-      return const Offset(0, 0);
+      return Offset.zero;
   }
 }
 
@@ -42,15 +42,15 @@ class FadeIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final newTween = MultiTween<AniProps>()
+    final MultiTween<AniProps> newTween = MultiTween<AniProps>()
       ..add(
         AniProps.opacity,
-        Tween(begin: 0.0, end: 1.0),
+        Tween<double>(begin: 0.0, end: 1.0),
         const Duration(milliseconds: 500),
       )
       ..add(
         AniProps.translateX,
-        Tween(begin: 60.0, end: 0.0),
+        Tween<double>(begin: 60.0, end: 0.0),
         const Duration(milliseconds: 500),
         curve,
       );
@@ -61,7 +61,9 @@ class FadeIn extends StatelessWidget {
       duration: newTween.duration,
       tween: newTween,
       child: child,
-      builder: (context, child, animation) => Opacity(
+      builder: (BuildContext context, Widget? child,
+              MultiTweenValues<AniProps> animation) =>
+          Opacity(
         opacity: fade ? animation.get(AniProps.opacity) : 1,
         child: Transform.translate(
           offset: getOffset(animation, from),
@@ -94,10 +96,10 @@ class Slide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tween = MultiTween<AniProps>()
+    final MultiTween<AniProps> tween = MultiTween<AniProps>()
       ..add(
         AniProps.translateX,
-        Tween(begin: slideDistance, end: 0.0),
+        Tween<double>(begin: slideDistance, end: 0.0),
         Duration(
           milliseconds: (500 * duration).round(),
         ),
@@ -109,7 +111,9 @@ class Slide extends StatelessWidget {
       duration: tween.duration,
       tween: tween,
       child: child,
-      builder: (context, child, animation) => Transform.translate(
+      builder: (BuildContext context, Widget? child,
+              MultiTweenValues<AniProps> animation) =>
+          Transform.translate(
         offset: getOffset(animation, from),
         child: child,
         //offset: Offset(animation["translateX"], 0), child: child),
@@ -140,15 +144,17 @@ class ScaleFade extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tween = MultiTween<AniProps>()
+    final MultiTween<AniProps> tween = MultiTween<AniProps>()
       ..add(
         AniProps.opacity,
-        fade ? Tween(begin: 0.0, end: 1.0) : Tween(begin: 1.0, end: 1.0),
+        fade
+            ? Tween<double>(begin: 0.0, end: 1.0)
+            : Tween<double>(begin: 1.0, end: 1.0),
         Duration(milliseconds: (500 * duration).round()),
       )
       ..add(
         AniProps.scale,
-        Tween(begin: scale, end: 1.0),
+        Tween<double>(begin: scale, end: 1.0),
         Duration(milliseconds: (500 * duration).round()),
         curve,
       );
@@ -159,11 +165,12 @@ class ScaleFade extends StatelessWidget {
       duration: tween.duration,
       tween: tween,
       child: child,
-      builder: (context, child, animation) => Opacity(
+      builder: (BuildContext context, Widget? child,
+              MultiTweenValues<AniProps> animation) =>
+          Opacity(
         opacity: animation.get(AniProps.opacity),
         child: Transform.scale(
           scale: animation.get(AniProps.scale),
-          alignment: Alignment.center,
           child: child,
           //offset: Offset(animation["translateX"], 0), child: child),
         ),
@@ -188,10 +195,10 @@ class ShowHide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tween = MultiTween<AniProps>()
+    final MultiTween<AniProps> tween = MultiTween<AniProps>()
       ..add(
         AniProps.scale,
-        Tween(begin: 0.0, end: 1.0),
+        Tween<double>(begin: 0.0, end: 1.0),
         Duration(milliseconds: (500 * duration).round()),
         Curves.linear,
       );
@@ -204,9 +211,10 @@ class ShowHide extends StatelessWidget {
       duration: tween.duration,
       tween: tween,
       child: child,
-      builder: (context, child, animation) => Transform.scale(
+      builder: (BuildContext context, Widget? child,
+              MultiTweenValues<AniProps> animation) =>
+          Transform.scale(
         scale: animation.get(AniProps.scale),
-        alignment: Alignment.center,
         child: child,
         //offset: Offset(animation["translateX"], 0), child: child),
       ),
