@@ -342,6 +342,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                       animType: AnimType.RIGHSLIDE,
                       title: 'Passing Data Back',
+                      titleTextStyle: const TextStyle(
+                        fontSize: 32,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w600,
+                      ),
                       desc: 'Dialog description here...',
                       showCloseIcon: true,
                       btnCancelOnPress: () {},
@@ -350,6 +355,7 @@ class _HomePageState extends State<HomePage> {
                       onDissmissCallback: (type) {
                         Navigator.of(context).pop(type);
                       },
+                      barrierColor: Colors.purple[900]?.withOpacity(0.54),
                     ).show();
 
                     ScaffoldMessenger.of(context).showSnackBar(

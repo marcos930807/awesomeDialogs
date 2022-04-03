@@ -1,14 +1,33 @@
 import 'package:flutter/material.dart';
 
 class AnimatedButton extends StatefulWidget {
+  /// Function to execute when button is pressed
   final Function pressEvent;
+
+  /// Text of the [AnimatedButton]
   final String? text;
+
+  /// Icon for the [AnimatedButton]
   final IconData? icon;
+
+  /// Width of the [AnimatedButton]
   final double width;
+
+  /// Height of the [AnimatedButton]
   final double? height;
+
+  /// If true, height is setted to `50.0`.
+  ///
+  /// Priority over [height]
   final bool isFixedHeight;
+
+  /// Color for the [AnimatedButton]
   final Color? color;
+
+  /// Border Radius of the [AnimatedButton]
   final BorderRadiusGeometry? borderRadius;
+
+  /// Textstyle to use for the text of the [AnimatedButton]
   final TextStyle? buttonTextStyle;
 
   const AnimatedButton({

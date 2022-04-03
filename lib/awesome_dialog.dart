@@ -1,5 +1,7 @@
 library awesome_dialog;
 
+import 'package:flutter/services.dart';
+
 import 'src/anims/anims.dart';
 import 'src/animated_button.dart';
 import 'src/anims/flare_header.dart';
@@ -10,15 +12,7 @@ export 'src/animated_button.dart';
 export 'src/anims/flare_header.dart';
 export 'src/anims/anims.dart';
 
-enum DialogType {
-  INFO,
-  INFO_REVERSED,
-  WARNING,
-  ERROR,
-  SUCCES,
-  QUESTION,
-  NO_HEADER
-}
+enum DialogType { INFO, INFO_REVERSED, WARNING, ERROR, SUCCES, QUESTION, NO_HEADER }
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
 enum DismissType { BTN_OK, BTN_CANCEL, TOP_ICON, OTHER }
 
@@ -35,22 +29,44 @@ class AwesomeDialog {
   /// Dialog Title
   final String? title;
 
+  /// The [TextStyle] of the title
+  ///
+  /// If not set, it will be the [ThemeData.textTheme.headline6]
+  final TextStyle? titleTextStyle;
+
   /// Set the description text of the dialog.
   final String? desc;
+
+  /// The [TextStyle] of the description
+  ///
+  /// If not set, it will be the [DefaultTextStyle]
+  final TextStyle? descTextStyle;
 
   /// Create your own Widget for body, if this property is set title and description will be ignored.
   final Widget? body;
 
-  /// Btn OK props
+  /// Text for the Ok button
   final String? btnOkText;
+
+  /// Icon to use for the Ok button
   final IconData? btnOkIcon;
+
+  /// Function to execute when Ok button is pressed
   final Function? btnOkOnPress;
+
+  /// Color of the Ok Button
   final Color? btnOkColor;
 
-  /// Btn Cancel props
+  /// Text for the Cancel button
   final String? btnCancelText;
+
+  /// Icon to use for the Cancel button
   final IconData? btnCancelIcon;
+
+  /// Function to execute when Cancel button is pressed
   final Function? btnCancelOnPress;
+
+  /// Color of the Cancel Button
   final Color? btnCancelColor;
 
   /// Custom Btn OK
@@ -116,15 +132,40 @@ class AwesomeDialog {
   /// Set BorderSide of DialogShape
   final BorderSide? borderSide;
 
-  /// Useful when you want to pass data from [Navigator.pop]
+  /// Set to `false` when you want to pass data from custom [Navigator.pop]
+  ///
+  /// Defaults to `true`
   final bool autoDismiss;
 
+  /// [Color] of the barrier around the dialog
+  ///
+  /// Defaults to `Colors.black54`
+  final Color? barrierColor;
+
+  /// If true, then hitting `Enter` key will be equivalent to clicking `Ok` button.
+  ///
+  /// Useful for desktop or web platforms.
+  ///
+  /// Defaults to `false`
+  final bool enableEnterKey;
+
+  /// Sets **gap/distance** between the top of the body and header
+  /// when [dialogType] is [DialogType.NO_HEADER]
+  ///
+  /// Defaults to `15.0`
+  final double bodyHeaderDistance;
+
+  /// Creates a Dialog that is shown using the [showDialog] function
+  ///
+  /// Returns null if [autoDismiss] is true, else returns data passed to custom [Navigator.pop] function
   AwesomeDialog({
     required this.context,
     this.dialogType = DialogType.INFO,
     this.customHeader,
     this.title,
+    this.titleTextStyle,
     this.desc,
+    this.descTextStyle,
     this.body,
     this.btnOk,
     this.btnCancel,
@@ -156,17 +197,29 @@ class AwesomeDialog {
     this.borderSide,
     this.buttonsTextStyle,
     this.autoDismiss = true,
+    this.barrierColor = Colors.black54,
+    this.enableEnterKey = false,
+    this.bodyHeaderDistance = 15.0,
   }) : assert(
           autoDismiss || onDissmissCallback != null,
           "If autoDismiss is false, you must provide an onDissmissCallback to pop the dialog",
         );
 
+  /// The type for dismissal of the dialog
   DismissType _dismissType = DismissType.OTHER;
 
+  /// Used to call the `onDissmissCallback` if dialog
+  /// is popped using custom [Navigator.pop] method.
+  bool _onDissmissCallbackCalled = false;
+
+  /// Shows the dialog using the [showDialog] function
+  ///
+  /// Returns `null` if [autoDismiss] is true, else returns data passed to custom [Navigator.pop] function
   Future show() => showDialog(
         context: context,
         useRootNavigator: useRootNavigator,
         barrierDismissible: dismissOnTouchOutside,
+        barrierColor: barrierColor,
         builder: (BuildContext context) {
           if (autoHide != null) {
             Future.delayed(autoHide!).then((value) => dismiss());
@@ -196,8 +249,11 @@ class AwesomeDialog {
               return _buildDialog;
           }
         },
-      );
+      )..then(
+          (value) => _onDissmissCallbackCalled ? null : onDissmissCallback?.call(_dismissType),
+        );
 
+  /// Return the header of the dialog
   Widget? get _buildHeader {
     if (customHeader != null) return customHeader;
     if (dialogType == DialogType.NO_HEADER) return null;
@@ -207,33 +263,59 @@ class AwesomeDialog {
     );
   }
 
+  /// Returns the body of the dialog
   Widget get _buildDialog => WillPopScope(
         onWillPop: _onWillPop,
-        child: VerticalStackDialog(
-          dialogBackgroundColor: dialogBackgroundColor,
-          borderSide: borderSide,
-          borderRadius: dialogBorderRadius,
-          header: _buildHeader,
-          title: title,
-          desc: desc,
-          body: body,
-          isDense: isDense,
-          alignment: aligment,
-          keyboardAware: keyboardAware,
-          width: width,
-          padding: padding ?? const EdgeInsets.only(left: 5, right: 5),
-          btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
-          btnCancel: btnCancel ??
-              (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
-          showCloseIcon: showCloseIcon,
-          onClose: () {
-            _dismissType = DismissType.TOP_ICON;
-            dismiss.call();
-          },
-          closeIcon: closeIcon,
+        child: _getDialogWidget(
+          child: VerticalStackDialog(
+            dialogBackgroundColor: dialogBackgroundColor,
+            borderSide: borderSide,
+            borderRadius: dialogBorderRadius,
+            header: _buildHeader,
+            title: title,
+            titleStyle: titleTextStyle,
+            desc: desc,
+            descStyle: descTextStyle,
+            body: body,
+            isDense: isDense,
+            alignment: aligment,
+            keyboardAware: keyboardAware,
+            width: width,
+            padding: padding ?? const EdgeInsets.only(left: 5, right: 5),
+            bodyHeaderDistance: bodyHeaderDistance,
+            btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
+            btnCancel: btnCancel ?? (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
+            showCloseIcon: showCloseIcon,
+            onClose: () {
+              _dismissType = DismissType.TOP_ICON;
+              dismiss.call();
+            },
+            closeIcon: closeIcon,
+          ),
         ),
       );
 
+  Widget _getDialogWidget({required Widget child}) {
+    return enableEnterKey
+        ? RawKeyboardListener(
+            focusNode: FocusNode(),
+            autofocus: true,
+            onKey: (event) {
+              if (event.isKeyPressed(LogicalKeyboardKey.enter) ||
+                  event.isKeyPressed(LogicalKeyboardKey.numpadEnter)) {
+                if (btnOk == null && btnOkOnPress != null) {
+                  _dismissType = DismissType.BTN_OK;
+                  dismiss();
+                  btnOkOnPress?.call();
+                }
+              }
+            },
+            child: child,
+          )
+        : child;
+  }
+
+  /// Returns the default `Ok Button` widget
   Widget get _buildFancyButtonOk => AnimatedButton(
         isFixedHeight: false,
         pressEvent: () {
@@ -248,6 +330,7 @@ class AwesomeDialog {
         buttonTextStyle: buttonsTextStyle,
       );
 
+  /// Returns the default `Cancel Button` widget
   Widget get _buildFancyButtonCancel => AnimatedButton(
         isFixedHeight: false,
         pressEvent: () {
@@ -262,13 +345,17 @@ class AwesomeDialog {
         buttonTextStyle: buttonsTextStyle,
       );
 
+  /// Called to dismiss the dialog using the [Navigator.pop] method
+  /// or calls the [onDissmissCallback] function if [autoDismiss] is `false`
   void dismiss() {
     if (autoDismiss) {
       Navigator.of(context, rootNavigator: useRootNavigator).pop();
     }
     onDissmissCallback?.call(_dismissType);
+    _onDissmissCallbackCalled = true;
   }
 
+  /// Executes when `back button` pressed or `barrier dismissed`
   Future<bool> _onWillPop() async {
     if (dismissOnBackKeyPress) {
       _dismissType = DismissType.OTHER;
