@@ -1,3 +1,12 @@
+## [2.2.0] - 3/04/2022.
+## Huge thanks to @OutdatedGuy
+* New feature custom barrier color via prop "barrierColor" PR#96
+* New feature use keyboard enter key to trigger ok button enable via prop "enableEnterKey" default to false PR#97
+* New feature add props for custom titleStyle and descStyle via "titleTextStyle" and "descTextStyle"  PR#98
+* New feature add padding between body and dialog when DialogType.NO_HEADER is selected via prop "bodyHeaderDistance" default to 15  PR#99
+* Breaking the signature of some function change to fallow flutter_lints rules.  PR#100
+
+
 ## [2.1.3] - 27/03/2022.
 * New feature to pass data back from dialog.
 ## [2.1.2] - 11/12/2021.
@@ -5,7 +14,7 @@
 ## [2.1.1] - 17/8/2021.
 * Fix useRootNavigator for nested routes.
 ## [2.1.0] - 27/5/2021.
-* Migrated AnimatedButton to underline use ElevetedButton from flutter core.
+* Migrated AnimatedButton to underline use ElevatedButton from flutter core.
 * Improve padding in Error Animation.
 * onDismiss Callback now indicates by which method the dialog was dismissed using an Enum. 
 ## [2.0.0] - 27/4/2021.
@@ -28,18 +37,18 @@
 * Updated INFO dialogType to show info mark.
 ## [1.2.1] - 11/10/2020.
 * Added Property buttonsBorderRadius.
-* Safe Call operator on Navigation.of(context) before trying to dissmiss the Dialog.
+* Safe Call operator on Navigation.of(context) before trying to dismiss the Dialog.
 ## [1.2.0] - 19/08/2020.
 * Added Property width to control the maximum width of the dialog, especially useful in web flutter, or landscape mode, by default it is MediaQuery.of(context).size.width.
 ## [1.1.3] - 27/06/2020.
-* Added Property dismissOnBackKeyPress to control if AwesomeDialog is dissmisable by back button
+* Added Property dismissOnBackKeyPress to control if AwesomeDialog is dismissible by back button
 ## [1.1.2] - 9/06/2020.
 * Added Property keyboardAware to control whenever or not add the Padding introducing on v1.1.1, and make it optional. Default value True.
 ## [1.1.1] - 9/06/2020.
 * Added Padding EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom) to AwesomeDialog to be aware of keyboard input
 ## [1.1.0] - 30/05/2020.
 * [Breaking Change in title Prop]
-* Meger Pull Request Fixed title prop and fixed some padding issues. #17, thanks to @iampawan.
+* Merge Pull Request Fixed title prop and fixed some padding issues. #17, thanks to @iampawan.
 ## [1.0.1] - 28/05/2020.
 * Exported anims helper class for external use.
 ## [1.0.0] - 28/05/2020.
