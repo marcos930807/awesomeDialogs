@@ -1,16 +1,16 @@
 library awesome_dialog;
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'src/anims/anims.dart';
 import 'src/animated_button.dart';
+import 'src/anims/anims.dart';
 import 'src/anims/flare_header.dart';
 import 'src/vertical_stack_header_dialog.dart';
-import 'package:flutter/material.dart';
 
 export 'src/animated_button.dart';
-export 'src/anims/flare_header.dart';
 export 'src/anims/anims.dart';
+export 'src/anims/flare_header.dart';
 
 enum DialogType { INFO, INFO_REVERSED, WARNING, ERROR, SUCCES, QUESTION, NO_HEADER }
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
@@ -52,7 +52,7 @@ class AwesomeDialog {
   final IconData? btnOkIcon;
 
   /// Function to execute when Ok button is pressed
-  final Function? btnOkOnPress;
+  final Function()? btnOkOnPress;
 
   /// Color of the Ok Button
   final Color? btnOkColor;
@@ -64,7 +64,7 @@ class AwesomeDialog {
   final IconData? btnCancelIcon;
 
   /// Function to execute when Cancel button is pressed
-  final Function? btnCancelOnPress;
+  final Function()? btnCancelOnPress;
 
   /// Color of the Cancel Button
   final Color? btnCancelColor;
@@ -202,7 +202,7 @@ class AwesomeDialog {
     this.bodyHeaderDistance = 15.0,
   }) : assert(
           autoDismiss || onDissmissCallback != null,
-          "If autoDismiss is false, you must provide an onDissmissCallback to pop the dialog",
+          'If autoDismiss is false, you must provide an onDissmissCallback to pop the dialog',
         );
 
   /// The type for dismissal of the dialog
@@ -215,20 +215,19 @@ class AwesomeDialog {
   /// Shows the dialog using the [showDialog] function
   ///
   /// Returns `null` if [autoDismiss] is true, else returns data passed to custom [Navigator.pop] function
-  Future show() => showDialog(
+  Future<dynamic> show() => showDialog(
         context: context,
         useRootNavigator: useRootNavigator,
         barrierDismissible: dismissOnTouchOutside,
         barrierColor: barrierColor,
         builder: (BuildContext context) {
           if (autoHide != null) {
-            Future.delayed(autoHide!).then((value) => dismiss());
+            Future<void>.delayed(autoHide!).then((dynamic value) => dismiss());
           }
           switch (animType) {
             case AnimType.SCALE:
               return ScaleFade(
                 scale: 0.1,
-                fade: true,
                 curve: Curves.fastLinearToSlowEaseIn,
                 child: _buildDialog,
               );
@@ -237,7 +236,7 @@ class AwesomeDialog {
               return FadeIn(from: SlideFrom.LEFT, child: _buildDialog);
 
             case AnimType.RIGHSLIDE:
-              return FadeIn(from: SlideFrom.RIGHT, child: _buildDialog);
+              return FadeIn(child: _buildDialog);
 
             case AnimType.BOTTOMSLIDE:
               return FadeIn(from: SlideFrom.BOTTOM, child: _buildDialog);
@@ -250,13 +249,18 @@ class AwesomeDialog {
           }
         },
       )..then(
-          (value) => _onDissmissCallbackCalled ? null : onDissmissCallback?.call(_dismissType),
+          (dynamic value) =>
+              _onDissmissCallbackCalled ? null : onDissmissCallback?.call(_dismissType),
         );
 
   /// Return the header of the dialog
   Widget? get _buildHeader {
-    if (customHeader != null) return customHeader;
-    if (dialogType == DialogType.NO_HEADER) return null;
+    if (customHeader != null) {
+      return customHeader;
+    }
+    if (dialogType == DialogType.NO_HEADER) {
+      return null;
+    }
     return FlareHeader(
       loop: headerAnimationLoop,
       dialogType: dialogType,
@@ -300,7 +304,7 @@ class AwesomeDialog {
         ? RawKeyboardListener(
             focusNode: FocusNode(),
             autofocus: true,
-            onKey: (event) {
+            onKey: (RawKeyEvent event) {
               if (event.isKeyPressed(LogicalKeyboardKey.enter) ||
                   event.isKeyPressed(LogicalKeyboardKey.numpadEnter)) {
                 if (btnOk == null && btnOkOnPress != null) {
