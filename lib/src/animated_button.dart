@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AnimatedButton extends StatefulWidget {
   /// Function to execute when button is pressed
-  final Function pressEvent;
+  final Function() pressEvent;
 
   /// Text of the [AnimatedButton]
   final String? text;
@@ -44,7 +44,7 @@ class AnimatedButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _AnimatedButtonState createState() => _AnimatedButtonState();
+  State<AnimatedButton> createState() => _AnimatedButtonState();
 }
 
 class _AnimatedButtonState extends State<AnimatedButton>
@@ -76,7 +76,9 @@ class _AnimatedButtonState extends State<AnimatedButton>
   }
 
   void _animationStatusListener(AnimationStatus status) {
-    if (status == AnimationStatus.completed) _animationController.reverse();
+    if (status == AnimationStatus.completed) {
+      _animationController.reverse();
+    }
   }
 
   @override
@@ -85,10 +87,10 @@ class _AnimatedButtonState extends State<AnimatedButton>
     super.dispose();
   }
 
-  void _onTap() async {
+  Future<void> _onTap() async {
     _animationController.forward();
     //Delayed added in purpose to keep same animation behavior as previous version when dialog was closed while animation was still playing
-    await Future.delayed(
+    await Future<void>.delayed(
       const Duration(milliseconds: _forwardDurationNumber ~/ 2),
     );
     widget.pressEvent();
@@ -120,7 +122,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              if (widget.icon != null) ...[
+              if (widget.icon != null) ...<Widget>[
                 Padding(
                   padding: const EdgeInsets.only(left: 4.0),
                   child: Icon(
@@ -133,7 +135,6 @@ class _AnimatedButtonState extends State<AnimatedButton>
                 ),
               ],
               Flexible(
-                fit: FlexFit.loose,
                 child: Text(
                   '${widget.text}',
                   // maxLines: 1,

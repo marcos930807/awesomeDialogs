@@ -15,7 +15,7 @@ class VerticalStackDialog extends StatelessWidget {
   final bool keyboardAware;
   final double? width;
   final bool? showCloseIcon;
-  final Function onClose;
+  final Function() onClose;
   final Widget? closeIcon;
   final Color? dialogBackgroundColor;
   final BorderSide? borderSide;
@@ -77,7 +77,6 @@ class VerticalStackDialog extends StatelessWidget {
                 padding: padding,
                 child: SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       SizedBox(
@@ -90,7 +89,6 @@ class VerticalStackDialog extends StatelessWidget {
                               if (title != null) ..._titleBody(title!, theme),
                               if (desc != null)
                                 Flexible(
-                                  fit: FlexFit.loose,
                                   child: SingleChildScrollView(
                                     physics: const BouncingScrollPhysics(),
                                     child: Text(
@@ -172,7 +170,7 @@ class VerticalStackDialog extends StatelessWidget {
   }
 
   /// The default widget for the Title of dialog
-  List<Widget> _titleBody(String title, ThemeData theme) => [
+  List<Widget> _titleBody(String title, ThemeData theme) => <Widget>[
         Text(
           title,
           textAlign: TextAlign.center,
