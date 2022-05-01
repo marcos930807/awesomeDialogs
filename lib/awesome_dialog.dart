@@ -216,8 +216,9 @@ class AwesomeDialog {
   /// The type for dismissal of the dialog
   DismissType _dismissType = DismissType.OTHER;
 
-  /// Used to call the `onDissmissCallback` if dialog
-  /// is popped using custom [Navigator.pop] method.
+  /// Used to check if the [onDissmissCallback] is called. (also to see if dialog is popped)
+  ///
+  /// Initialized to `false`
   bool _onDissmissCallbackCalled = false;
 
   /// Shows the dialog using the [showDialog] function
