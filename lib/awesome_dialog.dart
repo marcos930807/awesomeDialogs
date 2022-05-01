@@ -231,7 +231,9 @@ class AwesomeDialog {
         barrierColor: barrierColor,
         builder: (BuildContext context) {
           if (autoHide != null) {
-            Future<void>.delayed(autoHide!).then((dynamic value) => dismiss());
+            Future<void>.delayed(autoHide!).then(
+              (dynamic value) => _onDissmissCallbackCalled ? null : dismiss(),
+            );
           }
           switch (animType) {
             case AnimType.SCALE:
