@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
-                      dialogType: DialogType.INFO_REVERSED,
+                      dialogType: DialogType.infoReversed,
                       borderSide: const BorderSide(
                         color: Colors.green,
                         width: 2,
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       dismissOnTouchOutside: true,
                       dismissOnBackKeyPress: false,
-                      onDissmissCallback: (type) {
+                      onDismissCallback: (type) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text('Dismissed by $type'),
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                         );
                       },
                       headerAnimationLoop: false,
-                      animType: AnimType.BOTTOMSLIDE,
+                      animType: AnimType.bottomSlide,
                       title: 'INFO',
                       desc: 'This Dialog can be dismissed touching outside',
                       showCloseIcon: true,
@@ -82,9 +82,9 @@ class _HomePageState extends State<HomePage> {
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
-                      dialogType: DialogType.QUESTION,
+                      dialogType: DialogType.question,
                       headerAnimationLoop: false,
-                      animType: AnimType.BOTTOMSLIDE,
+                      animType: AnimType.bottomSlide,
                       title: 'Question',
                       desc: 'Dialog description here...',
                       buttonsTextStyle: const TextStyle(color: Colors.black),
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                     AwesomeDialog(
                       context: context,
                       headerAnimationLoop: true,
-                      animType: AnimType.BOTTOMSLIDE,
+                      animType: AnimType.bottomSlide,
                       title: 'INFO',
                       desc:
                           'Lorem ipsum dolor sit amet consectetur adipiscing elit eget ornare tempus, vestibulum sagittis rhoncus felis hendrerit lectus ultricies duis vel, id morbi cum ultrices tellus metus dis ut donec. Ut sagittis viverra venenatis eget euismod faucibus odio ligula phasellus,',
@@ -119,17 +119,17 @@ class _HomePageState extends State<HomePage> {
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
-                      dialogType: DialogType.WARNING,
+                      dialogType: DialogType.warning,
                       headerAnimationLoop: false,
-                      animType: AnimType.TOPSLIDE,
+                      animType: AnimType.topSlide,
                       showCloseIcon: true,
                       closeIcon: const Icon(Icons.close_fullscreen_outlined),
                       title: 'Warning',
                       desc:
                           'Dialog description here..................................................',
                       btnCancelOnPress: () {},
-                      onDissmissCallback: (type) {
-                        debugPrint('Dialog Dissmiss from callback $type');
+                      onDismissCallback: (type) {
+                        debugPrint('Dialog Dismiss from callback $type');
                       },
                       btnOkOnPress: () {},
                     ).show();
@@ -144,8 +144,8 @@ class _HomePageState extends State<HomePage> {
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
-                      dialogType: DialogType.ERROR,
-                      animType: AnimType.RIGHSLIDE,
+                      dialogType: DialogType.error,
+                      animType: AnimType.rightSlide,
                       headerAnimationLoop: true,
                       title: 'Error',
                       desc:
@@ -160,24 +160,24 @@ class _HomePageState extends State<HomePage> {
                   height: 16,
                 ),
                 AnimatedButton(
-                  text: 'Succes Dialog',
+                  text: 'Success Dialog',
                   color: Colors.green,
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
-                      animType: AnimType.LEFTSLIDE,
+                      animType: AnimType.leftSlide,
                       headerAnimationLoop: false,
-                      dialogType: DialogType.SUCCES,
+                      dialogType: DialogType.success,
                       showCloseIcon: true,
-                      title: 'Succes',
+                      title: 'Success',
                       desc:
                           'Dialog description here..................................................',
                       btnOkOnPress: () {
-                        debugPrint('OnClcik');
+                        debugPrint('OnClick');
                       },
                       btnOkIcon: Icons.check_circle,
-                      onDissmissCallback: (type) {
-                        debugPrint('Dialog Dissmiss from callback $type');
+                      onDismissCallback: (type) {
+                        debugPrint('Dialog Dismiss from callback $type');
                       },
                     ).show();
                   },
@@ -192,12 +192,12 @@ class _HomePageState extends State<HomePage> {
                     AwesomeDialog(
                       context: context,
                       headerAnimationLoop: false,
-                      dialogType: DialogType.NO_HEADER,
+                      dialogType: DialogType.noHeader,
                       title: 'No Header',
                       desc:
                           'Dialog description here..................................................',
                       btnOkOnPress: () {
-                        debugPrint('OnClcik');
+                        debugPrint('OnClick');
                       },
                       btnOkIcon: Icons.check_circle,
                     ).show();
@@ -212,8 +212,8 @@ class _HomePageState extends State<HomePage> {
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
-                      animType: AnimType.SCALE,
-                      dialogType: DialogType.INFO,
+                      animType: AnimType.scale,
+                      dialogType: DialogType.info,
                       body: const Center(
                         child: Text(
                           'If the body is specified, then title and description will be ignored, this allows to further customize the dialogue.',
@@ -234,8 +234,8 @@ class _HomePageState extends State<HomePage> {
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
-                      dialogType: DialogType.INFO,
-                      animType: AnimType.SCALE,
+                      dialogType: DialogType.info,
+                      animType: AnimType.scale,
                       title: 'Auto Hide Dialog',
                       desc: 'AutoHide after 2 seconds',
                       autoHide: const Duration(seconds: 2),
@@ -253,8 +253,8 @@ class _HomePageState extends State<HomePage> {
                       context: context,
                       keyboardAware: true,
                       dismissOnBackKeyPress: false,
-                      dialogType: DialogType.WARNING,
-                      animType: AnimType.BOTTOMSLIDE,
+                      dialogType: DialogType.warning,
+                      animType: AnimType.bottomSlide,
                       btnCancelText: "Cancel Order",
                       btnOkText: "Yes, I will pay",
                       title: 'Continue to pay?',
@@ -276,8 +276,8 @@ class _HomePageState extends State<HomePage> {
                     late AwesomeDialog dialog;
                     dialog = AwesomeDialog(
                       context: context,
-                      animType: AnimType.SCALE,
-                      dialogType: DialogType.INFO,
+                      animType: AnimType.scale,
+                      dialogType: DialogType.info,
                       keyboardAware: true,
                       body: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -345,11 +345,11 @@ class _HomePageState extends State<HomePage> {
                   pressEvent: () async {
                     final dismissMode = await AwesomeDialog(
                       context: context,
-                      dialogType: DialogType.NO_HEADER,
+                      dialogType: DialogType.noHeader,
                       buttonsBorderRadius: const BorderRadius.all(
                         Radius.circular(2),
                       ),
-                      animType: AnimType.RIGHSLIDE,
+                      animType: AnimType.rightSlide,
                       title: 'Passing Data Back',
                       titleTextStyle: const TextStyle(
                         fontSize: 32,
@@ -361,7 +361,7 @@ class _HomePageState extends State<HomePage> {
                       btnCancelOnPress: () {},
                       btnOkOnPress: () {},
                       autoDismiss: false,
-                      onDissmissCallback: (type) {
+                      onDismissCallback: (type) {
                         Navigator.of(context).pop(type);
                       },
                       barrierColor: Colors.purple[900]?.withOpacity(0.54),
