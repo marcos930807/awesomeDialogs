@@ -22,7 +22,15 @@ enum DialogType {
   NO_HEADER
 }
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
-enum DismissType { BTN_OK, BTN_CANCEL, TOP_ICON, OTHER }
+
+enum DismissType {
+  BTN_OK,
+  BTN_CANCEL,
+  TOP_ICON,
+  MODAL_BARRIER,
+  ANDROID_BACK_BTN,
+  OTHER
+}
 
 class AwesomeDialog {
   /// [@required]
@@ -374,10 +382,18 @@ class AwesomeDialog {
 
   /// Executes when `back button` pressed or `barrier dismissed`
   Future<bool> _onWillPop() async {
-    if (dismissOnBackKeyPress) {
-      _dismissType = DismissType.OTHER;
+    //Determine whenever the dismiss is from Modal Barrier or BackButton
+    if (StackTrace.current.toString().contains('ModalBarrier')) {
+      if (dismissOnTouchOutside) {
+        _dismissType = DismissType.MODAL_BARRIER;
+        dismiss();
+      }
+    } else if (dismissOnBackKeyPress) {
+      //BackButton
+      _dismissType = DismissType.ANDROID_BACK_BTN;
       dismiss();
     }
-    return dismissOnBackKeyPress;
+
+    return false;
   }
 }

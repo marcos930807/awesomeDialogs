@@ -16,7 +16,7 @@ Check out <https://cv.toranzo.dev/awesome_dialog> for more fun.
 
 ### Example
 
-```
+```dart
 AwesomeDialog(
             context: context,
             dialogType: DialogType.INFO,
@@ -31,19 +31,19 @@ AwesomeDialog(
 
 If the body is specified, then title and description will be ignored, this allows to further customize the dialogue.
 
-```
+```dart
 AwesomeDialog(
             context: context,
             animType: AnimType.SCALE,
             dialogType: DialogType.INFO,
             body: Center(child: Text(
-                    'If the body is specified, then title and description will be ignored, this allows to further customize the dialogue.',
+                    'If the body is specified, then title and description will be ignored, this allows to 											further customize the dialogue.',
                     style: TextStyle(fontStyle: FontStyle.italic),
                   ),),
             title: 'This is Ignored',
             desc:   'This is also Ignored',
             btnOkOnPress: () {},
-                 )..show();
+            )..show();
 ```
 
 ## Custom Button
@@ -57,7 +57,7 @@ AwesomeDialog has onDissmissCallback() and can be dissmissed at any time using d
 ### AwesomeDialog Class
 
 | Dart attribute        | Datatype             | Description                                                                                                                                                   |             Default Value              |
-|:----------------------|:---------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------:|
+|:---------------------:|:--------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------:|
 | dialogType            | DialogType           | Set DialogType example: DialogType.INFO, this create an animated Header.                                                                                      |                  Null                  |
 | customHeader          | Widget               | Create your own header(if this is set DiaologType is ignored.)                                                                                                |                  Null                  |
 | width                 | double               | The maximum width of the dialog, especially useful in web flutter, or landscape mode                                                                          |   MediaQuery.of(context).size.width.   |
@@ -95,7 +95,6 @@ AwesomeDialog has onDissmissCallback() and can be dissmissed at any time using d
 | autoDismiss | bool                 |   When stetted to `false` clicking **Ok** or **Cancel** button won't dismiss the dialog. You can pass custom `Navigator.pop` function in the `onDissmissCallback`.                               |                  true                    |
 | barrierColor | Color                 |   Color for the `barrier` around the dialog                               |                  Colors.black54                    |
 | enableEnterKey | bool                 |   If `true`, hitting `Enter` key will act like pressing the **Ok** button.                               |                  false                    |
-
 
 
 

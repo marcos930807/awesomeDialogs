@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: <Widget>[
                 AnimatedButton(
-                  text: 'Info Dialog fixed width and sqare buttons',
+                  text: 'Info Dialog fixed width and square buttons',
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
@@ -55,10 +55,19 @@ class _HomePageState extends State<HomePage> {
                       buttonsBorderRadius: const BorderRadius.all(
                         Radius.circular(2),
                       ),
+                      dismissOnTouchOutside: true,
+                      dismissOnBackKeyPress: false,
+                      onDissmissCallback: (type) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Dismissed by $type'),
+                          ),
+                        );
+                      },
                       headerAnimationLoop: false,
                       animType: AnimType.BOTTOMSLIDE,
                       title: 'INFO',
-                      desc: 'Dialog description here...',
+                      desc: 'This Dialog can be dismissed touching outside',
                       showCloseIcon: true,
                       btnCancelOnPress: () {},
                       btnOkOnPress: () {},
