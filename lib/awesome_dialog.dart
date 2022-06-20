@@ -12,25 +12,10 @@ export 'src/animated_button.dart';
 export 'src/anims/anims.dart';
 export 'src/anims/flare_header.dart';
 
-enum DialogType {
-  INFO,
-  INFO_REVERSED,
-  WARNING,
-  ERROR,
-  SUCCES,
-  QUESTION,
-  NO_HEADER
-}
-enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
+enum DialogType { INFO, INFO_REVERSED, WARNING, ERROR, SUCCES, QUESTION, NO_HEADER }
+enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE, SHAKE }
 
-enum DismissType {
-  BTN_OK,
-  BTN_CANCEL,
-  TOP_ICON,
-  MODAL_BARRIER,
-  ANDROID_BACK_BTN,
-  OTHER
-}
+enum DismissType { BTN_OK, BTN_CANCEL, TOP_ICON, MODAL_BARRIER, ANDROID_BACK_BTN, OTHER }
 
 class AwesomeDialog {
   /// [@required]
@@ -171,6 +156,8 @@ class AwesomeDialog {
   /// Defaults to `15.0`
   final double bodyHeaderDistance;
 
+  final int shakeAnimCount;
+
   /// Creates a Dialog that is shown using the [showDialog] function
   ///
   /// Returns null if [autoDismiss] is true, else returns data passed to custom [Navigator.pop] function
@@ -216,6 +203,7 @@ class AwesomeDialog {
     this.barrierColor = Colors.black54,
     this.enableEnterKey = false,
     this.bodyHeaderDistance = 15.0,
+    this.shakeAnimCount = 3,
   }) : assert(
           autoDismiss || onDissmissCallback != null,
           'If autoDismiss is false, you must provide an onDissmissCallback to pop the dialog',
@@ -263,14 +251,17 @@ class AwesomeDialog {
             case AnimType.TOPSLIDE:
               return FadeIn(from: SlideFrom.TOP, child: _buildDialog);
 
+            case AnimType.SHAKE:
+              return Shake(
+                child: _buildDialog,
+              );
+
             default:
               return _buildDialog;
           }
         },
       )..then(
-          (dynamic value) => _onDissmissCallbackCalled
-              ? null
-              : onDissmissCallback?.call(_dismissType),
+          (dynamic value) => _onDissmissCallbackCalled ? null : onDissmissCallback?.call(_dismissType),
         );
 
   /// Return the header of the dialog
@@ -308,8 +299,7 @@ class AwesomeDialog {
             padding: padding ?? const EdgeInsets.only(left: 5, right: 5),
             bodyHeaderDistance: bodyHeaderDistance,
             btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
-            btnCancel: btnCancel ??
-                (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
+            btnCancel: btnCancel ?? (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
             showCloseIcon: showCloseIcon,
             onClose: () {
               _dismissType = DismissType.TOP_ICON;
@@ -326,8 +316,7 @@ class AwesomeDialog {
             focusNode: FocusNode(),
             autofocus: true,
             onKey: (RawKeyEvent event) {
-              if (event.isKeyPressed(LogicalKeyboardKey.enter) ||
-                  event.isKeyPressed(LogicalKeyboardKey.numpadEnter)) {
+              if (event.isKeyPressed(LogicalKeyboardKey.enter) || event.isKeyPressed(LogicalKeyboardKey.numpadEnter)) {
                 if (btnOk == null && btnOkOnPress != null) {
                   _dismissType = DismissType.BTN_OK;
                   dismiss();
