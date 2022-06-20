@@ -212,7 +212,7 @@ class ShowHide extends StatelessWidget {
 }
 
 class Shake extends StatefulWidget {
-  final Duration duration; // how fast to shake
+  final Duration? duration; // how fast to shake
   final double distance; // how far to shake
   final bool shakeOnInit;
   final int shakeCount;

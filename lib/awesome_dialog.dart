@@ -157,6 +157,8 @@ class AwesomeDialog {
   final double bodyHeaderDistance;
 
   final int shakeAnimCount;
+  final double shakeAnimDistance;
+  final Duration? shakeAnimDuration;
 
   /// Creates a Dialog that is shown using the [showDialog] function
   ///
@@ -204,6 +206,8 @@ class AwesomeDialog {
     this.enableEnterKey = false,
     this.bodyHeaderDistance = 15.0,
     this.shakeAnimCount = 3,
+    this.shakeAnimDistance = 24,
+    this.shakeAnimDuration,
   }) : assert(
           autoDismiss || onDissmissCallback != null,
           'If autoDismiss is false, you must provide an onDissmissCallback to pop the dialog',
@@ -253,6 +257,9 @@ class AwesomeDialog {
 
             case AnimType.SHAKE:
               return Shake(
+                shakeCount: shakeAnimCount,
+                distance: shakeAnimDistance,
+                duration: shakeAnimDuration,
                 child: _buildDialog,
               );
 
