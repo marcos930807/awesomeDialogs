@@ -10,7 +10,7 @@ And add this import to your file.
 import 'package:awesome_dialog/awesome_dialog.dart';
 
 ## Demo
-Check out <https://cv.toranzo.dev/awesome_dialog> for more fun.
+Check out <https://cv.toranzo.dev/awesome-dialog> for more fun.
 ## Image
 ![alt text](doc/gif.gif)
 
