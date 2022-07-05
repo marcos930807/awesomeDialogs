@@ -53,16 +53,25 @@ class VerticalStackDialog extends StatelessWidget {
     return Container(
       alignment: alignment,
       padding: EdgeInsets.only(
-          bottom: keyboardAware ? mediaQueryData.viewInsets.bottom : 0),
+        bottom: keyboardAware ? mediaQueryData.viewInsets.bottom : 0,
+      ),
       child: Stack(
         children: <Widget>[
           Container(
             width: width ?? mediaQueryData.size.width,
             padding: isDense
                 ? const EdgeInsets.only(
-                    top: 65.0, left: 15.0, right: 15.0, bottom: 10.0)
+                    top: 65.0,
+                    left: 15.0,
+                    right: 15.0,
+                    bottom: 10.0,
+                  )
                 : const EdgeInsets.only(
-                    top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
+                    top: 65.0,
+                    left: 40.0,
+                    right: 40.0,
+                    bottom: 10.0,
+                  ),
             child: Material(
               shape: RoundedRectangleBorder(
                 borderRadius: borderRadius ??
