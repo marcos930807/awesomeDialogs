@@ -7,13 +7,14 @@ enum SlideFrom { TOP, BOTTOM, LEFT, RIGHT }
 Offset getOffset(MultiTweenValues<AniProps> animation, SlideFrom from) {
   switch (from) {
     case SlideFrom.TOP:
-      return Offset(0, -(animation.get(AniProps.translateX) as double));
+      return Offset(0, -animation.get<double>(AniProps.translateX));
     case SlideFrom.BOTTOM:
       return Offset(0, animation.get(AniProps.translateX));
     case SlideFrom.LEFT:
-      return Offset(-(animation.get(AniProps.translateX) as double), 0);
+      return Offset(-animation.get<double>(AniProps.translateX), 0);
     case SlideFrom.RIGHT:
       return Offset(animation.get(AniProps.translateX), 0);
+    // ignore: no_default_cases
     default:
       return Offset.zero;
   }

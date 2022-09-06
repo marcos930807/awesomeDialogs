@@ -1,5 +1,6 @@
 library awesome_dialog;
 
+import 'package:awesome_dialog/src/anims/native_animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -21,6 +22,7 @@ enum DialogType {
   QUESTION,
   NO_HEADER
 }
+
 enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
 
 enum DismissType {
@@ -229,45 +231,31 @@ class AwesomeDialog {
   /// Initialized to `false`
   bool _onDissmissCallbackCalled = false;
 
-  /// Shows the dialog using the [showDialog] function
+  /// Shows the dialog using the [showGeneralDialog] function
   ///
   /// Returns `null` if [autoDismiss] is true, else returns data passed to custom [Navigator.pop] function
-  Future<dynamic> show() => showDialog(
+  Future<dynamic> show() => showGeneralDialog(
         context: context,
         useRootNavigator: useRootNavigator,
         barrierDismissible: dismissOnTouchOutside,
-        barrierColor: barrierColor,
-        builder: (BuildContext context) {
-          if (autoHide != null) {
-            Future<void>.delayed(autoHide!).then(
-              (dynamic value) => _onDissmissCallbackCalled ? null : dismiss(),
-            );
-          }
-          switch (animType) {
-            case AnimType.SCALE:
-              return ScaleFade(
-                scale: 0.1,
-                curve: Curves.fastLinearToSlowEaseIn,
-                child: _buildDialog,
-              );
-
-            case AnimType.LEFTSLIDE:
-              return FadeIn(from: SlideFrom.LEFT, child: _buildDialog);
-
-            case AnimType.RIGHSLIDE:
-              return FadeIn(child: _buildDialog);
-
-            case AnimType.BOTTOMSLIDE:
-              return FadeIn(from: SlideFrom.BOTTOM, child: _buildDialog);
-
-            case AnimType.TOPSLIDE:
-              return FadeIn(from: SlideFrom.TOP, child: _buildDialog);
-
-            default:
-              return _buildDialog;
-          }
+        pageBuilder: (
+          BuildContext buildContext,
+          Animation<double> animation,
+          Animation<double> secondaryAnimation,
+        ) {
+          return _buildDialog;
         },
-      )..then(
+        transitionBuilder: (
+          BuildContext context,
+          Animation<double> animation,
+          Animation<double> secondaryAnimation,
+          Widget child,
+        ) =>
+            _showAnimation(animation, secondaryAnimation, child),
+        barrierColor: barrierColor ?? const Color(0x80000000),
+        barrierLabel:
+            MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      )..then<dynamic>(
           (dynamic value) => _onDissmissCallbackCalled
               ? null
               : onDissmissCallback?.call(_dismissType),
@@ -338,6 +326,46 @@ class AwesomeDialog {
             child: child,
           )
         : child;
+  }
+
+  /// Shows alert with selected animation
+  Widget _showAnimation(
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    switch (animType) {
+      case AnimType.RIGHSLIDE:
+        return AnimationTransition.fromRight(
+          animation,
+          secondaryAnimation,
+          child,
+        );
+      case AnimType.LEFTSLIDE:
+        return AnimationTransition.fromLeft(
+          animation,
+          secondaryAnimation,
+          child,
+        );
+      case AnimType.TOPSLIDE:
+        return AnimationTransition.fromTop(
+          animation,
+          secondaryAnimation,
+          child,
+        );
+      case AnimType.BOTTOMSLIDE:
+        return AnimationTransition.fromBottom(
+          animation,
+          secondaryAnimation,
+          child,
+        );
+      case AnimType.SCALE:
+        return AnimationTransition.grow(
+          animation,
+          secondaryAnimation,
+          child,
+        );
+    }
   }
 
   /// Returns the default `Ok Button` widget
