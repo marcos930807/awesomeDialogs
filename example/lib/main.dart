@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
-                      dialogType: DialogType.INFO_REVERSED,
+                      dialogType: DialogType.INFO,
                       borderSide: const BorderSide(
                         color: Colors.green,
                         width: 2,
@@ -98,13 +98,14 @@ class _HomePageState extends State<HomePage> {
                   height: 16,
                 ),
                 AnimatedButton(
-                  text: 'Info Dialog Without buttons',
+                  text: 'Info Reverse Dialog Without buttons',
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
+                      dialogType: DialogType.INFO_REVERSED,
                       headerAnimationLoop: true,
                       animType: AnimType.BOTTOMSLIDE,
-                      title: 'INFO',
+                      title: 'INFO Reversed',
                       desc:
                           'Lorem ipsum dolor sit amet consectetur adipiscing elit eget ornare tempus, vestibulum sagittis rhoncus felis hendrerit lectus ultricies duis vel, id morbi cum ultrices tellus metus dis ut donec. Ut sagittis viverra venenatis eget euismod faucibus odio ligula phasellus,',
                     ).show();
@@ -146,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                       context: context,
                       dialogType: DialogType.ERROR,
                       animType: AnimType.RIGHSLIDE,
-                      headerAnimationLoop: true,
+                      headerAnimationLoop: false,
                       title: 'Error',
                       desc:
                           'Dialog description here..................................................',

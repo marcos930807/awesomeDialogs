@@ -2,6 +2,7 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 import '../../awesome_dialog.dart';
+import 'rive_anim.dart';
 
 class FlareHeader extends StatelessWidget {
   const FlareHeader({
@@ -17,20 +18,17 @@ class FlareHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (dialogType) {
       case DialogType.INFO:
-        return FlareActor(
-          'packages/awesome_dialog/assets/flare/info2.flr',
-          fit: BoxFit.cover,
-          animation: loop ? 'appear_loop' : 'appear',
-          callback: (String call) {},
+        return RiveAssetAnimation(
+          assetPath: 'packages/awesome_dialog/assets/rive/info.riv',
+          animName: loop ? 'appear_loop' : 'appear',
         );
+
       case DialogType.INFO_REVERSED:
-        return FlareActor(
-          loop
-              ? 'packages/awesome_dialog/assets/flare/info.flr'
-              : 'packages/awesome_dialog/assets/flare/info_without_loop.flr',
-          fit: BoxFit.cover,
-          animation: 'appear',
+        return RiveAssetAnimation(
+          assetPath: 'packages/awesome_dialog/assets/rive/info_reverse.riv',
+          animName: loop ? 'appear_loop' : 'appear',
         );
+
       case DialogType.QUESTION:
         return FlareActor(
           'packages/awesome_dialog/assets/flare/question.flr',
@@ -39,26 +37,20 @@ class FlareHeader extends StatelessWidget {
           callback: (String call) {},
         );
       case DialogType.WARNING:
-        return FlareActor(
-          loop
-              ? 'packages/awesome_dialog/assets/flare/warning.flr'
-              : 'packages/awesome_dialog/assets/flare/warning_without_loop.flr',
-          fit: BoxFit.cover,
-          animation: 'appear',
+        return RiveAssetAnimation(
+          assetPath: 'packages/awesome_dialog/assets/rive/warning.riv',
+          animName: loop ? 'appear_loop' : 'appear',
         );
+
       case DialogType.ERROR:
-        return FlareActor(
-          'packages/awesome_dialog/assets/flare/error.flr',
-          fit: BoxFit.fill,
-          animation: loop ? 'Error' : 'Error_no_loop',
+        return RiveAssetAnimation(
+          assetPath: 'packages/awesome_dialog/assets/rive/error.riv',
+          animName: loop ? 'appear_loop' : 'appear',
         );
       case DialogType.SUCCES:
-        return FlareActor(
-          loop
-              ? 'packages/awesome_dialog/assets/flare/succes.flr'
-              : 'packages/awesome_dialog/assets/flare/succes_without_loop.flr',
-          fit: BoxFit.fill,
-          animation: 'Untitled',
+        return RiveAssetAnimation(
+          assetPath: 'packages/awesome_dialog/assets/rive/success.riv',
+          animName: loop ? 'appear_loop' : 'appear',
         );
       default:
         return const SizedBox.shrink();
