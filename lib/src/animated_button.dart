@@ -138,16 +138,18 @@ class _AnimatedButtonState extends State<AnimatedButton>
                 ),
               ],
               Flexible(
-                child: Text(
-                  '${widget.text}',
-                  // maxLines: 1,
-                  textAlign: TextAlign.center,
-                  style: widget.buttonTextStyle ??
-                      const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                      ),
+                child: FittedBox(
+                  child: Text(
+                    '${widget.text}',
+                    // maxLines: 1,
+                    textAlign: TextAlign.center,
+                    style: widget.buttonTextStyle ??
+                        const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 14,
+                        ),
+                  ),
                 ),
               ),
             ],
