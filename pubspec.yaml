@@ -1,7 +1,7 @@
 name: awesome_dialog
 description: >-
   Flutter package to show beautiful dialogs(INFO,QUESTION,WARNING,SUCCESS,ERROR) with animations as simply as possible.
-version: 2.2.1
+version: 3.0.0
 homepage: https://github.com/marcos930807/awesomeDialogs
 
 environment:
@@ -10,13 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  simple_animations: ^4.0.1
-  flare_flutter: ^3.0.2
+  rive: ^0.9.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.4
+  very_good_analysis: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -26,6 +25,7 @@ flutter:
   # To add assets to your package, add an assets section, like this:
   assets:
     - assets/flare/
+    - assets/rive/
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
   #
