@@ -1,7 +1,7 @@
 ## [3.0.0] - 6/09/2022
 
 * Remove Flare Dependency in favor of new Rive runtime to render header animation.
-* Remode Simple animation dependency in favor of native animations.
+* Remove Simple animation dependency in favor of native animations.
 * Deprecate all uppercase Enums in favor of effective dart new ones.
 * [Breaking] Temporary remove question type header for being incompatible with rive.
 * [Breaking] Change typo in 'onDismissCallback' and 'alignment' props.
