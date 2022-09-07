@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
+///RiveRuntimeRender
 class RiveAssetAnimation extends StatefulWidget {
+  ///Constructor
   const RiveAssetAnimation({
     Key? key,
     required this.assetPath,
     required this.animName,
   }) : super(key: key);
 
+  ///Path of the .riv assets file
   final String assetPath;
+
+  ///Name od the animation to load
   final String animName;
   @override
   State<RiveAssetAnimation> createState() => _RiveAnimationState();

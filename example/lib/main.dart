@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       dismissOnTouchOutside: true,
                       dismissOnBackKeyPress: false,
-                      onDissmissCallback: (type) {
+                      onDismissCallback: (type) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text('Dismissed by $type'),
@@ -78,13 +78,13 @@ class _HomePageState extends State<HomePage> {
                   height: 16,
                 ),
                 AnimatedButton(
-                  text: 'Question Dialog With Custom BTN Style',
+                  text: 'Warning Dialog With Custom BTN Style',
                   pressEvent: () {
                     AwesomeDialog(
                       context: context,
-                      dialogType: DialogType.QUESTION,
+                      dialogType: DialogType.warning,
                       headerAnimationLoop: false,
-                      animType: AnimType.BOTTOMSLIDE,
+                      animType: AnimType.bottomSlide,
                       title: 'Question',
                       desc: 'Dialog description here...',
                       buttonsTextStyle: const TextStyle(color: Colors.black),
@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                       desc:
                           'Dialog description here..................................................',
                       btnCancelOnPress: () {},
-                      onDissmissCallback: (type) {
+                      onDismissCallback: (type) {
                         debugPrint('Dialog Dissmiss from callback $type');
                       },
                       btnOkOnPress: () {},
@@ -177,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                         debugPrint('OnClcik');
                       },
                       btnOkIcon: Icons.check_circle,
-                      onDissmissCallback: (type) {
+                      onDismissCallback: (type) {
                         debugPrint('Dialog Dissmiss from callback $type');
                       },
                     ).show();
@@ -240,6 +240,9 @@ class _HomePageState extends State<HomePage> {
                       title: 'Auto Hide Dialog',
                       desc: 'AutoHide after 2 seconds',
                       autoHide: const Duration(seconds: 2),
+                      onDismissCallback: (type) {
+                        debugPrint('Dialog Dissmiss from callback $type');
+                      },
                     ).show();
                   },
                 ),
@@ -362,7 +365,7 @@ class _HomePageState extends State<HomePage> {
                       btnCancelOnPress: () {},
                       btnOkOnPress: () {},
                       autoDismiss: false,
-                      onDissmissCallback: (type) {
+                      onDismissCallback: (type) {
                         Navigator.of(context).pop(type);
                       },
                       barrierColor: Colors.purple[900]?.withOpacity(0.54),

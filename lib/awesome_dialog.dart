@@ -1,36 +1,71 @@
 library awesome_dialog;
 
+import 'package:awesome_dialog/src/animated_button.dart';
+import 'package:awesome_dialog/src/header.dart';
 import 'package:awesome_dialog/src/anims/native_animations.dart';
+import 'package:awesome_dialog/src/vertical_stack_header_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'src/animated_button.dart';
-import 'src/anims/anims.dart';
-import 'src/anims/flare_header.dart';
-import 'src/vertical_stack_header_dialog.dart';
-
 export 'src/animated_button.dart';
-export 'src/anims/anims.dart';
-export 'src/anims/flare_header.dart';
+export 'src/anims/native_animations.dart';
+export 'src/header.dart';
 
+///Defines the header of [AwesomeDialog]
 enum DialogType {
+  @Deprecated("Use effective dart version 'info' ")
+
+  ///Dialog with information type header
   INFO,
+
+  ///Dialog with information type header
+  info,
+
+  ///Dialog with information type header rotated 180 degree
+  @Deprecated("Use effective dart version 'infoReverse' ")
   INFO_REVERSED,
+
+  ///Dialog with information type header rotated 180 degree
+  infoReverse,
+
+  ///Dialog with warning amber type header
+  @Deprecated("Use effective dart version 'warning' ")
   WARNING,
+
+  ///Dialog with warning amber type header
+  warning,
+
+  ///Dialog with error red type header
+  @Deprecated("Use effective dart version 'error' ")
   ERROR,
+
+  ///Dialog with error red type header
+  error,
+
+  ///Dialog with success green type header
+  @Deprecated("Use effective dart version 'success' ")
   SUCCES,
-  QUESTION,
-  NO_HEADER
+
+  ///Dialog with success green type header
+  success,
+
+  @Deprecated("Use effective dart version 'noHeader' ")
+
+  ///Dialog without a header
+  NO_HEADER,
+
+  ///Dialog without a header
+  noHeader
 }
 
-enum AnimType { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
-
+///Defines dismiss type of [AwesomeDialog]
 enum DismissType {
   BTN_OK,
   BTN_CANCEL,
   TOP_ICON,
   MODAL_BARRIER,
   ANDROID_BACK_BTN,
+  AUTO_HIDE,
   OTHER
 }
 
@@ -97,7 +132,7 @@ class AwesomeDialog {
   final bool dismissOnTouchOutside;
 
   /// Callback to execute after dialog get dissmised
-  final Function(DismissType type)? onDissmissCallback;
+  final Function(DismissType type)? onDismissCallback;
 
   /// Anim Type can be { SCALE, LEFTSLIDE, RIGHSLIDE, BOTTOMSLIDE, TOPSLIDE }
   final AnimType animType;
@@ -195,7 +230,7 @@ class AwesomeDialog {
     this.btnCancelIcon,
     this.btnCancelOnPress,
     this.btnCancelColor,
-    this.onDissmissCallback,
+    this.onDismissCallback,
     this.isDense = false,
     this.dismissOnTouchOutside = true,
     this.headerAnimationLoop = true,
@@ -219,17 +254,17 @@ class AwesomeDialog {
     this.enableEnterKey = false,
     this.bodyHeaderDistance = 15.0,
   }) : assert(
-          autoDismiss || onDissmissCallback != null,
+          autoDismiss || onDismissCallback != null,
           'If autoDismiss is false, you must provide an onDissmissCallback to pop the dialog',
         );
 
   /// The type for dismissal of the dialog
   DismissType _dismissType = DismissType.OTHER;
 
-  /// Used to check if the [onDissmissCallback] is called. (also to see if dialog is popped)
+  /// Used to check if the [onDismissCallback] is called. (also to see if dialog is popped)
   ///
   /// Initialized to `false`
-  bool _onDissmissCallbackCalled = false;
+  bool _onDismissCallbackCalled = false;
 
   /// Shows the dialog using the [showGeneralDialog] function
   ///
@@ -243,8 +278,15 @@ class AwesomeDialog {
           Animation<double> animation,
           Animation<double> secondaryAnimation,
         ) {
+          if (autoHide != null) {
+            Future<dynamic>.delayed(autoHide!).then((dynamic _) {
+              _dismissType = DismissType.AUTO_HIDE;
+              dismiss();
+            });
+          }
           return _buildDialog;
         },
+        transitionDuration: const Duration(milliseconds: 500),
         transitionBuilder: (
           BuildContext context,
           Animation<double> animation,
@@ -256,9 +298,9 @@ class AwesomeDialog {
         barrierLabel:
             MaterialLocalizations.of(context).modalBarrierDismissLabel,
       )..then<dynamic>(
-          (dynamic value) => _onDissmissCallbackCalled
+          (dynamic value) => _onDismissCallbackCalled
               ? null
-              : onDissmissCallback?.call(_dismissType),
+              : onDismissCallback?.call(_dismissType),
         );
 
   /// Return the header of the dialog
@@ -266,10 +308,11 @@ class AwesomeDialog {
     if (customHeader != null) {
       return customHeader;
     }
-    if (dialogType == DialogType.NO_HEADER) {
+    if (dialogType == DialogType.NO_HEADER ||
+        dialogType == DialogType.noHeader) {
       return null;
     }
-    return FlareHeader(
+    return AwesomeDialogHeader(
       loop: headerAnimationLoop,
       dialogType: dialogType,
     );
@@ -336,31 +379,36 @@ class AwesomeDialog {
   ) {
     switch (animType) {
       case AnimType.RIGHSLIDE:
+      case AnimType.rightSlide:
         return AnimationTransition.fromRight(
           animation,
           secondaryAnimation,
           child,
         );
       case AnimType.LEFTSLIDE:
+      case AnimType.leftSlide:
         return AnimationTransition.fromLeft(
           animation,
           secondaryAnimation,
           child,
         );
       case AnimType.TOPSLIDE:
+      case AnimType.topSlide:
         return AnimationTransition.fromTop(
           animation,
           secondaryAnimation,
           child,
         );
       case AnimType.BOTTOMSLIDE:
+      case AnimType.bottomSlide:
         return AnimationTransition.fromBottom(
           animation,
           secondaryAnimation,
           child,
         );
       case AnimType.SCALE:
-        return AnimationTransition.grow(
+      case AnimType.scale:
+        return AnimationTransition.scale(
           animation,
           secondaryAnimation,
           child,
@@ -399,13 +447,13 @@ class AwesomeDialog {
       );
 
   /// Called to dismiss the dialog using the [Navigator.pop] method
-  /// or calls the [onDissmissCallback] function if [autoDismiss] is `false`
+  /// or calls the [onDismissCallback] function if [autoDismiss] is `false`
   void dismiss() {
     if (autoDismiss) {
       Navigator.of(context, rootNavigator: useRootNavigator).pop();
     }
-    onDissmissCallback?.call(_dismissType);
-    _onDissmissCallbackCalled = true;
+    onDismissCallback?.call(_dismissType);
+    _onDismissCallbackCalled = true;
   }
 
   /// Executes when `back button` pressed or `barrier dismissed`
