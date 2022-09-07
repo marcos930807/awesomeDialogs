@@ -19,8 +19,8 @@ Check out <https://cv.toranzo.dev/awesome_dialog> for more fun.
 ```dart
 AwesomeDialog(
             context: context,
-            dialogType: DialogType.INFO,
-            animType: AnimType.BOTTOMSLIDE,
+            dialogType: DialogType.info,
+            animType: AnimType.rightSlide,,
             title: 'Dialog Title',
             desc: 'Dialog description here.............',
             btnCancelOnPress: () {},
@@ -34,8 +34,8 @@ If the body is specified, then title and description will be ignored, this allow
 ```dart
 AwesomeDialog(
             context: context,
-            animType: AnimType.SCALE,
-            dialogType: DialogType.INFO,
+            animType: AnimType.scale,
+            dialogType: DialogType.info,
             body: Center(child: Text(
                     'If the body is specified, then title and description will be ignored, this allows to 											further customize the dialogue.',
                     style: TextStyle(fontStyle: FontStyle.italic),
@@ -52,13 +52,13 @@ To use custom buttons, just specify the buttonOk or btnCancel widget, all text p
 
 ## Dissmiss and Callback
 
-AwesomeDialog has onDissmissCallback() and can be dissmissed at any time using dissmiss() public method.
+AwesomeDialog has onDismissCallback(type) and can be dismissed at any time using dismiss() public method.
 
 ### AwesomeDialog Class
 
 | Dart attribute        | Datatype             | Description                                                                                                                                                   |             Default Value              |
 |:---------------------:|:--------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------:|
-| dialogType            | DialogType           | Set DialogType example: DialogType.INFO, this create an animated Header.                                                                                      |                  Null                  |
+| dialogType            | DialogType           | Set DialogType example: DialogType.info, this create an animated Header.                                                                                      |                  Null                  |
 | customHeader          | Widget               | Create your own header(if this is set DiaologType is ignored.)                                                                                                |                  Null                  |
 | width                 | double               | The maximum width of the dialog, especially useful in web flutter, or landscape mode                                                                          |   MediaQuery.of(context).size.width.   |
 | title                 | String               | Set the title of dialog.                                                                                                                                      |                  Null                  |
