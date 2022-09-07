@@ -1,3 +1,11 @@
+## [3.0.0] - 6/09/2022
+
+* Remove Flare Dependency in favor of new Rive runtime to render header animation.
+* Remode Simple animation dependency in favor of native animations.
+* Deprecate all uppercase Enums in favor of effective dart new ones.
+* [Breaking] Temporary remove question type header for being incompatible with rive.
+* [Breaking] Change typo in 'onDismissCallback' and 'alignment' props.
+
 ## [2.2.1] - 1/05/2022
 
 * Fix issue #103 dismissOnTouchOutside does not work when dismissOnBackKeyPress is false.

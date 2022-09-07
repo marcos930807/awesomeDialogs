@@ -127,17 +127,10 @@ class AnimationTransition {
       opacity: animation,
       child: ScaleTransition(
         scale: Tween<double>(
-          begin: 0,
+          begin: 0.7,
           end: 1,
         ).animate(
-          CurvedAnimation(
-            parent: animation,
-            curve: const Interval(
-              0,
-              0.50,
-              curve: Curves.easeIn,
-            ),
-          ),
+          CurvedAnimation(parent: animation, curve: Curves.ease),
         ),
         child: child,
       ),

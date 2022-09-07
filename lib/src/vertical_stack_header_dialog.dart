@@ -1,27 +1,9 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
 
+///Main widget to render dialog UI
 class VerticalStackDialog extends StatelessWidget {
-  final String? title;
-  final TextStyle? titleStyle;
-  final String? desc;
-  final TextStyle? descStyle;
-  final Widget? btnOk;
-  final Widget? btnCancel;
-  final Widget? header;
-  final Widget? body;
-  final bool isDense;
-  final AlignmentGeometry? alignment;
-  final EdgeInsetsGeometry padding;
-  final bool keyboardAware;
-  final double? width;
-  final bool? showCloseIcon;
-  final Function() onClose;
-  final Widget? closeIcon;
-  final Color? dialogBackgroundColor;
-  final BorderSide? borderSide;
-  final BorderRadiusGeometry? borderRadius;
-  final double bodyHeaderDistance;
-
   const VerticalStackDialog({
     Key? key,
     this.title,
@@ -45,11 +27,31 @@ class VerticalStackDialog extends StatelessWidget {
     this.borderRadius,
     this.bodyHeaderDistance = 15.0,
   }) : super(key: key);
+  final String? title;
+  final TextStyle? titleStyle;
+  final String? desc;
+  final TextStyle? descStyle;
+  final Widget? btnOk;
+  final Widget? btnCancel;
+  final Widget? header;
+  final Widget? body;
+  final bool isDense;
+  final AlignmentGeometry? alignment;
+  final EdgeInsetsGeometry padding;
+  final bool keyboardAware;
+  final double? width;
+  final bool? showCloseIcon;
+  final void Function() onClose;
+  final Widget? closeIcon;
+  final Color? dialogBackgroundColor;
+  final BorderSide? borderSide;
+  final BorderRadiusGeometry? borderRadius;
+  final double bodyHeaderDistance;
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final MediaQueryData mediaQueryData = MediaQuery.of(context);
+    final theme = Theme.of(context);
+    final mediaQueryData = MediaQuery.of(context);
     return Container(
       alignment: alignment,
       padding: EdgeInsets.only(
