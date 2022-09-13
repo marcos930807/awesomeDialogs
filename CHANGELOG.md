@@ -1,3 +1,7 @@
+## [3.0.1] - 13/09/2022
+
+* Added transitionAnimationDuration this default value of 300 ms.
+* Added reverseBtnOrder to invert btnbOk and btnCancel Order.
 ## [3.0.0] - 6/09/2022
 
 * Remove Flare Dependency in favor of new Rive runtime to render header animation.

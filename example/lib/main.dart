@@ -106,6 +106,9 @@ class _HomePageState extends State<HomePage> {
                       headerAnimationLoop: true,
                       animType: AnimType.bottomSlide,
                       title: 'INFO Reversed',
+                      reverseBtnOrder: true,
+                      btnOkOnPress: () {},
+                      btnCancelOnPress: () {},
                       desc:
                           'Lorem ipsum dolor sit amet consectetur adipiscing elit eget ornare tempus, vestibulum sagittis rhoncus felis hendrerit lectus ultricies duis vel, id morbi cum ultrices tellus metus dis ut donec. Ut sagittis viverra venenatis eget euismod faucibus odio ligula phasellus,',
                     ).show();
