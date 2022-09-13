@@ -14,49 +14,51 @@ export 'src/header.dart';
 ///Main class for creating a dialog
 class AwesomeDialog {
   ///Constructor
-  AwesomeDialog({
-    required this.context,
-    this.dialogType = DialogType.info,
-    this.customHeader,
-    this.title,
-    this.titleTextStyle,
-    this.desc,
-    this.descTextStyle,
-    this.body,
-    this.btnOk,
-    this.btnCancel,
-    this.btnOkText,
-    this.btnOkIcon,
-    this.btnOkOnPress,
-    this.btnOkColor,
-    this.btnCancelText,
-    this.btnCancelIcon,
-    this.btnCancelOnPress,
-    this.btnCancelColor,
-    this.onDismissCallback,
-    this.isDense = false,
-    this.dismissOnTouchOutside = true,
-    this.headerAnimationLoop = true,
-    this.alignment = Alignment.center,
-    this.animType = AnimType.scale,
-    this.padding,
-    this.useRootNavigator = false,
-    this.autoHide,
-    this.keyboardAware = true,
-    this.dismissOnBackKeyPress = true,
-    this.width,
-    this.dialogBorderRadius,
-    this.buttonsBorderRadius,
-    this.showCloseIcon = false,
-    this.closeIcon,
-    this.dialogBackgroundColor,
-    this.borderSide,
-    this.buttonsTextStyle,
-    this.autoDismiss = true,
-    this.barrierColor = Colors.black54,
-    this.enableEnterKey = false,
-    this.bodyHeaderDistance = 15.0,
-  }) : assert(
+  AwesomeDialog(
+      {required this.context,
+      this.dialogType = DialogType.info,
+      this.customHeader,
+      this.title,
+      this.titleTextStyle,
+      this.desc,
+      this.descTextStyle,
+      this.body,
+      this.btnOk,
+      this.btnCancel,
+      this.btnOkText,
+      this.btnOkIcon,
+      this.btnOkOnPress,
+      this.btnOkColor,
+      this.btnCancelText,
+      this.btnCancelIcon,
+      this.btnCancelOnPress,
+      this.btnCancelColor,
+      this.onDismissCallback,
+      this.isDense = false,
+      this.dismissOnTouchOutside = true,
+      this.headerAnimationLoop = true,
+      this.alignment = Alignment.center,
+      this.animType = AnimType.scale,
+      this.padding,
+      this.useRootNavigator = false,
+      this.autoHide,
+      this.keyboardAware = true,
+      this.dismissOnBackKeyPress = true,
+      this.width,
+      this.dialogBorderRadius,
+      this.buttonsBorderRadius,
+      this.showCloseIcon = false,
+      this.closeIcon,
+      this.dialogBackgroundColor,
+      this.borderSide,
+      this.buttonsTextStyle,
+      this.autoDismiss = true,
+      this.barrierColor = Colors.black54,
+      this.enableEnterKey = false,
+      this.bodyHeaderDistance = 15.0,
+      this.reverseBtnOrder = false,
+      this.transitionAnimationDuration = const Duration(milliseconds: 300)})
+      : assert(
           autoDismiss || onDismissCallback != null,
           'If autoDismiss is false, you must provide an onDismissCallback to pop the dialog',
         );
@@ -199,6 +201,14 @@ class AwesomeDialog {
   /// Defaults to `15.0`
   final double bodyHeaderDistance;
 
+  /// Used to make Ok button appear First than Cancel.
+  ///
+  /// Initialized to `false`
+  bool reverseBtnOrder;
+
+  /// Duration of the transition animation
+  Duration transitionAnimationDuration;
+
   /// Creates a Dialog that is shown using the [showDialog] function
   ///
   /// Returns null if [autoDismiss] is true, else returns data passed to custom [Navigator.pop] function
@@ -231,7 +241,7 @@ class AwesomeDialog {
           }
           return _buildDialog;
         },
-        transitionDuration: const Duration(milliseconds: 500),
+        transitionDuration: transitionAnimationDuration,
         transitionBuilder: (
           BuildContext context,
           Animation<double> animation,
@@ -292,6 +302,7 @@ class AwesomeDialog {
               dismiss.call();
             },
             closeIcon: closeIcon,
+            reverseBtnOrder: reverseBtnOrder,
           ),
         ),
       );
