@@ -26,6 +26,7 @@ class VerticalStackDialog extends StatelessWidget {
     this.borderSide,
     this.borderRadius,
     this.bodyHeaderDistance = 15.0,
+    this.reverseBtnOrder = false,
   }) : super(key: key);
   final String? title;
   final TextStyle? titleStyle;
@@ -47,6 +48,7 @@ class VerticalStackDialog extends StatelessWidget {
   final BorderSide? borderSide;
   final BorderRadiusGeometry? borderRadius;
   final double bodyHeaderDistance;
+  final bool reverseBtnOrder;
 
   @override
   Widget build(BuildContext context) {
@@ -115,18 +117,33 @@ class VerticalStackDialog extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              if (btnCancel != null)
-                                Expanded(
-                                  child: btnCancel ?? Container(),
-                                ),
-                              if (btnCancel != null && btnOk != null)
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                              if (btnOk != null)
-                                Expanded(
-                                  child: btnOk!,
-                                )
+                              if (reverseBtnOrder) ...[
+                                if (btnOk != null)
+                                  Expanded(
+                                    child: btnOk!,
+                                  ),
+                                if (btnCancel != null && btnOk != null)
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                if (btnCancel != null)
+                                  Expanded(
+                                    child: btnCancel ?? Container(),
+                                  ),
+                              ] else ...[
+                                if (btnCancel != null)
+                                  Expanded(
+                                    child: btnCancel ?? Container(),
+                                  ),
+                                if (btnCancel != null && btnOk != null)
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                if (btnOk != null)
+                                  Expanded(
+                                    child: btnOk!,
+                                  )
+                              ]
                             ],
                           ),
                         ),
