@@ -1,3 +1,6 @@
+## [3.0.2] - 23/09/2022
+
+* Added Question Type header again.
 ## [3.0.1] - 13/09/2022
 
 * Added transitionAnimationDuration this default value of 300 ms.
