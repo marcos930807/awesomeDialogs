@@ -34,13 +34,12 @@ class AwesomeDialogHeader extends StatelessWidget {
           animName: loop ? 'appear_loop' : 'appear',
         );
 
-      // case DialogType.QUESTION:
-      //   return FlareActor(
-      //     'packages/awesome_dialog/assets/flare/question.flr',
-      //     fit: BoxFit.cover,
-      //     animation: loop ? 'anim_loop' : 'anim',
-      //     callback: (String call) {},
-      //   );
+      case DialogType.question:
+        return RiveAssetAnimation(
+          assetPath: 'packages/awesome_dialog/assets/rive/question.riv',
+          animName: loop ? 'appear_loop' : 'appear',
+        );
+
       case DialogType.WARNING:
       case DialogType.warning:
         return RiveAssetAnimation(

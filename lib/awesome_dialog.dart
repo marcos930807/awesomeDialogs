@@ -477,7 +477,10 @@ enum DialogType {
   NO_HEADER,
 
   ///Dialog without a header
-  noHeader
+  noHeader,
+
+  ///Dialog without a header
+  question
 }
 
 ///Defines dismiss type of [AwesomeDialog]
