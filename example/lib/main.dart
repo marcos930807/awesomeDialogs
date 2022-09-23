@@ -164,6 +164,25 @@ class _HomePageState extends State<HomePage> {
                   height: 16,
                 ),
                 AnimatedButton(
+                  text: 'Question Dialog',
+                  color: Colors.amber,
+                  pressEvent: () {
+                    AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.question,
+                      animType: AnimType.rightSlide,
+                      headerAnimationLoop: true,
+                      title: 'Question',
+                      desc:
+                          'Dialog description here..................................................',
+                      btnOkOnPress: () {},
+                    ).show();
+                  },
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                AnimatedButton(
                   text: 'Success Dialog',
                   color: Colors.green,
                   pressEvent: () {
