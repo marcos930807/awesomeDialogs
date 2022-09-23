@@ -479,7 +479,7 @@ enum DialogType {
   ///Dialog without a header
   noHeader,
 
-  ///Dialog without a header
+  ///Dialog with question header
   question
 }
 
