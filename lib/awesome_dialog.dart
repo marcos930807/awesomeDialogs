@@ -40,6 +40,7 @@ class AwesomeDialog {
       this.alignment = Alignment.center,
       this.animType = AnimType.scale,
       this.padding,
+      this.outterPadding,
       this.useRootNavigator = false,
       this.autoHide,
       this.keyboardAware = true,
@@ -138,6 +139,9 @@ class AwesomeDialog {
 
   /// Padding off inner content of Dialog
   final EdgeInsetsGeometry? padding;
+
+  /// Padding off outer content of Dialog
+  final EdgeInsetsGeometry? outterPadding;
 
   /// This Prop is usefull to Take advantage of screen dimensions
   final bool isDense;
@@ -292,6 +296,7 @@ class AwesomeDialog {
             keyboardAware: keyboardAware,
             width: width,
             padding: padding ?? const EdgeInsets.only(left: 5, right: 5),
+            outterPadding: outterPadding,
             bodyHeaderDistance: bodyHeaderDistance,
             btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
             btnCancel: btnCancel ??

@@ -26,7 +26,7 @@ class VerticalStackDialog extends StatelessWidget {
     this.borderSide,
     this.borderRadius,
     this.bodyHeaderDistance = 15.0,
-    this.reverseBtnOrder = false,
+    this.reverseBtnOrder = false, this.outterPadding,
   }) : super(key: key);
   final String? title;
   final TextStyle? titleStyle;
@@ -49,6 +49,7 @@ class VerticalStackDialog extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   final double bodyHeaderDistance;
   final bool reverseBtnOrder;
+  final EdgeInsetsGeometry? outterPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +63,11 @@ class VerticalStackDialog extends StatelessWidget {
         children: <Widget>[
           Container(
             width: width ?? mediaQueryData.size.width,
-            padding: isDense
+            padding: outterPadding ?? (isDense
                 ? const EdgeInsets.only(
                     top: 65.0, left: 15.0, right: 15.0, bottom: 10.0)
                 : const EdgeInsets.only(
-                    top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
+                    top: 65.0, left: 40.0, right: 40.0, bottom: 10.0)),
             child: Material(
               shape: RoundedRectangleBorder(
                 borderRadius: borderRadius ??
