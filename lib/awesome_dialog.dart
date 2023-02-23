@@ -50,6 +50,7 @@ class AwesomeDialog {
       this.showCloseIcon = false,
       this.closeIcon,
       this.dialogBackgroundColor,
+      this.dialogElevation = 0.5,
       this.borderSide,
       this.buttonsTextStyle,
       this.autoDismiss = true,
@@ -175,6 +176,12 @@ class AwesomeDialog {
   /// Custom background color for dialog + header
   final Color? dialogBackgroundColor;
 
+  /// Elevation of dialog + header
+  /// 
+  /// Defaults to `0.5`
+
+  final double dialogElevation;
+
   /// Set BorderSide of DialogShape
   final BorderSide? borderSide;
 
@@ -279,6 +286,7 @@ class AwesomeDialog {
         child: _getDialogWidget(
           child: VerticalStackDialog(
             dialogBackgroundColor: dialogBackgroundColor,
+            dialogElevation: dialogElevation,
             borderSide: borderSide,
             borderRadius: dialogBorderRadius,
             header: _buildHeader,

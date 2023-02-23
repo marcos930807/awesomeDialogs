@@ -23,6 +23,7 @@ class VerticalStackDialog extends StatelessWidget {
     required this.onClose,
     this.closeIcon,
     this.dialogBackgroundColor,
+    this.dialogElevation = 0.5,
     this.borderSide,
     this.borderRadius,
     this.bodyHeaderDistance = 15.0,
@@ -45,6 +46,7 @@ class VerticalStackDialog extends StatelessWidget {
   final void Function() onClose;
   final Widget? closeIcon;
   final Color? dialogBackgroundColor;
+  final double dialogElevation;
   final BorderSide? borderSide;
   final BorderRadiusGeometry? borderRadius;
   final double bodyHeaderDistance;
@@ -75,7 +77,7 @@ class VerticalStackDialog extends StatelessWidget {
                     ),
                 side: borderSide ?? BorderSide.none,
               ),
-              elevation: 0.5,
+              elevation: dialogElevation,
               color: dialogBackgroundColor ?? theme.cardColor,
               child: Padding(
                 padding: padding,
