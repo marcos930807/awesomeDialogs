@@ -1,3 +1,6 @@
+## [3.1.0] - 24/05/2023
+
+* Upgrade dependencies. 
 ## [3.0.2] - 23/09/2022
 
 * Added Question Type header again.
