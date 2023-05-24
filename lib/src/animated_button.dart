@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class AnimatedButton extends StatefulWidget {
   ///Constructor
   const AnimatedButton({
-    required this.pressEvent, Key? key,
+    required this.pressEvent,
+    Key? key,
     this.text,
     this.icon,
     this.color,
@@ -111,7 +112,8 @@ class _AnimatedButtonState extends State<AnimatedButton>
         height: widget.isFixedHeight ? 50 : widget.height,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            elevation: 0, backgroundColor: widget.color,
+            elevation: 0,
+            backgroundColor: widget.color,
             shape: RoundedRectangleBorder(
               borderRadius: widget.borderRadius ??
                   const BorderRadius.all(

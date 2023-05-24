@@ -5,7 +5,9 @@ import 'package:rive/rive.dart';
 class RiveAssetAnimation extends StatefulWidget {
   ///Constructor
   const RiveAssetAnimation({
-    required this.assetPath, required this.animName, Key? key,
+    required this.assetPath,
+    required this.animName,
+    Key? key,
   }) : super(key: key);
 
   ///Path of the .riv assets file
