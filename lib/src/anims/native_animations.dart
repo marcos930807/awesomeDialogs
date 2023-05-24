@@ -104,7 +104,7 @@ class AnimationTransition {
       opacity: animation,
       child: SlideTransition(
         position: Tween<Offset>(
-          begin: const Offset(0.0, 0.2),
+          begin: const Offset(0, 0.2),
           end: Offset.zero,
         ).animate(
           CurvedAnimation(
@@ -139,7 +139,7 @@ class AnimationTransition {
 
   /// Scale animation, from out to in (ScaleTransition)
   static Widget shrink(Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
+      Animation<double> secondaryAnimation, Widget child,) {
     return FadeTransition(
       opacity: animation,
       child: ScaleTransition(

@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 class AwesomeDialogHeader extends StatelessWidget {
   ///Constructor of the [AwesomeDialogHeader]
   const AwesomeDialogHeader({
-    Key? key,
-    required this.dialogType,
-    required this.loop,
+    required this.dialogType, required this.loop, Key? key,
   }) : super(key: key);
 
   ///Defines the type of [AwesomeDialogHeader]

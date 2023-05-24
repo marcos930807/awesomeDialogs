@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 class AnimatedButton extends StatefulWidget {
   ///Constructor
   const AnimatedButton({
-    Key? key,
-    required this.pressEvent,
+    required this.pressEvent, Key? key,
     this.text,
     this.icon,
     this.color,
@@ -91,7 +90,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
   }
 
   Future<void> _onTap() async {
-    _animationController.forward();
+    await _animationController.forward();
     //Delayed added in purpose to keep same animation behavior as previous version when dialog was closed while animation was still playing
     await Future<void>.delayed(
       const Duration(milliseconds: _forwardDurationNumber ~/ 2),
@@ -112,8 +111,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
         height: widget.isFixedHeight ? 50 : widget.height,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            elevation: 0,
-            primary: widget.color,
+            elevation: 0, backgroundColor: widget.color,
             shape: RoundedRectangleBorder(
               borderRadius: widget.borderRadius ??
                   const BorderRadius.all(
@@ -127,7 +125,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
             children: <Widget>[
               if (widget.icon != null) ...<Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(left: 4.0),
+                  padding: const EdgeInsets.only(left: 4),
                   child: Icon(
                     widget.icon,
                     color: Colors.white,

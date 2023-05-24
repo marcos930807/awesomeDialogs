@@ -1,4 +1,3 @@
-library awesome_dialog;
 
 import 'package:awesome_dialog/src/animated_button.dart';
 import 'package:awesome_dialog/src/anims/native_animations.dart';
@@ -57,7 +56,7 @@ class AwesomeDialog {
       this.enableEnterKey = false,
       this.bodyHeaderDistance = 15.0,
       this.reverseBtnOrder = false,
-      this.transitionAnimationDuration = const Duration(milliseconds: 300)})
+      this.transitionAnimationDuration = const Duration(milliseconds: 300),})
       : assert(
           autoDismiss || onDismissCallback != null,
           'If autoDismiss is false, you must provide an onDismissCallback to pop the dialog',
