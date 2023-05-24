@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 ///Main widget to render dialog UI
 class VerticalStackDialog extends StatelessWidget {
   const VerticalStackDialog({
+    required this.header,
+    required this.padding,
+    required this.onClose,
     Key? key,
     this.title,
     this.titleStyle,
@@ -15,12 +18,9 @@ class VerticalStackDialog extends StatelessWidget {
     this.body,
     this.alignment,
     this.isDense = true,
-    required this.header,
-    required this.padding,
     this.keyboardAware = true,
     this.width,
     this.showCloseIcon,
-    required this.onClose,
     this.closeIcon,
     this.dialogBackgroundColor,
     this.borderSide,
@@ -57,16 +57,25 @@ class VerticalStackDialog extends StatelessWidget {
     return Container(
       alignment: alignment,
       padding: EdgeInsets.only(
-          bottom: keyboardAware ? mediaQueryData.viewInsets.bottom : 0),
+        bottom: keyboardAware ? mediaQueryData.viewInsets.bottom : 0,
+      ),
       child: Stack(
         children: <Widget>[
           Container(
             width: width ?? mediaQueryData.size.width,
             padding: isDense
                 ? const EdgeInsets.only(
-                    top: 65.0, left: 15.0, right: 15.0, bottom: 10.0)
+                    top: 65,
+                    left: 15,
+                    right: 15,
+                    bottom: 10,
+                  )
                 : const EdgeInsets.only(
-                    top: 65.0, left: 40.0, right: 40.0, bottom: 10.0),
+                    top: 65,
+                    left: 40,
+                    right: 40,
+                    bottom: 10,
+                  ),
             child: Material(
               shape: RoundedRectangleBorder(
                 borderRadius: borderRadius ??
@@ -106,7 +115,7 @@ class VerticalStackDialog extends StatelessWidget {
                           ),
                       if (desc != null)
                         const SizedBox(
-                          height: 16.0,
+                          height: 16,
                         ),
                       if (btnOk != null || btnCancel != null)
                         Container(
@@ -165,7 +174,7 @@ class VerticalStackDialog extends StatelessWidget {
                     ),
                     child: CircleAvatar(
                       backgroundColor: dialogBackgroundColor ?? theme.cardColor,
-                      radius: 55.0,
+                      radius: 55,
                       child: header,
                     ),
                   ),
@@ -174,12 +183,10 @@ class VerticalStackDialog extends StatelessWidget {
             ),
           if (showCloseIcon!)
             Positioned(
-              right: 50.0,
-              top: 75.0,
+              right: 50,
+              top: 75,
               child: GestureDetector(
-                onTap: () {
-                  onClose.call();
-                },
+                onTap: onClose.call,
                 child: closeIcon ?? const Icon(Icons.close),
               ),
             ),
@@ -193,10 +200,10 @@ class VerticalStackDialog extends StatelessWidget {
         Text(
           title,
           textAlign: TextAlign.center,
-          style: titleStyle ?? theme.textTheme.headline6,
+          style: titleStyle ?? theme.textTheme.titleLarge,
         ),
         const SizedBox(
-          height: 10.0,
+          height: 10,
         ),
       ];
 }

@@ -308,7 +308,7 @@ class _HomePageState extends State<HomePage> {
                           children: <Widget>[
                             Text(
                               'Form Data',
-                              style: Theme.of(context).textTheme.headline6,
+                              style: Theme.of(context).textTheme.titleLarge,
                             ),
                             const SizedBox(
                               height: 10,
