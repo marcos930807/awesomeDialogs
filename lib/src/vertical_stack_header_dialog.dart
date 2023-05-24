@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 ///Main widget to render dialog UI
 class VerticalStackDialog extends StatelessWidget {
   const VerticalStackDialog({
-    required this.header, required this.padding, required this.onClose, Key? key,
+    required this.header,
+    required this.padding,
+    required this.onClose,
+    Key? key,
     this.title,
     this.titleStyle,
     this.desc,
@@ -54,16 +57,25 @@ class VerticalStackDialog extends StatelessWidget {
     return Container(
       alignment: alignment,
       padding: EdgeInsets.only(
-          bottom: keyboardAware ? mediaQueryData.viewInsets.bottom : 0,),
+        bottom: keyboardAware ? mediaQueryData.viewInsets.bottom : 0,
+      ),
       child: Stack(
         children: <Widget>[
           Container(
             width: width ?? mediaQueryData.size.width,
             padding: isDense
                 ? const EdgeInsets.only(
-                    top: 65, left: 15, right: 15, bottom: 10,)
+                    top: 65,
+                    left: 15,
+                    right: 15,
+                    bottom: 10,
+                  )
                 : const EdgeInsets.only(
-                    top: 65, left: 40, right: 40, bottom: 10,),
+                    top: 65,
+                    left: 40,
+                    right: 40,
+                    bottom: 10,
+                  ),
             child: Material(
               shape: RoundedRectangleBorder(
                 borderRadius: borderRadius ??
