@@ -20,6 +20,7 @@ class AwesomeDialog {
     this.titleTextStyle,
     this.desc,
     this.descTextStyle,
+    this.descAlign,
     this.body,
     this.btnOk,
     this.btnCancel,
@@ -85,6 +86,11 @@ class AwesomeDialog {
   ///
   /// If not set, it will be the [DefaultTextStyle]
   final TextStyle? descTextStyle;
+
+  /// The [TextAlign] of the description
+  ///
+  /// If not set, it will be [TextAlign.center]
+  final TextAlign? descAlign;
 
   /// Create your own Widget for body, if this property is set title and description will be ignored.
   final Widget? body;
@@ -284,6 +290,7 @@ class AwesomeDialog {
             titleStyle: titleTextStyle,
             desc: desc,
             descStyle: descTextStyle,
+            descAlign: descAlign,
             body: body,
             isDense: isDense,
             alignment: alignment,
