@@ -13,6 +13,7 @@ class VerticalStackDialog extends StatelessWidget {
     this.titleStyle,
     this.desc,
     this.descStyle,
+    this.descAlign = TextAlign.center,
     this.btnOk,
     this.btnCancel,
     this.body,
@@ -32,6 +33,7 @@ class VerticalStackDialog extends StatelessWidget {
   final TextStyle? titleStyle;
   final String? desc;
   final TextStyle? descStyle;
+  final TextAlign descAlign;
   final Widget? btnOk;
   final Widget? btnCancel;
   final Widget? header;
@@ -106,7 +108,7 @@ class VerticalStackDialog extends StatelessWidget {
                                     physics: const BouncingScrollPhysics(),
                                     child: Text(
                                       desc!,
-                                      textAlign: TextAlign.center,
+                                      textAlign: descAlign,
                                       style: descStyle,
                                     ),
                                   ),
