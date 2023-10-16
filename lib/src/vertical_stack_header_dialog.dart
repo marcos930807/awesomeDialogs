@@ -26,7 +26,7 @@ class VerticalStackDialog extends StatelessWidget {
     this.borderSide,
     this.borderRadius,
     this.bodyHeaderDistance = 15.0,
-    this.reverseBtnOrder = false, this.outterPadding,
+    this.reverseBtnOrder = false, this.outterPadding, this.controller,
   }) : super(key: key);
   final String? title;
   final TextStyle? titleStyle;
@@ -50,6 +50,7 @@ class VerticalStackDialog extends StatelessWidget {
   final double bodyHeaderDistance;
   final bool reverseBtnOrder;
   final EdgeInsetsGeometry? outterPadding;
+  final ScrollController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +82,7 @@ class VerticalStackDialog extends StatelessWidget {
               child: Padding(
                 padding: padding,
                 child: SingleChildScrollView(
+                  controller: controller,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
