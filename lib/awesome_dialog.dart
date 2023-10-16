@@ -58,7 +58,7 @@ class AwesomeDialog {
       this.enableEnterKey = false,
       this.bodyHeaderDistance = 15.0,
       this.reverseBtnOrder = false,
-      this.controller,
+      this.onReachEnd,
       this.transitionAnimationDuration = const Duration(milliseconds: 300)})
       : assert(
           autoDismiss || onDismissCallback != null,
@@ -212,7 +212,7 @@ class AwesomeDialog {
   bool reverseBtnOrder;
 
   /// Scroll Controller
-  ScrollController? controller;
+  void Function()? onReachEnd;
 
   /// Duration of the transition animation
   Duration transitionAnimationDuration;
@@ -312,7 +312,7 @@ class AwesomeDialog {
             },
             closeIcon: closeIcon,
             reverseBtnOrder: reverseBtnOrder,
-            controller: controller,
+            onReachEnd: onReachEnd,
           ),
         ),
       );
