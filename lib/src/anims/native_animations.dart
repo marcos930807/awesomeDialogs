@@ -5,20 +5,10 @@ import 'package:flutter/material.dart';
 
 ///Defines animation transition
 enum AnimType {
-  @Deprecated("Use effective dart version 'scale' ")
-  SCALE,
   scale,
-  @Deprecated("Use effective dart version 'leftSlide' ")
-  LEFTSLIDE,
   leftSlide,
-  @Deprecated("Use effective dart version 'rightSlide' ")
-  RIGHSLIDE,
   rightSlide,
-  @Deprecated("Use effective dart version 'bottomSlide' ")
-  BOTTOMSLIDE,
   bottomSlide,
-  @Deprecated("Use effective dart version 'topSlide' ")
-  TOPSLIDE,
   topSlide,
 }
 
