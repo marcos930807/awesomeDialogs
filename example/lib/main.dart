@@ -1,8 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 
-import 'routes.dart';
-
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -11,11 +9,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fancy Dialog Example',
-      theme: ThemeData.dark(),
-      initialRoute: '/',
-      onGenerateRoute: RouteGenerator.generateRoute,
-    );
+        title: 'Fancy Dialog Example',
+        theme: ThemeData.dark(),
+        initialRoute: '/',
+        home: HomePage());
   }
 }
 
