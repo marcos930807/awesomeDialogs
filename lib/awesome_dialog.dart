@@ -267,8 +267,7 @@ class AwesomeDialog {
     if (customHeader != null) {
       return customHeader;
     }
-    if (dialogType == DialogType.NO_HEADER ||
-        dialogType == DialogType.noHeader) {
+    if (dialogType == DialogType.noHeader) {
       return null;
     }
     return AwesomeDialogHeader(
@@ -341,35 +340,30 @@ class AwesomeDialog {
     Widget child,
   ) {
     switch (animType) {
-      case AnimType.RIGHSLIDE:
       case AnimType.rightSlide:
         return AnimationTransition.fromRight(
           animation,
           secondaryAnimation,
           child,
         );
-      case AnimType.LEFTSLIDE:
       case AnimType.leftSlide:
         return AnimationTransition.fromLeft(
           animation,
           secondaryAnimation,
           child,
         );
-      case AnimType.TOPSLIDE:
       case AnimType.topSlide:
         return AnimationTransition.fromTop(
           animation,
           secondaryAnimation,
           child,
         );
-      case AnimType.BOTTOMSLIDE:
       case AnimType.bottomSlide:
         return AnimationTransition.fromBottom(
           animation,
           secondaryAnimation,
           child,
         );
-      case AnimType.SCALE:
       case AnimType.scale:
         return AnimationTransition.scale(
           animation,
@@ -440,46 +434,20 @@ class AwesomeDialog {
 
 ///Defines the header of [AwesomeDialog]
 enum DialogType {
-  @Deprecated("Use effective dart version 'info' ")
-
-  ///Dialog with information type header
-  INFO,
-
   ///Dialog with information type header
   info,
-
-  ///Dialog with information type header rotated 180 degree
-  @Deprecated("Use effective dart version 'infoReverse' ")
-  INFO_REVERSED,
 
   ///Dialog with information type header rotated 180 degree
   infoReverse,
 
   ///Dialog with warning amber type header
-  @Deprecated("Use effective dart version 'warning' ")
-  WARNING,
-
-  ///Dialog with warning amber type header
   warning,
-
-  ///Dialog with error red type header
-  @Deprecated("Use effective dart version 'error' ")
-  ERROR,
 
   ///Dialog with error red type header
   error,
 
   ///Dialog with success green type header
-  @Deprecated("Use effective dart version 'success' ")
-  SUCCES,
-
-  ///Dialog with success green type header
   success,
-
-  @Deprecated("Use effective dart version 'noHeader' ")
-
-  ///Dialog without a header
-  NO_HEADER,
 
   ///Dialog without a header
   noHeader,
