@@ -189,15 +189,15 @@ class _HomePageState extends State<HomePage> {
                       headerAnimationLoop: false,
                       dialogType: DialogType.success,
                       showCloseIcon: true,
-                      title: 'Succes',
+                      title: 'Success',
                       desc:
                           'Dialog description here..................................................',
                       btnOkOnPress: () {
-                        debugPrint('OnClcik');
+                        debugPrint('OnClick');
                       },
                       btnOkIcon: Icons.check_circle,
                       onDismissCallback: (type) {
-                        debugPrint('Dialog Dissmiss from callback $type');
+                        debugPrint('Dialog Dismiss from callback $type');
                       },
                     ).show();
                   },
@@ -217,7 +217,7 @@ class _HomePageState extends State<HomePage> {
                       desc:
                           'Dialog description here..................................................',
                       btnOkOnPress: () {
-                        debugPrint('OnClcik');
+                        debugPrint('OnClick');
                       },
                       btnOkIcon: Icons.check_circle,
                     ).show();
@@ -236,7 +236,7 @@ class _HomePageState extends State<HomePage> {
                       dialogType: DialogType.info,
                       body: const Center(
                         child: Text(
-                          'If the body is specified, then title and description will be ignored, this allows to further customize the dialogue.',
+                          'If the body is specified, then title and description will be ignored. This allows further dialogue customization.',
                           style: TextStyle(fontStyle: FontStyle.italic),
                         ),
                       ),
@@ -260,7 +260,7 @@ class _HomePageState extends State<HomePage> {
                       desc: 'AutoHide after 2 seconds',
                       autoHide: const Duration(seconds: 2),
                       onDismissCallback: (type) {
-                        debugPrint('Dialog Dissmiss from callback $type');
+                        debugPrint('Dialog Dismiss from callback $type');
                       },
                     ).show();
                   },
