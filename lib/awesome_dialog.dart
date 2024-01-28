@@ -25,10 +25,12 @@ class AwesomeDialog {
       this.body,
       this.btnOk,
       this.btnCancel,
+      this.btnOkHeight,
       this.btnOkText,
       this.btnOkIcon,
       this.btnOkOnPress,
       this.btnOkColor,
+      this.btnCancelHeight,
       this.btnCancelText,
       this.btnCancelIcon,
       this.btnCancelOnPress,
@@ -93,6 +95,9 @@ class AwesomeDialog {
   /// Create your own Widget for body, if this property is set title and description will be ignored.
   final Widget? body;
 
+  /// Height for the Ok button
+  final double? btnOkHeight;
+
   /// Text for the Ok button
   final String? btnOkText;
 
@@ -104,6 +109,9 @@ class AwesomeDialog {
 
   /// Color of the Ok Button
   final Color? btnOkColor;
+
+  /// Height for the Cancel button
+  final double? btnCancelHeight;
 
   /// Text for the Cancel button
   final String? btnCancelText;
@@ -386,6 +394,7 @@ class AwesomeDialog {
 
   /// Returns the default `Ok Button` widget
   Widget get _buildFancyButtonOk => AnimatedButton(
+        height: btnOkHeight,
         isFixedHeight: false,
         pressEvent: () {
           _dismissType = DismissType.btnOk;
@@ -401,6 +410,7 @@ class AwesomeDialog {
 
   /// Returns the default `Cancel Button` widget
   Widget get _buildFancyButtonCancel => AnimatedButton(
+        height: btnCancelHeight,
         isFixedHeight: false,
         pressEvent: () {
           _dismissType = DismissType.btnCancel;
