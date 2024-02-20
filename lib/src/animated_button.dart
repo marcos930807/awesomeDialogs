@@ -113,7 +113,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: widget.color,
+            backgroundColor: widget.color,
             shape: RoundedRectangleBorder(
               borderRadius: widget.borderRadius ??
                   const BorderRadius.all(
