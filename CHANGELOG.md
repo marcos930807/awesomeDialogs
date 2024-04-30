@@ -1,3 +1,6 @@
+## [3.2.1] - 30/04/2024
+
+* Upgrade dependencies.
 ## [3.2.0] - 02/01/2024
 
 * Upgrade dependencies.
