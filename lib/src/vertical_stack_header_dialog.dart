@@ -210,7 +210,7 @@ class _VerticalStackDialogState extends State<VerticalStackDialog> {
         Text(
           title,
           textAlign: TextAlign.center,
-          style: widget.titleStyle ?? theme.textTheme.headline6,
+          style: widget.titleStyle ?? theme.textTheme.titleLarge,
         ),
         const SizedBox(
           height: 10.0,
