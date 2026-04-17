@@ -8,6 +8,7 @@ class VerticalStackDialog extends StatelessWidget {
     required this.header,
     required this.padding,
     required this.onClose,
+    required this.elevation,
     Key? key,
     this.title,
     this.titleStyle,
@@ -51,6 +52,7 @@ class VerticalStackDialog extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   final double bodyHeaderDistance;
   final bool reverseBtnOrder;
+  final double elevation;
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +88,7 @@ class VerticalStackDialog extends StatelessWidget {
                     ),
                 side: borderSide ?? BorderSide.none,
               ),
-              elevation: 0.5,
+              elevation: elevation,
               color: dialogBackgroundColor ?? theme.cardColor,
               child: Padding(
                 padding: padding,

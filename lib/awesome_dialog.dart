@@ -55,6 +55,7 @@ class AwesomeDialog {
     this.barrierColor = Colors.black54,
     this.enableEnterKey = false,
     this.bodyHeaderDistance = 15.0,
+    this.elevation = 0.5,
     this.reverseBtnOrder = false,
     this.transitionAnimationDuration = const Duration(milliseconds: 300),
   }) : assert(
@@ -205,6 +206,13 @@ class AwesomeDialog {
   /// Defaults to `15.0`
   final double bodyHeaderDistance;
 
+  /// Controls elevation of dialog
+  /// 
+  /// Defaults to 0.5
+  /// 
+  /// Set to 0 in case of transparent background for no shadow
+  final double elevation;
+
   /// Used to make Ok button appear First than Cancel.
   ///
   /// Initialized to `false`
@@ -307,6 +315,7 @@ class AwesomeDialog {
             },
             closeIcon: closeIcon,
             reverseBtnOrder: reverseBtnOrder,
+            elevation: elevation,
           ),
         ),
       );
