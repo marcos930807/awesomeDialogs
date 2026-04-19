@@ -20,12 +20,12 @@ Check out <https://cv.toranzo.dev/awesome-dialog> for more fun.
 AwesomeDialog(
             context: context,
             dialogType: DialogType.info,
-            animType: AnimType.rightSlide,,
+            animType: AnimType.rightSlide,
             title: 'Dialog Title',
             desc: 'Dialog description here.............',
             btnCancelOnPress: () {},
             btnOkOnPress: () {},
-            )..show();
+            ).show();
 ```
 ## Custom Body
 
