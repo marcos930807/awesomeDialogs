@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rive: any
+  flutter_svg: ^2.3.0
 
 dev_dependencies:
   flutter_test:
@@ -24,9 +24,9 @@ dev_dependencies:
 flutter:
   # To add assets to your package, add an assets section, like this:
   assets:
-    - assets/flare/
-    - assets/rive/
+    - assets/icons/
   #  - images/a_dot_burr.jpeg
+
   #  - images/a_dot_ham.jpeg
   #
   # For details regarding assets in packages, see

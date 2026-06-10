@@ -156,6 +156,7 @@ class AwesomeDialog {
   final bool isDense;
 
   /// Whenever the animation Header loops or not.
+  @Deprecated('This property is no longer used as headers are now static.')
   final bool headerAnimationLoop;
 
   /// To use the Rootnavigator
@@ -284,7 +285,6 @@ class AwesomeDialog {
       return null;
     }
     return AwesomeDialogHeader(
-      loop: headerAnimationLoop,
       dialogType: dialogType,
     );
   }
