@@ -7,3 +7,6 @@ analyzer:
     implicit-dynamic: false
   errors:
     invalid_assignment: error
+    lines_longer_than_80_chars: ignore
+  exclude:
+    - build/**

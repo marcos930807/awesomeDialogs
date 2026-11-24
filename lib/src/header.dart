@@ -1,6 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:awesome_dialog/src/anims/rive_anim.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 ///Header of the [AwesomeDialog]
 class AwesomeDialogHeader extends StatelessWidget {
