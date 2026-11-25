@@ -2,8 +2,8 @@ import 'package:awesome_dialog/src/animated_button.dart';
 import 'package:awesome_dialog/src/anims/native_animations.dart';
 import 'package:awesome_dialog/src/header.dart';
 import 'package:awesome_dialog/src/vertical_stack_header_dialog.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_ui/material_ui.dart';
 
 export 'src/animated_button.dart';
 export 'src/anims/native_animations.dart';
@@ -233,9 +233,9 @@ class AwesomeDialog {
         useRootNavigator: useRootNavigator,
         barrierDismissible: dismissOnTouchOutside,
         pageBuilder: (
-          BuildContext buildContext,
-          Animation<double> animation,
-          Animation<double> secondaryAnimation,
+          buildContext,
+          animation,
+          secondaryAnimation,
         ) {
           if (autoHide != null) {
             Future<dynamic>.delayed(autoHide!).then((dynamic _) {
@@ -247,19 +247,17 @@ class AwesomeDialog {
         },
         transitionDuration: transitionAnimationDuration,
         transitionBuilder: (
-          BuildContext context,
-          Animation<double> animation,
-          Animation<double> secondaryAnimation,
-          Widget child,
+          context,
+          animation,
+          secondaryAnimation,
+          child,
         ) =>
             _showAnimation(animation, secondaryAnimation, child),
         barrierColor: barrierColor ?? const Color(0x80000000),
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
       )..then<dynamic>(
-          (dynamic value) => _onDismissCallbackCalled
-              ? null
-              : onDismissCallback?.call(_dismissType),
+          (dynamic value) =>
+              _onDismissCallbackCalled ? null : onDismissCallback?.call(_dismissType),
         );
 
   /// Return the header of the dialog
@@ -277,8 +275,12 @@ class AwesomeDialog {
   }
 
   /// Returns the body of the dialog
-  Widget get _buildDialog => WillPopScope(
-        onWillPop: _onWillPop,
+  Widget get _buildDialog => PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) async {
+          if (didPop) return;
+          await _onWillPop();
+        },
         child: _getDialogWidget(
           child: VerticalStackDialog(
             dialogBackgroundColor: dialogBackgroundColor,
@@ -298,8 +300,7 @@ class AwesomeDialog {
             padding: padding ?? const EdgeInsets.only(left: 5, right: 5),
             bodyHeaderDistance: bodyHeaderDistance,
             btnOk: btnOk ?? (btnOkOnPress != null ? _buildFancyButtonOk : null),
-            btnCancel: btnCancel ??
-                (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
+            btnCancel: btnCancel ?? (btnCancelOnPress != null ? _buildFancyButtonCancel : null),
             showCloseIcon: showCloseIcon,
             onClose: () {
               _dismissType = DismissType.topIcon;
@@ -315,12 +316,13 @@ class AwesomeDialog {
     required Widget child,
   }) {
     return enableEnterKey
-        ? RawKeyboardListener(
+        ? KeyboardListener(
             focusNode: FocusNode(),
             autofocus: true,
-            onKey: (RawKeyEvent event) {
-              if (event.isKeyPressed(LogicalKeyboardKey.enter) ||
-                  event.isKeyPressed(LogicalKeyboardKey.numpadEnter)) {
+            onKeyEvent: (event) {
+              if (event is KeyDownEvent &&
+                  (event.logicalKey == LogicalKeyboardKey.enter ||
+                      event.logicalKey == LogicalKeyboardKey.numpadEnter)) {
                 if (btnOk == null && btnOkOnPress != null) {
                   _dismissType = DismissType.btnOk;
                   dismiss();
